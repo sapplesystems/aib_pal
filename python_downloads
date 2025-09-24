@@ -1,0 +1,1993 @@
+#
+# AIB Desktop Utility
+#
+# Copyright (C) 2019 SmallTownPapers, Inc.
+#
+#
+# Version: 1.0
+#
+
+# =======
+# Imports
+# =======
+# Import system functions
+
+import sys
+import os
+import re
+
+# Import ZIP library functions.  ZLIB contains constant definitions.
+
+import zipfile
+import zlib
+
+# Subprocess library
+
+from subprocess import call
+
+# String processing library
+
+import string
+
+# Date and time libraries
+
+import time
+import datetime
+from datetime import date
+from datetime import datetime
+from dateutil.parser import parse
+
+# URL encoding
+
+import urllib.parse
+
+# Import GUI
+
+from tkinter import *
+from tkinter import filedialog
+from tkinter import messagebox
+from tkinter import ttk
+from tkinter import font
+
+# Import FoxPro tools
+
+import CodeBaseTools
+
+# =======
+# Globals
+# =======
+
+AppInfo = {}
+GlobalZIPNumber = 0
+
+# =================
+# SUPPORT FUNCTIONS
+# =================
+
+# Disable event event handler
+# ---------------------------
+def disable_event():
+    pass
+
+# Close a window
+# --------------
+def close_window_func(WindowHandle):
+    WindowHandle.destroy()
+
+
+# Show directory selection and copy result if selected
+# ----------------------------------------------------
+def select_path(PathWidget,Title):
+    DirInfo = filedialog.askdirectory(mustexist=1,title=Title)
+    PathWidget.delete(0,'end')
+    PathWidget.insert(1,DirInfo)
+    return
+
+# Show directory selection and copy result if selected
+# ----------------------------------------------------
+def select_backup_path(PathWidget,Title):
+    DirInfo = filedialog.askdirectory(mustexist=1,title=Title)
+    PathWidget.delete(0,'end')
+    PathWidget.insert(1,DirInfo)
+    get_available_fields_list()
+    return
+
+# ==========================
+# DATABASE SUPPORT FUNCTIONS
+# ==========================
+
+# Filter string, eliminating all unprintable characters
+# -----------------------------------------------------
+def filter_string(InString):
+    Printable = set(string.printable)
+    TempOutput = filter(lambda x: x in Printable,InString)
+    Output = ""
+    for Character in TempOutput:
+        Output = Output + Character
+
+    return Output
+
+# Filter string field, eliminating all unprintable characters and replacing with hex values
+# -----------------------------------------------------------------------------------------
+def filter_string_field(InString):
+    Printable = set(string.printable)
+#    TempOutput = filter(lambda x: x in Printable,InString)
+    Output = ""
+    for Character in InString:
+
+        # If the character is eight bits or is not printable, replace with hex string
+
+        if Character > chr(127) or Character < chr(32):
+            TempString = " [%02x] " % ord(Character)
+            Output = Output + TempString
+        else:
+            Output = Output + Character
+
+    return(urllib.parse.quote(Output))
+#    return Output
+
+# Return 1 if the field is a required output field
+def field_is_required_for_output(TestFieldName):
+    if TestFieldName == "OBJECTID" or TestFieldName == "ACCESSNO" or TestFieldName == "IMAGEFILE" or TestFieldName == "IMAGENO":
+        return(1)
+
+    return(0)
+
+
+# Get the list of available fields, with the source table and format
+# ------------------------------------------------------------------
+def get_available_fields_list():
+
+    # Get the location of the backup databases
+
+    DBBasePath = BackupDBPathName.get()
+    if DBBasePath == "":
+        messagebox.showinfo("ERROR: NO BACKUP DIRECTORY SELECTED","You must select the backup directory")
+        return
+
+    # Make sure the selected directory is a pp5 backup
+
+    FileName = DBBasePath + "\pp5backup"
+    if os.path.exists(FileName) == False:
+        messagebox.showinfo("ERROR: INVALID BACKUP DIRECTORY","The directory you selected does not contain a backup")
+        return
+
+    # See if the index schema files were copied
+
+    FileName = DBBasePath + "\pp5backup\PPFIELDS.CDX"
+    if os.path.exists(FileName) == False:
+        messagebox.showinfo("ERROR: MISSING INDEX SCHEMA FILES","You must copy the index schema files to the backup directory: " + DBBasePath + "\pp5backup")
+        return
+
+    # Copy schema files to local directory
+
+    CommandString = "del pp_data_template\PPFIELDS.*"
+    print("Copy PPFIELDS\n")
+    call(CommandString,shell=True)
+    CommandString = "copy \"" + DBBasePath + "\pp5backup\PPFIELDS.*\" pp_data_template"
+    call(CommandString,shell=True)
+
+    # Open field list
+
+    DBHandle = CodeBaseTools.cbToolsX(False)
+    UseResult = DBHandle.use("pp_data_template\PPFIELDS.DBF","ppfields",True,True,False)
+    if UseResult == False:
+        print("Can't open field definitions table\n")
+        print(DBHandle.cErrorMessage)
+        print("\n")
+        sys.exit(-1)
+
+    # Re-index
+
+    print("Reindexing prior to load\n")
+    DBHandle.reindex()
+
+    # Move to first record
+
+    print("Loading\n")
+    DBHandle.goto("RECORD",1)
+
+    # Loop over records in DBF, create list of available fields
+
+    MasterFieldList[:] = []
+    while(True):
+
+        # Get field data to record map
+
+        MapData = DBHandle.scatter("ppfields",True,True,"","XX")
+
+        # Clean definitions in record
+        #
+        # FIELD_NAME: Field name in DBF
+        # FIELD_DBF: Name of the DBF file containing the field
+        # TABLENAME: "table" (database) name.  ARCHIVES, PHOTOS, etc.
+        # FIELD_TYPE: Field format.  Numeric, text, memo, date, etc.; single character
+        # BROWSENAME: Short descriptive name
+        # DEFDESCRIP: A long description of the field content
+        # FIELDKEY: Internal unique ket combining field name and DBF name
+
+        MapData["FIELD_NAME"] = filter_string(MapData["FIELD_NAME"])
+        MapData["FIELD_DBF"] = filter_string(MapData["FIELD_DBF"])
+        MapData["TABLENAME"] = filter_string(MapData["TABLENAME"])
+        MapData["FIELD_TYPE"] = filter_string(MapData["FIELD_TYPE"])
+        MapData["BROWSENAME"] = filter_string(MapData["BROWSENAME"])
+        MapData["DEFDESCRIP"] = filter_string(MapData["DEFDESCRIP"])
+        MapData["FIELDKEY"] = MapData["FIELD_NAME"] + MapData["FIELD_DBF"]
+        print("DEBUG: " + MapData["TABLENAME"] + ", " + MapData["FIELD_NAME"])
+
+        # Add definition to list
+
+        MasterFieldList.append(MapData)
+
+        # Next record in DBF
+
+        if DBHandle.goto("NEXT",1) == False:
+            break
+
+    # Close table
+
+    DBHandle.closetable("ppfields")
+
+    # Close database
+
+    DBHandle.cb_shutdown()
+    SelectedFieldMap.clear()
+    FieldListMap.clear()
+    MasterFieldListCounter = 0
+    for Record in MasterFieldList:
+        LocalTable = Record["TABLENAME"]
+        if LocalTable == "ARCHIVES" or LocalTable == "LIBRARY" or LocalTable == "OBJECTS" or LocalTable == "PHOTOS" or LocalTable == "OBJECT2" or LocalTable == "OBJECTS2":
+
+            # If the "BROWSENAME" field is empty, use the first 80 characters of the "DEFDESCRIP" field for the
+            # "DEFDESCRIP" field.
+
+            if Record["BROWSENAME"] == "":
+                Record["BROWSENAME"] = Record["DEFDESCRIP"][:80]
+
+            # If the BROWSENAME and DEFDESCRIP aren't empty, use the field
+
+            if Record["BROWSENAME"] != "" and Record["DEFDESCRIP"] != "":
+                LocalFieldName = Record["FIELD_NAME"]
+                if field_is_required_for_output(LocalFieldName) == 1:
+                    Record["_key"] = Record["FIELD_NAME"]
+                else:
+                    Record["_key"] = Record["TABLENAME"] + ":" + Record["FIELD_NAME"]
+
+                SelectedFieldMap[Record["_key"]] = "N"
+                FieldListMap[Record["_key"]] = Record
+
+    load_field_list_to_box(TreeUnselectedFieldList,"N")
+    return
+
+# =====================
+# GUI SUPPORT FUNCTIONS
+# =====================
+
+# If the entry field for the backup path has been altered, set the "need to load" flag
+# for the field list
+# ------------------------------------------------------------------------------------
+def backup_path_altered():
+    get_available_fields_list()
+    return
+
+# Insert list of fields into list box.  Takes the list box widget
+# as the first argument, and the list of field names/sources as
+# the next.
+# ---------------------------------------------------------------
+def load_field_list_to_box(TreeWidget,MapValue):
+    MaxColWidth = 0
+
+    # Clear tree object
+
+    for Counter in TreeWidget.get_children():
+        TreeWidget.delete(Counter)
+
+    # Load correct values to a local list
+
+    LocalList = []
+    for Key in FieldListMap:
+        RequiredFlag = 0
+        Record = FieldListMap[Key]
+        if field_is_required_for_output(Record["FIELD_NAME"]) == 0:
+            LocalKey = Record["TABLENAME"] + ":" + Record["FIELD_NAME"]
+        else:
+            RequiredFlag = 1
+            LocalKey = Record["FIELD_NAME"]
+
+        TableName = Record["TABLENAME"]
+        if SelectedFieldMap[LocalKey] == MapValue:
+            while True:
+                if TableName == "ARCHIVES" and RequiredFlag == 0:
+                    if ArchivesDBVar.get() != 0:
+                        LocalList.append(Record)
+                        break
+
+                if TableName == "LIBRARY" and RequiredFlag == 0:
+                    if LibraryDBVar.get() != 0:
+                        LocalList.append(Record)
+                        break
+
+                if (TableName == "OBJECTS" or TableName == "OBJECT2" or TableName == "OBJECTS2") and RequiredFlag == 0:
+                    if ObjectsDBVar.get() != 0:
+                        LocalList.append(Record)
+                        break
+
+                if TableName == "PHOTOS" and RequiredFlag == 0:
+                    if PhotosDBVar.get() != 0:
+                        LocalList.append(Record)
+                        break
+
+                break
+
+            if MaxColWidth < len(Record["BROWSENAME"]):
+                MaxColWidth = len(Record["BROWSENAME"])
+
+    # Sort the list
+
+    LocalList.sort(key=compare_field_list_entry)
+
+    # Load the list into the tree view widget
+
+    for TempRecord in LocalList:
+        LocalBrowseName = TempRecord["BROWSENAME"]
+        TreeWidget.insert("","end",text=TempRecord["TABLENAME"],values=(TempRecord["FIELD_NAME"],LocalBrowseName))
+
+    # Get the size of the default listbox font and calculate the max column width we'll need
+
+    DefaultListFont = font.nametofont("TkTextFont")
+    LocalFontSize = DefaultListFont.measure(text="0")
+    MaxColWidth = int(MaxColWidth * LocalFontSize * 1.1)
+
+    # Alter the columns so that the scrollbar will work.  Set the description column (2) max width
+    # to the calculated max width needed.
+
+    TreeWidget.column('#0',width=0,minwidth=100,stretch=True)
+    TreeWidget.column('#1',width=0,minwidth=100,stretch=True)
+    TreeWidget.column('#2',width=0,minwidth=MaxColWidth,stretch=True)
+
+    return
+
+# Compare field list elements for sort
+# ------------------------------------
+def compare_field_list_entry(Entry):
+    Key = Entry["TABLENAME"] + ":" + Entry["FIELD_NAME"]
+    return Key
+
+# Add a field to the list of selected fields
+# ------------------------------------------
+def add_field_callback(TreeWidget,TargetTreeWidget):
+
+    # Get all of the selected items.  If there aren't any, then message box.
+
+    TotalSelected = 0
+    for Item in TreeWidget.selection():
+        TotalSelected = TotalSelected + 1
+
+        # Get list of values from tree item, calculate key
+
+        ValueList = TreeWidget.item(Item)["values"]
+        ItemText = TreeWidget.item(Item,"text")
+        KeyValue = ItemText + ":" + ValueList[0]
+
+        # Set flag value in map
+
+        SelectedFieldMap[KeyValue] = "Y"
+
+    if TotalSelected < 1:
+        messagebox.showinfo("ERROR: NO FIELDS SELECTED","You must select one or more fields to add")
+        return
+
+    load_field_list_to_box(TreeWidget,"N")
+    load_field_list_to_box(TargetTreeWidget,"Y")
+    return
+
+# Remove a field from the list of selected fields
+# -----------------------------------------------
+def remove_field_callback(TreeWidget,TargetTreeWidget):
+
+    # Get all of the selected items.  If there aren't any, then message box.
+
+    TotalSelected = 0
+    for Item in TreeWidget.selection():
+        TotalSelected = TotalSelected + 1
+
+        # Get list of values from tree item, calculate key
+
+        ValueList = TreeWidget.item(Item)["values"]
+        ItemText = TreeWidget.item(Item,"text")
+        KeyValue = ItemText + ":" + ValueList[0]
+
+        # Set flag value in map
+
+        SelectedFieldMap[KeyValue] = "N"
+
+    # Show error if the user tries to remove a field without first selecting one
+
+    if TotalSelected < 1:
+        messagebox.showinfo("ERROR: NO FIELDS SELECTED","You must select one or more fields to remove")
+        return
+
+    load_field_list_to_box(TreeWidget,"Y")
+    load_field_list_to_box(TargetTreeWidget,"N")
+    return
+
+# Update list boxes to show available fields for the selected databases
+# ---------------------------------------------------------------------
+def update_selected_db():
+    load_field_list_to_box(TreeSelectedFieldList,"Y")
+    load_field_list_to_box(TreeUnselectedFieldList,"N")
+
+# Given a date and/or accession number, return True if there is a match for the defined export range
+# --------------------------------------------------------------------------------------------------
+def check_export_record_range(DateStamp,Accession):
+    DateOk = False
+    AccessionOk = False
+
+    # Make sure date is in range (inclusive)
+
+    if StartDateStamp != 0:
+        if EndDateStamp != 0:
+            if DateStamp >= StartDateStamp and DateStamp <= EndDateStamp:
+                DateOk = True
+        else:
+            if DateStamp >= StartDateStamp:
+                DateOk = True
+    else:
+        DateOk = True
+
+    # Make sure Accession is in range (inclusive)
+
+    if StartAccession != "":
+        if EndAccession != "":
+            if Accession >= StartAccession and Accession <= EndAccession:
+                AccessionOk = True
+        else:
+            if Accession >= StartAccession:
+                AccessionOk = True
+    else:
+        AccessionOk = True
+
+    if DateOk == True and AccessionOk == True:
+        return True
+
+    return False
+
+# Convert a record field based on type and table
+# ----------------------------------------------
+def convert_field_to_string(TableName,FieldName,FieldValue):
+    LocalKey = FieldName
+    Record = FieldListMap[LocalKey]
+    Decimals = Record["FIELD_DEC"]
+    FieldType = Record["FIELD_TYPE"]
+    if FieldValue == None:
+        return ""
+
+    while(True):
+
+        # Character or memo field; treat as a string
+
+        if FieldType == "C" or FieldType == "M":
+            return filter_string_field(FieldValue.strip(" \t\r\n" + chr(0)))
+
+        # Number field.  Convert as float if there are any decimals.  Otherwise, represent as an integer.
+
+        if FieldType == "N":
+            if Decimals == 0.0:
+                TempString = "%d" % FieldValue
+            else:
+                TempString = "%f" % FieldValue
+
+            return TempString
+        
+        # Date field; format as a parseable date string in the form YYYY-MM-DD HH:II:SS
+
+        if FieldType == "D":
+            TempString = FieldValue.strftime("%Y-%m-%d %H:%M:%S")
+            return TempString.strip(" \t\r\n" + chr(0))
+
+        # Ignore everything else
+
+        return ""
+
+# ================
+# EXPORT FUNCTIONS
+# ================
+
+# Given a file name and the path to the backup, find the path for an image file
+# -----------------------------------------------------------------------------
+def find_image_path(SourceBaseName,DBPath,Record):
+
+    FoundPath = ""
+    
+    # First, see if the file is in the "images" path where it's supposed to be.  If so, all done.
+
+    FileName = DBPath + "/images/" + SourceBaseName
+    if os.path.exists(FileName):
+        return(FileName)
+
+    # Create a new base name without any prefix directory
+
+    SourceSeg = SourceBaseName.split("/")
+    TempBaseName = SourceSeg.pop()
+    OriginalPath = "/".join(SourceSeg)
+
+    # Get file name extension and a name without extension in case
+    # a file has been saved with the wrong extension
+
+    ExtensionList = TempBaseName.split(".")
+    Extension = ExtensionList.pop()
+    TempBaseNoExt =".".join(ExtensionList)
+    
+    # Test for bad extension but original position
+
+    LocalFileName = DBPath + "/images/" + OriginalPath + "/" + TempBaseNoExt + "." + "bmp"
+    if os.path.exists(LocalFileName):
+        return(LocalFileName)
+
+
+    # Check other prefix directories in "images" to see if the file is there.  Directory
+    # names will be "images/001", "images/002", etc.
+
+    for Counter in range(1,1000):
+        LocalPath = "%03d" % Counter
+        LocalFileName = DBPath + "/images/" + LocalPath + "/" + TempBaseName
+        if os.path.exists(LocalFileName):
+            return(LocalFileName)
+
+    # Look in the "largeimages" directories.  Directory names will be "largeimages1", "largeimages2", etc.
+
+    for Counter in range(100):
+
+        # If counter is zero, then no suffix on "largeimages".  Else, numeric suffix
+
+        if Counter > 0:
+            LocalPath = "%d" % Counter
+        else:
+            LocalPath = ""
+
+        # See if the file exists in the largeimages path; if so, return value
+
+        LocalFileName = DBPath + "/multimedia/largeimages" + LocalPath + "/" + TempBaseName
+        if os.path.exists(LocalFileName):
+            return(LocalFileName)
+
+        # See if the file exists in the documents path; if so, return value
+
+        LocalFileName = DBPath + "/multimedia/documents" + LocalPath + "/" + TempBaseName
+        if os.path.exists(LocalFileName):
+            return(LocalFileName)
+
+    # Nothing found.  Return empty string.
+
+    return("")
+
+
+# Given a record, get a list of available files and add to ZIP file
+# -----------------------------------------------------------------
+def add_record_files_to_zip(TableName,Record,ZIPHandle,DBPath,RecordNumber):
+
+    # Get number of images.  If less than one, all done
+
+    ImageCount = int(Record["IMAGENO"])
+    if ImageCount < 1:
+        return 0
+
+    FileSizeTotal = 0
+
+    # Build components for image file name
+
+    InitialImageName = Record["IMAGEFILE"]
+    LocalObjectID = Record["OBJECTID"]
+    LocalObjectID = LocalObjectID.strip(" " + chr(0))
+    InitialImageName = InitialImageName.strip(" " + chr(0))
+    BaseImageSeg = InitialImageName.split(".")
+    ImageExtension = BaseImageSeg.pop()
+    BaseImageName = ".".join(BaseImageSeg)
+    BaseImageName = BaseImageName.replace("\\","/")
+
+    ProgressString = "Exporting record " + "%d" % RecordNumber + " (object ID " + LocalObjectID + ") from " + TableName
+    ProgressVar.set(ProgressString)
+    LabelProgress.update()
+
+    # If there's no image name, all done
+
+    if InitialImageName == "":
+        return True
+
+    # Process images
+
+    LocalPattern = re.compile(r'.*-[0-9]+$')
+    Counter = 1
+    while Counter <= ImageCount:
+
+        # Create file name.  If this is image one, there is no "-nnnn", else add it along
+        # with the path to the images.
+
+        if Counter > 1:
+            LocalTest = LocalPattern.match(BaseImageName)
+            if LocalTest != None:
+                SubSeg = BaseImageName.split("-")
+                LastSeg = SubSeg.pop()
+                SubName = "-".join(SubSeg)
+                FileName = DBPath + "/images/" + SubName + "-" + "%d" % Counter
+                TestBaseName = SubName + "-" + "%d" % Counter + "." + ImageExtension
+                TestBaseName = TestBaseName.strip(chr(0))
+                ArchiveName = SubName + "-" + "%d" % Counter
+            else:
+                FileName = DBPath + "/images/" + BaseImageName + "-" + "%d" % Counter
+                TestBaseName = BaseImageName + "-" + "%d" % Counter + "." + ImageExtension
+                TestBaseName = TestBaseName.strip(chr(0))
+                ArchiveName = BaseImageName + "-" + "%d" % Counter
+
+        else:
+                FileName = DBPath + "/images/" + BaseImageName
+                TestBaseName = BaseImageName + "." + ImageExtension
+                TestBaseName = TestBaseName.strip(chr(0))
+                ArchiveName = BaseImageName
+        
+        # Add extension
+
+        FileName = FileName + "." + ImageExtension
+        FileName = FileName.strip(chr(0))
+
+        # Name as stored in the archive doesn't include anything but the PP path to the image within "images"
+
+        ArchiveName = ArchiveName + "." + ImageExtension
+        ArchiveName = ArchiveName.strip(chr(0))
+
+        # If the file exists, add.  Else warning at console.
+
+        FoundSourceName = find_image_path(TestBaseName,DBPath,Record)
+        if FoundSourceName != "":
+            LocalFileInfo = os.stat(FoundSourceName)
+            FileSizeTotal += LocalFileInfo.st_size
+            ZIPHandle.write(FoundSourceName,ArchiveName)
+        else:
+            print("WARNING","Can't find file",FileName,"(" + DBPath + "/images/" + BaseImageName + ")")
+
+#        if os.path.exists(FileName):
+#            ProgressString = "Record %d" % RecordNumber
+#            ProgressString = ProgressString + "; Object ID in " + TableName + ": " + LocalObjectID + "; Saving image file " + FileName + " as " + ArchiveName
+#            ProgressVar.set(ProgressString)
+#            LabelProgress.update()
+#            ZIPHandle.write(FileName,ArchiveName)
+#        else:
+#            print("WARNING","Can't find file",FileName,"(" + DBPath + "/images/" + BaseImageName + ")")
+
+        Counter = Counter + 1
+
+    return FileSizeTotal
+
+# Given a base file name and image number, generate new image name
+# ----------------------------------------------------------------
+def format_image_name(InName,ImageNumber):
+    if ImageNumber < 2:
+        return(InName)
+
+    InSeg = InName.split(".")
+    Extension = InSeg.pop()
+    BaseName = ".".join(InSeg)
+    BaseName = BaseName + "-" + str(ImageNumber) + "." + Extension
+    return(BaseName)
+
+
+# Do the actual export for each selected PP "database"
+# ----------------------------------------------------
+def run_export(ProgressWidgetHandle):
+
+    # Make progress area font bigger and bolder
+
+    LabelProgress.configure(font="Helvetica 14 bold")
+
+    # Disable most of the widgets on the screen so the user focuses on the progress area,
+    # and can't screw something up by hitting a button accidentally.  Leave the field lists
+    # active so the user can look at them if needed.  Set colors to gray to emphasize
+    # that we're not in those areas.
+
+    StartButton.configure(state=DISABLED)
+    StartButton.update()
+    BackupDBPathName.configure(state=DISABLED)
+    BackupDBPathSelectButton.configure(state=DISABLED)
+    ZIPPathName.configure(state=DISABLED)
+    ZIPPathSelectButton.configure(state=DISABLED)
+    AddFieldButton.configure(state=DISABLED)
+    RemoveFieldButton.configure(state=DISABLED)
+    ZIPFileName.configure(state=DISABLED)
+    ObjectsCheck.configure(state=DISABLED)
+    PhotosCheck.configure(state=DISABLED)
+    ArchivesCheck.configure(state=DISABLED)
+    LibraryCheck.configure(state=DISABLED)
+    FrameBackupPath.configure(fg='darkgrey')
+    FrameZipInfo.configure(fg='darkgrey')
+    FrameDatabaseSelect.configure(fg='darkgrey')
+    FrameRanges.configure(fg='darkgrey')
+    FrameFieldSelect.configure(fg='darkgrey')
+    ZIPFileSizeDropDown.configure(state=DISABLED)
+    ZIPFileSizeDropDown.configure(fg='darkgrey')
+#    TreeUnselectedFieldList.configure(state=DISABLED)
+#    TreeUnselectedFieldList.configure(fg='darkgrey')
+#    TreeSelectedFieldList.configure(state=DISABLED)
+#    TreeSelectedFieldList.configure(fg='darkgrey')
+
+    # Open CSV file
+
+    print("Open CSV\n");
+    ProgressVar.set("Open CSV")
+    ProgressWidgetHandle.update()
+    ExportPath = ZIPPathName.get()
+    CSVFileName = ExportPath + "/records.csv"
+
+    CSVFile = open(CSVFileName,"w")
+
+    # Open the ZIP file using DEFLATE algorithm
+
+    print("Open ZIP file\n");
+    BaseZIPFileText = ZIPFileName.get()
+    BaseZIPSegs = BaseZIPFileText.split(".")
+    BaseZIPSegs.pop()
+    BaseZIPName = ".".join(BaseZIPSegs)
+    LocalZIPFileName = ExportPath + "/" + BaseZIPName + ".zip"
+    ProgressVar.set("Open ZIP archive " + LocalZIPFileName)
+    ProgressWidgetHandle.update()
+    ZIPNumber = 1
+    GlobalZIPNumber = ZIPNumber
+    TotalZipSize = 0
+    CompressMethod = zipfile.ZIP_DEFLATED
+    ZIPHandle = zipfile.ZipFile(LocalZIPFileName,mode='w',compression=CompressMethod,allowZip64=True,compresslevel=9)
+
+    # Create lists of export fields for selected "databases"
+
+    LibraryFieldList = []
+    PhotosFieldList = []
+    ArchivesFieldList = []
+    ObjectsFieldList = []
+
+    # Create maps for fast field usage lookups
+
+    ArchivesFieldMap = {}
+    ObjectsFieldMap = {}
+    PhotosFieldMap = {}
+    LibraryFieldMap = {}
+    HeaderMap = {"SECTION":"Y","IMAGENUMBER":"Y"}
+
+    # Generate field maps
+
+    ProgressVar.set("Generating field maps")
+    ProgressWidgetHandle.update()
+    for Key in FieldListMap:
+
+        # Get record from field list map, calculate local key value for lookups, get field name
+
+        RequiredFlag = 0
+        Record = FieldListMap[Key]
+        if field_is_required_for_output(Record["FIELD_NAME"]) == 1:
+            LocalKey = Record["FIELD_NAME"]
+            HeaderKey = Record["FIELD_NAME"]
+            RequiredFlag = 1
+        else:
+            LocalKey = Record["TABLENAME"] + ":" + Record["FIELD_NAME"]
+            HeaderKey = Record["TABLENAME"] + ":" + Record["FIELD_NAME"]
+
+        TableName = Record["TABLENAME"]
+        LocalFieldName = Record["FIELD_NAME"]
+
+        # If this is a selected field or it is one of OBJECTID,ACCESSNO,IMAGEFILE or IMAGENO, include in output
+
+        if SelectedFieldMap[LocalKey] == "Y" or RequiredFlag == 1:
+
+            # If one of the required fields, just use field name
+
+#            if field_is_required_for_output(LocalFieldName) == 1:
+#                HeaderKey = Record["FIELD_NAME"]
+
+            # Add field to header field name list if needed
+
+            if HeaderKey not in HeaderMap:
+                HeaderMap[HeaderKey] = "Y"
+
+            # Add field to the appropriate field list/map based on table name
+
+            while True:
+                if TableName == "ARCHIVES":
+                    if ArchivesDBVar.get() != 0:
+                        ArchivesFieldList.append(Record)
+                        ArchivesFieldMap[LocalFieldName] = Record
+                        break
+
+                if TableName == "LIBRARY":
+                    if LibraryDBVar.get() != 0:
+                        LibraryFieldList.append(Record)
+                        LibraryFieldMap[LocalFieldName] = Record
+                        break
+
+                if TableName == "OBJECTS" or TableName == "OBJECT2":
+                    if ObjectsDBVar.get() != 0:
+                        ObjectsFieldList.append(Record)
+                        ObjectsFieldMap[LocalFieldName] = Record
+                        break
+
+                if TableName == "PHOTOS":
+                    if PhotosDBVar.get() != 0:
+                        PhotosFieldList.append(Record)
+                        PhotosFieldMap[LocalFieldName] = Record
+                        break
+
+                break
+    
+    # Output the field names as a header string to the CSV
+
+    ProgressVar.set("Output field names to CSV")
+    ProgressWidgetHandle.update()
+    HeaderString = ""
+    for FieldName in HeaderMap:
+        Affirm = HeaderMap[FieldName]
+        HeaderString = HeaderString + FieldName + ","
+
+    # Chop off final comma and then send to file
+
+    HeaderString = HeaderString[:-1]
+    CSVFile.write(HeaderString + "\n")
+
+    # Process each "database".  First, get database backup files path.  We assume all data is in the "data" path, images in the "images" path
+
+    DBBasePath = BackupDBPathName.get()
+
+    # Copy indexes as needed.  PP doesn't include indexes in the backups(!), so we have to copy the index template
+    # from the sample database, and then reindex.
+
+    ProgressVar.set("Copying index file templates")
+    ProgressWidgetHandle.update()
+    LocalDBBasePath = DBBasePath.replace("/","\\")
+    print("Copy CDX files\n")
+    call("copy pp_data_template\OBJECTS.CDX " + LocalDBBasePath + "\data\OBJECTS.CDX",shell=True)
+    call("copy pp_data_template\LIBRARY.CDX " + LocalDBBasePath + "\data\LIBRARY.CDX",shell=True)
+    call("copy pp_data_template\PHOTOS.CDX " + LocalDBBasePath + "\data\PHOTOS.CDX",shell=True)
+    call("copy pp_data_template\ARCHIVES.CDX " + LocalDBBasePath + "\data\ARCHIVES.CDX",shell=True)
+
+    # Change progress text color so it's more noticeable
+
+    ProgressWidgetHandle.configure(fg='green')
+
+    # Get the file size to use
+
+    FileSizeLimit = 0
+    LocalStringValue = ZIPFileSizeVar.get()
+    while(True):
+        if LocalStringValue.find("No Size Limit") >= 0:
+            FileSizeLimit = -1
+            break
+
+        if LocalStringValue.find("250 MB") >= 0:
+            FileSizeLimit = 250000000
+            break
+
+        if LocalStringValue.find("100 MB") >= 0:
+            FileSizeLimit = 100000000
+            break
+
+        if LocalStringValue.find("50 MB") >= 0:
+            FileSizeLimit = 50000000
+            break
+
+        if LocalStringValue.find("25 MB") >= 0:
+            FileSizeLimit = 25000000
+            break
+
+    if FileSizeLimit == 0:
+            print("Cannot determine output zip size\n")
+            sys.exit(-1)
+
+    # Process the databases
+
+    # ARCHIVES
+
+    OutputCount = 0
+    ProgressCount = 0
+    if ArchivesDBVar.get() != 0:
+
+        # Open DBF
+
+        DBHandle = CodeBaseTools.cbToolsX(False)
+        UseResult = DBHandle.use(DBBasePath + "\pp5backup\ARCHIVES.DBF","archives",True,True,False)
+        if UseResult == False:
+            print("Can't open ARCHIVES DBF file: " + DBBasePath + "\pp5backup\ARCHIVES.DBF\n")
+            print(DBHandle.cErrorMessage)
+            print("\n")
+            sys.exit(-1)
+
+        # Reindex it just to be safe
+
+        ProgressVar.set("Re-indexing the 'Archives' database")
+        ProgressWidgetHandle.update()
+        DBHandle.reindex()
+
+        # Traverse records, checking date/accession number 
+
+        DBHandle.goto("RECORD",1)
+        ImageCount = 0
+        FileNameCol = -1
+        CurrentCol = 0
+        BaseImageName = ""
+        while(True):
+            CurrentCol = 0
+            FileNameCol = -1
+            ImageCount = 0
+            BaseImageName = ""
+
+            # Get record data
+
+            RecordData = DBHandle.scatter("archives",True,True,"","XX")
+            LocalDate = RecordData["CATDATE"]
+            if isinstance(LocalDate,date) == False:
+                if DBHandle.goto("NEXT",1) == False:
+                    break
+
+                continue
+
+            TempAccession = RecordData["ACCESSNO"]
+            LocalAccession = TempAccession.strip(" \t\r\n" + chr(0))
+            if LocalAccession == "":
+                if DBHandle.goto("NEXT",1) == False:
+                    break
+                else:
+                    continue
+
+            # Check date/accession range. First,
+            # convert date value to POSIX time stamp
+
+            TimeTuple = LocalDate.timetuple()
+            DateStamp = time.mktime(TimeTuple)
+
+            if check_export_record_range(DateStamp,LocalAccession) == True:
+
+                # Collect all of the export fields in a record, each as a string.  Convert as necessary.
+                # Note that in this table (and all others) output is in the same order that the header
+                # field names were output.
+
+                ValueList = ["ARCHIVES","0"]
+                for LocalKey in HeaderMap:
+                    if LocalKey == "IMAGENO":
+                        ImageCount = int(RecordData["IMAGENO"])
+
+                    if LocalKey == "IMAGEFILE":
+                        FileNameCol = CurrentCol
+
+                    if LocalKey == "SECTION" or LocalKey == "IMAGENUMBER":
+                        CurrentCol = CurrentCol + 1
+                        continue
+
+                    if LocalKey[:8] == "ARCHIVES":
+                        LocalLookup = LocalKey[9:]
+                        if LocalLookup in RecordData:
+                            RecordValue = RecordData[LocalLookup]
+                            OutValue = convert_field_to_string("ARCHIVES",LocalKey,RecordValue)
+                            OutValue = OutValue.strip(" \t\r\n" + chr(0))
+                            ValueList.append(OutValue)
+                    else:
+                        if LocalKey.find(":") < 0:
+                            RecordValue = RecordData[LocalKey]
+                            OutValue = convert_field_to_string("ARCHIVES",LocalKey,RecordValue)
+                            OutValue = OutValue.strip(" \t\r\n" + chr(0))
+                            ValueList.append(OutValue)
+                        else:
+                            ValueList.append("")
+
+                    CurrentCol = CurrentCol + 1
+
+                # Convert list of field values to a string where each string is quoted
+                # between comma separators
+
+                if ImageCount <= 0:
+                    OutString = "\"" + "\",\"".join(ValueList) + "\"\n"
+                    CSVFile.write(OutString)
+                else:
+                    ImageNumber = 1
+                    if FileNameCol >= 0:
+                        BaseImageName = ValueList[FileNameCol]
+
+                    while (ImageNumber <= ImageCount):
+                        ValueList[1] = str(ImageNumber)
+                        if FileNameCol >= 0:
+                            ValueList[FileNameCol] = format_image_name(BaseImageName,ImageNumber)
+
+                        OutString = "\"" + "\",\"".join(ValueList) + "\"\n"
+                        CSVFile.write(OutString)
+                        ImageNumber = ImageNumber + 1
+
+                # Add files
+
+                TotalZipSize += add_record_files_to_zip("ARCHIVES",RecordData,ZIPHandle,DBBasePath,OutputCount)
+                OutputCount = OutputCount + 1
+                ProgressCount = ProgressCount + 1
+                if ProgressCount >= 100:
+                    ProgressVar.set("%d" % OutputCount)
+                    ProgressWidgetHandle.update()
+                    ProgressCount = 0
+
+                if TotalZipSize >= FileSizeLimit and FileSizeLimit >= 0:
+
+                    # Close current CSV and add to open ZIP
+
+                    CSVFile.close()
+                    ProgressVar.set("Adding CSV file to ZIP archive")
+                    ProgressWidgetHandle.update()
+                    ZIPHandle.write(CSVFileName,"records.csv")
+
+                    # Close ZIP, increment ZIP number and reset size
+
+                    ZIPHandle.close()
+                    ZIPNumber = ZIPNumber + 1
+                    GlobalZIPNumber = ZIPNumber
+                    TotalZipSize = 0
+                    ProgressVar.set("Open CSV")
+                    ProgressWidgetHandle.update()
+                    ExportPath = ZIPPathName.get()
+
+                    # Open new CSV file
+
+                    CSVFileName = ExportPath + "/records.csv"
+                    CSVFile = open(CSVFileName,"w")
+                    CSVFile.write(HeaderString + "\n")
+
+                    # Open the ZIP file using DEFLATE algorithm
+
+                    LocalZIPFileName = ExportPath + "/" + BaseZIPName + "_" + "%02d" % ZIPNumber + ".zip"
+                    ProgressVar.set("Open ZIP archive " + LocalZIPFileName)
+                    ProgressWidgetHandle.update()
+                    CompressMethod = zipfile.ZIP_DEFLATED
+                    ZIPHandle = zipfile.ZipFile(LocalZIPFileName,mode='w',compression=CompressMethod,allowZip64=True,compresslevel=9)
+
+
+            # Next record
+
+            if DBHandle.goto("NEXT",1) == False:
+                break
+
+        # Close table
+
+        DBHandle.cb_shutdown()
+
+    # OBJECTS
+
+    if ObjectsDBVar.get() != 0:
+
+        # Open DBF
+
+        DBHandle = CodeBaseTools.cbToolsX(False)
+        UseResult = DBHandle.use(DBBasePath + "\pp5backup\OBJECTS.DBF","objects",True,True,False)
+        if UseResult == False:
+            print("Can't open OBJECTS DBF file: " + DBBasePath + "\pp5backup\OBJECTS.DBF\n")
+            print(DBHandle.cErrorMessage)
+            print("\n")
+            sys.exit(-1)
+
+        # Reindex it just to be safe
+
+        ProgressVar.set("Re-indexing the 'Objects' database")
+        ProgressWidgetHandle.update()
+        DBHandle.reindex()
+
+        # Traverse records, checking date/accession number 
+
+        DBHandle.goto("RECORD",1)
+        while(True):
+            CurrentCol = 0
+            FileNameCol = -1
+            ImageCount = 0
+            BaseImageName = ""
+
+
+            # Get record data
+
+            RecordData = DBHandle.scatter("objects",True,True,"","XX")
+            LocalDate = RecordData["CATDATE"]
+            if isinstance(LocalDate,date) == False:
+                if DBHandle.goto("NEXT",1) == False:
+                    break
+
+                continue
+
+            TempAccession = RecordData["ACCESSNO"]
+            LocalAccession = TempAccession.strip(" \t\r\n" + chr(0))
+            if LocalAccession == "":
+                if DBHandle.goto("NEXT",1) == False:
+                    break
+                else:
+                    continue
+
+            # Check date/accession range. First,
+            # convert date value to POSIX time stamp
+
+            TimeTuple = LocalDate.timetuple()
+            DateStamp = time.mktime(TimeTuple)
+
+            if check_export_record_range(DateStamp,LocalAccession) == True:
+
+                # Collect all of the export fields in a record, each as a string.  Convert as necessary.
+
+                ValueList = ["OBJECTS","0"]
+                for LocalKey in HeaderMap:
+                    if LocalKey == "IMAGENO":
+                        ImageCount = int(RecordData["IMAGENO"])
+
+                    if LocalKey == "IMAGEFILE":
+                        FileNameCol = CurrentCol
+
+                    if LocalKey == "SECTION" or LocalKey == "IMAGENUMBER":
+                        CurrentCol = CurrentCol + 1
+                        continue
+
+                    if LocalKey[:7] == "OBJECTS":
+                        LocalLookup = LocalKey[8:]
+                        if LocalLookup in RecordData:
+                         RecordValue = RecordData[LocalLookup]
+                         OutValue = convert_field_to_string("OBJECTS",LocalKey,RecordValue)
+                         OutValue = OutValue.strip(" \t\r\n" + chr(0))
+                         ValueList.append(OutValue)
+                    else:
+                        if LocalKey.find(":") < 0:
+                            RecordValue = RecordData[LocalKey]
+                            OutValue = convert_field_to_string("OBJECTS",LocalKey,RecordValue)
+                            OutValue = OutValue.strip(" \t\r\n" + chr(0))
+                            ValueList.append(OutValue)
+                        else:
+                            ValueList.append("")
+
+                    CurrentCol = CurrentCol + 1
+
+                # Convert list of field values to a string where each string is quoted
+                # between comma separators
+
+                if ImageCount <= 0:
+                    OutString = "\"" + "\",\"".join(ValueList) + "\"\n"
+                    CSVFile.write(OutString)
+                else:
+                    ImageNumber = 1
+                    if FileNameCol >= 0:
+                        BaseImageName = ValueList[FileNameCol]
+
+                    while (ImageNumber <= ImageCount):
+                        ValueList[1] = str(ImageNumber)
+                        if FileNameCol >= 0:
+                            ValueList[FileNameCol] = format_image_name(BaseImageName,ImageNumber)
+
+                        OutString = "\"" + "\",\"".join(ValueList) + "\"\n"
+                        CSVFile.write(OutString)
+                        ImageNumber = ImageNumber + 1
+
+                # Add files
+
+                TotalZipSize += add_record_files_to_zip("OBJECTS",RecordData,ZIPHandle,DBBasePath,OutputCount)
+                OutputCount = OutputCount + 1
+                ProgressCount = ProgressCount + 1
+                if ProgressCount >= 100:
+                    ProgressVar.set("%d" % OutputCount)
+                    ProgressWidgetHandle.update()
+                    ProgressCount = 0
+
+                if TotalZipSize >= FileSizeLimit and FileSizeLimit >= 0:
+
+                    # Close current CSV and add to open ZIP
+
+                    CSVFile.close()
+                    ProgressVar.set("Adding CSV file to ZIP archive")
+                    ProgressWidgetHandle.update()
+                    ZIPHandle.write(CSVFileName,"records.csv")
+
+                    # Close ZIP, increment ZIP number and reset size
+
+                    ZIPHandle.close()
+                    ZIPNumber = ZIPNumber + 1
+                    GlobalZIPNumber = ZIPNumber
+                    TotalZipSize = 0
+                    ProgressVar.set("Open CSV")
+                    ProgressWidgetHandle.update()
+                    ExportPath = ZIPPathName.get()
+
+                    # Open new CSV file
+
+                    CSVFileName = ExportPath + "/records.csv"
+                    CSVFile = open(CSVFileName,"w")
+                    CSVFile.write(HeaderString + "\n")
+
+                    # Open the ZIP file using DEFLATE algorithm
+
+                    LocalZIPFileName = ExportPath + "/" + BaseZIPName + "_" + "%02d" % ZIPNumber + ".zip"
+                    ProgressVar.set("Open ZIP archive " + LocalZIPFileName)
+                    ProgressWidgetHandle.update()
+                    CompressMethod = zipfile.ZIP_DEFLATED
+                    ZIPHandle = zipfile.ZipFile(LocalZIPFileName,mode='w',compression=CompressMethod,allowZip64=True,compresslevel=9)
+
+            # Next record
+
+            if DBHandle.goto("NEXT",1) == False:
+                break
+
+        # Close table
+
+        DBHandle.cb_shutdown()
+
+    # PHOTOS
+
+    if PhotosDBVar.get() != 0:
+
+        # Open DBF
+
+        DBHandle = CodeBaseTools.cbToolsX(False)
+        UseResult = DBHandle.use(DBBasePath + "\pp5backup\PHOTOS.DBF","photos",True,True,False)
+        if UseResult == False:
+            print("Can't open PHOTOS DBF file: " + DBBasePath + "\pp5backup\PHOTOS.DBF\n")
+            print(DBHandle.cErrorMessage)
+            print("\n")
+            sys.exit(-1)
+
+        # Reindex it just to be safe
+
+        ProgressVar.set("Re-indexing the 'Photos' database")
+        ProgressWidgetHandle.update()
+        DBHandle.reindex()
+
+        # Traverse records, checking date/accession number 
+
+        DBHandle.goto("RECORD",1)
+        while(True):
+            CurrentCol = 0
+            FileNameCol = -1
+            ImageCount = 0
+            BaseImageName = ""
+
+
+            # Get record data
+
+            RecordData = DBHandle.scatter("photos",True,True,"","XX")
+            LocalDate = RecordData["CATDATE"]
+            if isinstance(LocalDate,date) == False:
+                if DBHandle.goto("NEXT",1) == False:
+                    break
+
+                continue
+
+            TempAccession = RecordData["ACCESSNO"]
+            LocalAccession = TempAccession.strip(" \t\r\n" + chr(0))
+            if LocalAccession == "":
+                if DBHandle.goto("NEXT",1) == False:
+                    break
+                else:
+                    continue
+
+            # Check date/accession range. First,
+            # convert date value to POSIX time stamp
+
+            TimeTuple = LocalDate.timetuple()
+            DateStamp = time.mktime(TimeTuple)
+
+            if check_export_record_range(DateStamp,LocalAccession) == True:
+
+                # Collect all of the export fields in a record, each as a string.  Convert as necessary.
+
+                ValueList = ["PHOTOS","0"]
+                for LocalKey in HeaderMap:
+                    if LocalKey == "IMAGENO":
+                        ImageCount = int(RecordData["IMAGENO"])
+
+                    if LocalKey == "IMAGEFILE":
+                        FileNameCol = CurrentCol
+
+                    if LocalKey == "SECTION" or LocalKey == "IMAGENUMBER":
+                        CurrentCol = CurrentCol + 1
+                        continue
+
+                    if LocalKey[:6] == "PHOTOS":
+                        LocalLookup = LocalKey[7:]
+                        if LocalLookup in RecordData:
+                         RecordValue = RecordData[LocalLookup]
+                         OutValue = convert_field_to_string("PHOTOS",LocalKey,RecordValue)
+                         OutValue = OutValue.strip(" \t\r\n" + chr(0))
+                         ValueList.append(OutValue)
+                    else:
+                        if LocalKey.find(":") < 0:
+                            RecordValue = RecordData[LocalKey]
+                            OutValue = convert_field_to_string("PHOTOS",LocalKey,RecordValue)
+                            OutValue = OutValue.strip(" \t\r\n" + chr(0))
+                            ValueList.append(OutValue)
+                        else:
+                            ValueList.append("")
+
+                    CurrentCol = CurrentCol + 1
+    
+                # Convert list of field values to a string where each string is quoted
+                # between comma separators
+
+                if ImageCount <= 0:
+                    OutString = "\"" + "\",\"".join(ValueList) + "\"\n"
+                    CSVFile.write(OutString)
+                else:
+                    ImageNumber = 1
+                    if FileNameCol >= 0:
+                        BaseImageName = ValueList[FileNameCol]
+
+                    while (ImageNumber <= ImageCount):
+                        ValueList[1] = str(ImageNumber)
+                        if FileNameCol >= 0:
+                            ValueList[FileNameCol] = format_image_name(BaseImageName,ImageNumber)
+
+                        OutString = "\"" + "\",\"".join(ValueList) + "\"\n"
+                        CSVFile.write(OutString)
+                        ImageNumber = ImageNumber + 1
+
+                # Add files
+
+                TotalZipSize += add_record_files_to_zip("PHOTOS",RecordData,ZIPHandle,DBBasePath,OutputCount)
+                OutputCount = OutputCount + 1
+                ProgressCount = ProgressCount + 1
+                if ProgressCount >= 100:
+                    ProgressVar.set("%d" % OutputCount)
+                    ProgressWidgetHandle.update()
+                    ProgressCount = 0
+
+                if TotalZipSize >= FileSizeLimit and FileSizeLimit >= 0:
+
+                    # Close current CSV and add to open ZIP
+
+                    CSVFile.close()
+                    ProgressVar.set("Adding CSV file to ZIP archive")
+                    ProgressWidgetHandle.update()
+                    ZIPHandle.write(CSVFileName,"records.csv")
+
+                    # Close ZIP, increment ZIP number and reset size
+
+                    ZIPHandle.close()
+                    ZIPNumber = ZIPNumber + 1
+                    GlobalZIPNumber = ZIPNumber
+                    TotalZipSize = 0
+                    ProgressVar.set("Open CSV")
+                    ProgressWidgetHandle.update()
+                    ExportPath = ZIPPathName.get()
+
+                    # Open new CSV file
+
+                    CSVFileName = ExportPath + "/records.csv"
+                    CSVFile = open(CSVFileName,"w")
+                    CSVFile.write(HeaderString + "\n")
+
+                    # Open the ZIP file using DEFLATE algorithm
+
+                    LocalZIPFileName = ExportPath + "/" + BaseZIPName + "_" + "%02d" % ZIPNumber + ".zip"
+                    ProgressVar.set("Open ZIP archive " + LocalZIPFileName)
+                    ProgressWidgetHandle.update()
+                    CompressMethod = zipfile.ZIP_DEFLATED
+                    ZIPHandle = zipfile.ZipFile(LocalZIPFileName,mode='w',compression=CompressMethod,allowZip64=True,compresslevel=9)
+
+            # Next record
+
+            if DBHandle.goto("NEXT",1) == False:
+                break
+
+        # Close table
+
+        DBHandle.cb_shutdown()
+
+
+    # LIBRARY
+
+    if LibraryDBVar.get() != 0:
+
+        # Open DBF
+
+        DBHandle = CodeBaseTools.cbToolsX(False)
+        UseResult = DBHandle.use(DBBasePath + "\pp5backup\LIBRARY.DBF","library",True,True,False)
+        if UseResult == False:
+            print("Can't open LIBRARY DBF file: " + DBBasePath + "\pp5backup\LIBRARY.DBF\n")
+            print(DBHandle.cErrorMessage)
+            print("\n")
+            sys.exit(-1)
+
+        # Reindex it just to be safe
+
+        ProgressVar.set("Re-indexing the 'Library' database")
+        ProgressWidgetHandle.update()
+        DBHandle.reindex()
+
+        # Traverse records, checking date/accession number 
+
+        DBHandle.goto("RECORD",1)
+        while(True):
+            CurrentCol = 0
+            FileNameCol = -1
+            ImageCount = 0
+            BaseImageName = ""
+
+
+            # Get record data
+
+            RecordData = DBHandle.scatter("library",True,True,"","XX")
+            LocalDate = RecordData["CATDATE"]
+            if isinstance(LocalDate,date) == False:
+                if DBHandle.goto("NEXT",1) == False:
+                    break
+
+                continue
+
+            TempAccession = RecordData["ACCESSNO"]
+            LocalAccession = TempAccession.strip(" \t\r\n" + chr(0))
+            if LocalAccession == "":
+                if DBHandle.goto("NEXT",1) == False:
+                    break
+                else:
+                    continue
+
+            # Check date/accession range. First,
+            # convert date value to POSIX time stamp
+
+            TimeTuple = LocalDate.timetuple()
+            DateStamp = time.mktime(TimeTuple)
+
+            if check_export_record_range(DateStamp,LocalAccession) == True:
+
+                # Collect all of the export fields in a record, each as a string.  Convert as necessary.
+
+                ValueList = ["LIBRARY","0"]
+                for LocalKey in HeaderMap:
+                    if LocalKey == "IMAGENO":
+                        ImageCount = int(RecordData["IMAGENO"])
+
+                    if LocalKey == "IMAGEFILE":
+                        FileNameCol = CurrentCol
+
+                    if LocalKey == "SECTION" or LocalKey == "IMAGENUMBER":
+                        CurrentCol = CurrentCol + 1
+                        continue
+
+                    if LocalKey[:7] == "LIBRARY":
+                        LocalLookup = LocalKey[8:]
+                        if LocalLookup in RecordData:
+                            RecordValue = RecordData[LocalLookup]
+                            OutValue = convert_field_to_string("LIBRARY",LocalKey,RecordValue)
+                            OutValue = OutValue.strip(" \t\r\n" + chr(0))
+                            ValueList.append(OutValue)
+                    else:
+                        if LocalKey.find(":") < 0:
+                            RecordValue = RecordData[LocalKey]
+                            OutValue = convert_field_to_string("LIBRARY",LocalKey,RecordValue)
+                            OutValue = OutValue.strip(" \t\r\n" + chr(0))
+                            ValueList.append(OutValue)
+                        else:
+                            ValueList.append("")
+
+                    CurrentCol = CurrentCol + 1
+
+                # Convert list of field values to a string where each string is quoted
+                # between comma separators
+
+                if ImageCount <= 0:
+                    OutString = "\"" + "\",\"".join(ValueList) + "\"\n"
+                    CSVFile.write(OutString)
+                else:
+                    ImageNumber = 1
+                    if FileNameCol >= 0:
+                        BaseImageName = ValueList[FileNameCol]
+
+                    while (ImageNumber <= ImageCount):
+                        ValueList[1] = str(ImageNumber)
+                        if FileNameCol >= 0:
+                            ValueList[FileNameCol] = format_image_name(BaseImageName,ImageNumber)
+
+                        OutString = "\"" + "\",\"".join(ValueList) + "\"\n"
+                        CSVFile.write(OutString)
+                        ImageNumber = ImageNumber + 1
+
+                # Add files
+
+                TotalZipSize += add_record_files_to_zip("LIBRARY",RecordData,ZIPHandle,DBBasePath,OutputCount)
+                OutputCount = OutputCount + 1
+                ProgressCount = ProgressCount + 1
+                if ProgressCount >= 100:
+                    ProgressVar.set("%d" % OutputCount)
+                    ProgressWidgetHandle.update()
+                    ProgressCount = 0
+
+                if TotalZipSize >= FileSizeLimit and FileSizeLimit >= 0:
+
+                    # Close current CSV and add to open ZIP
+
+                    CSVFile.close()
+                    ProgressVar.set("Adding CSV file to ZIP archive")
+                    ProgressWidgetHandle.update()
+                    ZIPHandle.write(CSVFileName,"records.csv")
+
+                    # Close ZIP, increment ZIP number and reset size
+
+                    ZIPHandle.close()
+                    ZIPNumber = ZIPNumber + 1
+                    GlobalZIPNumber = ZIPNumber
+                    TotalZipSize = 0
+                    ProgressVar.set("Open CSV")
+                    ProgressWidgetHandle.update()
+                    ExportPath = ZIPPathName.get()
+
+                    # Open new CSV file
+
+                    CSVFileName = ExportPath + "/records.csv"
+                    CSVFile = open(CSVFileName,"w")
+                    CSVFile.write(HeaderString + "\n")
+
+                    # Open the ZIP file using DEFLATE algorithm
+
+                    LocalZIPFileName = ExportPath + "/" + BaseZIPName + "_" + "%02d" % ZIPNumber + ".zip"
+                    ProgressVar.set("Open ZIP archive " + LocalZIPFileName)
+                    ProgressWidgetHandle.update()
+                    CompressMethod = zipfile.ZIP_DEFLATED
+                    ZIPHandle = zipfile.ZipFile(LocalZIPFileName,mode='w',compression=CompressMethod,allowZip64=True,compresslevel=9)
+
+            # Next record
+
+            if DBHandle.goto("NEXT",1) == False:
+                break
+
+        # Close table
+
+        DBHandle.cb_shutdown()
+
+
+    ProgressVar.set("Closing CSV file")
+    ProgressWidgetHandle.update()
+
+    # Close CSV file
+
+    CSVFile.close()
+
+    # Add CSV file to ZIP
+
+    ProgressVar.set("Adding CSV file to ZIP archive")
+    ProgressWidgetHandle.update()
+    ZIPHandle.write(CSVFileName,"records.csv")
+
+    # Delete CSV File
+
+    if os.path.exists(CSVFileName):
+        os.remove(CSVFileName)
+
+    # Close ZIP file
+
+    ZIPHandle.close()
+    MessageString = "%d" % OutputCount
+
+    # Show completion
+
+    ProgressVar.set("EXPORT COMPLETE: Exported " + MessageString + " record(s) in " + "%d" % ZIPNumber + " ZIP file(s)")
+    ProgressWidgetHandle.update()
+    messagebox.showinfo("EXPORT COMPLETE","Export completed.  Exported " + MessageString + " record(s) in " + "%d" % ZIPNumber + " ZIP file(s)")
+    return
+
+# Start processing in response to "START" button click
+# ----------------------------------------------------
+def start_process(ProgressWidgetHandle):
+
+    # Validate input fields, database selection, fields selected, etc.
+    # First, there has to be a backup directory selected.
+
+    LocalValue = BackupDBPathName.get()
+    LocalValue.strip()
+    if LocalValue == "":
+        messagebox.showinfo("ERROR: MISSING BACKUP DIRECTORY","You must select a directory for the PastPerfect database backup")
+        return
+
+    # The PastPerfect directory can't be where the data comes from
+
+    LocalPattern = re.compile("^[A-Za-z][\\:][\\\\][Pp][Pp]5")
+    LocalTest = LocalPattern.match(LocalValue)
+    if LocalTest:
+        messagebox.showinfo("ERROR: CANNOT USE ACTIVE DATABASE","You cannot use your active (non-backup) PastPerfect database.  You must use a backup.")
+        return
+
+    DBPath = LocalValue
+
+    # There has to be a target directory for the ZIP file
+
+    LocalValue = ZIPPathName.get()
+    LocalValue.strip()
+    if LocalValue == "":
+        messagebox.showinfo("ERROR: MISSING ZIP DIRECTORY","You must select a directory for the ZIP file")
+        return
+
+    # The ZIP can't go on the system drive
+
+    if LocalValue.find("C:") >= 0 or LocalValue.find("c:") >= 0:
+        messagebox.showinfo("ERROR: BAD ZIP DIRECTORY","You cannot place the ZIP file on your local hard drive")
+        return
+
+    # The ZIP file can't go in the same place as the backup
+
+    LocalTempValue = BackupDBPathName.get()
+    LocalTempValue.strip()
+    if LocalValue == LocalTempValue:
+        messagebox.showinfo("ERROR: CANNOT CREATE ZIP FILE","You cannot place the ZIP file in the same directory as the backup")
+        return
+
+    # There has to be a zip file name
+
+    ExportPath = LocalValue
+    LocalValue = ZIPFileName.get()
+    LocalValue.strip()
+    if LocalValue == "":
+        messagebox.showinfo("ERROR: MISSING ZIP FILE NAME","You must select a name for the ZIP file")
+        return
+
+    # The ZIP file name has to end with .ZIP or .zip
+
+    TempZipName = LocalValue.upper()
+    if TempZipName.find(".ZIP") < 0:
+        messagebox.showinfo("ERROR: BAD ZIP FILE NAME","The file name for the ZIP file must end with '.zip' or '.ZIP'")
+        return
+
+    ZipFileName = LocalValue
+#    MapCounter = 0
+#    for Key in FieldListMap:
+#        Record = FieldListMap[Key]
+#        LocalKey = Record["TABLENAME"] + Record["FIELD_NAME"]
+#        if SelectedFieldMap[LocalKey] == "Y":
+#            MapCounter = MapCounter + 1
+#
+#    if MapCounter < 1:
+#        messagebox.showinfo("NOTICE","You must select at least one field to export from the database")
+#        return
+
+    # Check range values
+
+    StartValue = AccessionRangeStartEntry.get()
+    EndValue = AccessionRangeEndEntry.get()
+    StartValue.strip()
+    EndValue.strip()
+
+    # If there is a start or end value, the other value must also be specified
+
+    if StartValue != "":
+        if EndValue == "":
+            messagebox.showinfo("ERROR: MISSING THE ENDING ACCESSION NUMBER","Missing the ending Accession number")
+            return
+    else:
+        if EndValue != "":
+            messagebox.showinfo("ERROR: MISSING THE STARTING ACCESSION NUMBER","Missing the starting Accession number")
+            return
+
+    StartValue = DateRangeStartEntry.get()
+    EndValue = DateRangeEndEntry.get()
+    StartValue.strip()
+    EndValue.strip()
+
+    # If there is a start or end date, the other date must also be specified
+
+    if StartValue != "":
+        if EndValue == "":
+            messagebox.showinfo("ERROR: MISSING ENDING DATE","Missing the ending date")
+            return
+    else:
+        if EndValue != "":
+            messagebox.showinfo("ERRRO: MISSING STARTING DATE","Missing the starting date")
+            return
+
+    StartAccession = AccessionRangeStartEntry.get()
+    EndAccession = AccessionRangeEndEntry.get()
+    StartDate = DateRangeStartEntry.get()
+    EndDate = DateRangeEndEntry.get()
+
+    # Parse start/end date values and convert to POSIX time value (seconds since Jan 1, 1970)
+
+    if StartDate != "":
+        StartDateStamp = parse(StartDate)
+    else:
+        StartDateStamp = 0
+
+    if EndDate != "":
+        EndDateStamp = parse(EndDate)
+    else:
+        EndDateStamp = 0
+
+    # Run the ZIP packager and field export function
+
+    run_export(ProgressWidgetHandle)
+
+    # Exit the program
+
+    close_window_func(Root)
+    return
+
+# #########
+# MAIN CODE
+# #########
+
+# Create root window
+
+Root = Tk();
+Root.title("AIB PerfectXport Version 1.5 -- Copyright (C) 2019-2020 SmallTownPapers, Inc.")
+
+# Set window size and position on screen.  Size is 80% of width, 90% of height, 5 pixels from top left
+RootXSize = Root.winfo_screenwidth()
+RootYSize = Root.winfo_screenheight()
+RootXSize = int(RootXSize * 0.8)
+RootYSize = int(RootYSize * 0.9)
+RootGeometryString = "%d%s%d%s" % (RootXSize,"x",RootYSize,"+5+5")
+Root.geometry(RootGeometryString)
+
+# Preset vars
+
+ZIPFileSizeVar = StringVar(Root)
+
+# Add sections; Backup DB path, ZIP name, databases to export, select fields, then start button and progress area.
+# Backup database path selection
+# ------------------------------
+FrameBackupPath = LabelFrame(Root,text="1: Select Backup Directory",font="Helvetica 12 bold")
+BackupDBPathLabel = Label(FrameBackupPath,text="Directory:",width=20,anchor=E)
+BackupDBPathName = Entry(FrameBackupPath,width=80,validate="focusout",validatecommand=backup_path_altered)
+BackupDBPathSelectButton = ttk.Button(FrameBackupPath,text="Select...",command=lambda: select_backup_path(BackupDBPathName,"Select Backup Database Directory"))
+BackupDBPathLabel.pack(side=LEFT)
+BackupDBPathName.pack(side=LEFT,expand=TRUE,fill=X)
+BackupDBSelectPad = Frame(FrameBackupPath,width=10)
+BackupDBSelectPad.pack(side=LEFT)
+BackupDBPathSelectButton.pack(side=LEFT)
+FrameBackupPath.pack(fill=BOTH,expand=TRUE)
+
+
+# Zip name selection.  First, create frame for Zip data
+# -----------------------------------------------------
+FrameZipInfo = LabelFrame(Root,text="2: Select Location Of Output ZIP File, ZIP File Name and ZIP File Size",font="Helvetica 12 bold")
+
+# Frame for directory select
+
+FrameZipPath = Frame(FrameZipInfo)
+
+# Frame for ZIP file name
+
+FrameZipFileName = Frame(FrameZipInfo)
+
+# Frame for file size drop-down
+
+FrameZipFileSize = Frame(FrameZipInfo)
+
+# Pack directory select and ZIP file name frames
+
+FrameZipPath.pack(fill=BOTH,expand=TRUE)
+FrameZipFileName.pack(fill=BOTH,expand=TRUE)
+FrameZipFileSize.pack(fill=BOTH,expand=TRUE)
+
+# ZIP directory select components:  Label, entry field, button
+
+ZIPPathLabel = Label(FrameZipPath,text="ZIP Location:",width=20,anchor=E)
+ZIPPathName = Entry(FrameZipPath,width=80)
+ZIPPathSelectButton = ttk.Button(FrameZipPath,text="Select...",command=lambda: select_path(ZIPPathName,"Select ZIP File Directory"))
+
+# Pack label, name
+
+ZIPPathLabel.pack(side=LEFT)
+ZIPPathName.pack(side=LEFT,expand=TRUE,fill=X)
+
+# Padding between button and name
+
+ZIPSelectPad = Frame(FrameZipPath,width=10)
+ZIPSelectPad.pack(side=LEFT)
+
+# Pack button after padding
+
+ZIPPathSelectButton.pack(side=LEFT)
+
+# ZIP file name label, entry field
+
+ZIPFileNameLabel = Label(FrameZipFileName,text="ZIP File Name:",anchor=E,width=20)
+ZIPFileName = Entry(FrameZipFileName,width=40)
+DateInfo = datetime.now()
+DateString = DateInfo.strftime("%Y_%m_%d_%H_%M_%S_export.zip")
+ZIPFileName.insert(1,DateString)
+
+# Pack label and field
+
+ZIPFileNameLabel.pack(side=LEFT)
+ZIPFileName.pack(side=LEFT)
+
+# ZIP file size label
+
+ZIPFileSizeSelections = ["No Size Limit","250 MB: Use For Uploading To AIB With Fast Connections","100 MB: Use For Uploading To AIB With Normal Connections"," 50 MB: Use For Uploading To AIB With Slow Connections", " 25 MB: Use For Uploading To AIB With Poor Connections"]
+ZIPFileSizeVar.set("No Size Limit")
+ZIPFileSizeLabel = Label(FrameZipFileSize,text="ZIP File Size:",anchor=E,width=20)
+ZIPFileSizeDropDown = OptionMenu(FrameZipFileSize,ZIPFileSizeVar,*ZIPFileSizeSelections)
+ZIPFileSizeLabel.pack(side=LEFT)
+ZIPFileSizeDropDown.pack(side=LEFT)
+
+# Pack sub-frames
+
+FrameZipPath.pack(fill=X)
+FrameZipFileName.pack(fill=X)
+FrameZipFileSize.pack(fill=X)
+
+# Pack frame containing sub-frames
+
+FrameZipInfo.pack(fill=BOTH,expand=TRUE)
+
+# Flag variable indicating if the list of available export fields needs to be reloaded
+
+ExportFieldLoadFlagVar = IntVar()
+ExportFieldLoadFlagVar.set(1)
+
+# Database selection
+# ------------------
+ObjectsDBVar = IntVar()
+PhotosDBVar = IntVar()
+ArchivesDBVar = IntVar()
+LibraryDBVar = IntVar()
+FrameDatabaseSelect = LabelFrame(Root,text="3: Select Database Section(s) To Export",font="Helvetica 12 bold")
+ObjectsCheck = Checkbutton(FrameDatabaseSelect,text="Objects",variable=ObjectsDBVar,command=lambda: update_selected_db())
+PhotosCheck = Checkbutton(FrameDatabaseSelect,text="Photos",variable=PhotosDBVar,command=lambda: update_selected_db())
+ArchivesCheck = Checkbutton(FrameDatabaseSelect,text="Archives",variable=ArchivesDBVar,command=lambda: update_selected_db())
+LibraryCheck = Checkbutton(FrameDatabaseSelect,text="Library",variable=LibraryDBVar,command=lambda: update_selected_db())
+ObjectsCheck.pack(side=LEFT)
+PhotosCheck.pack(side=LEFT)
+ArchivesCheck.pack(side=LEFT)
+LibraryCheck.pack(side=LEFT)
+FrameDatabaseSelect.pack(fill=BOTH,expand=TRUE)
+
+# Field selection and progress area
+# ---------------------------------
+FrameFieldAndProgress = Frame(Root)
+FrameFieldAndProgress.pack(fill=BOTH,expand=TRUE)
+
+# Field select
+# ------------
+
+# Frame for field select
+FrameFieldSelect = LabelFrame(FrameFieldAndProgress,text="4: Select Fields To Export",font="Helvetica 12 bold")
+
+# Frame for unselected fields
+FrameUnselectedFields = LabelFrame(FrameFieldSelect,text="Available Fields",font="Helvetica 10 bold")
+
+# Frame for select buttons
+FrameSelectButtons = Frame(FrameFieldSelect)
+
+# Frame for selected fields
+FrameSelectedFields = LabelFrame(FrameFieldSelect,text="Selected Fields",font="Helvetica 10 bold")
+
+# Frame for accession range and date range
+FrameRanges = LabelFrame(FrameFieldSelect,text="5: Filter Records By Date And/Or Accession",font="Helvetica 12 bold")
+FrameAccessionRange = Frame(FrameRanges)
+FrameDateRange = Frame(FrameRanges)
+FrameRanges.pack(expand=TRUE,side=BOTTOM,fill=BOTH)
+
+# List box for unselected fields
+TreeUnselectedFieldList = ttk.Treeview(FrameUnselectedFields,columns=("Name","Description"),selectmode="extended")
+TreeUnselectedFieldList.heading("Name",text="Name")
+TreeUnselectedFieldList.heading("Description",text="Description")
+
+# List box for Selected fields
+
+TreeSelectedFieldList = ttk.Treeview(FrameSelectedFields,columns=("Name","Description"),selectmode="extended")
+TreeSelectedFieldList.heading("Name",text="Name")
+TreeSelectedFieldList.heading("Description",text="Description")
+
+# Scroll bars for unselected field tree view
+
+TreeUnselectedFieldListVScroll = ttk.Scrollbar(FrameUnselectedFields, orient="vertical", command=TreeUnselectedFieldList.yview)
+TreeUnselectedFieldListVScroll.pack(side='right', fill='y')
+TreeUnselectedFieldList.configure(yscrollcommand=TreeUnselectedFieldListVScroll.set)
+TreeUnselectedFieldListHScroll = ttk.Scrollbar(FrameUnselectedFields, orient="horizontal", command=TreeUnselectedFieldList.xview)
+TreeUnselectedFieldListHScroll.pack(side='bottom', fill='x')
+TreeUnselectedFieldList.configure(xscrollcommand=TreeUnselectedFieldListHScroll.set)
+
+# Scroll bars for selected field tree view
+
+TreeSelectedFieldListVScroll = ttk.Scrollbar(FrameSelectedFields, orient="vertical", command=TreeSelectedFieldList.yview)
+TreeSelectedFieldListVScroll.pack(side='right', fill='y')
+TreeSelectedFieldList.configure(yscrollcommand=TreeSelectedFieldListVScroll.set)
+TreeSelectedFieldListHScroll = ttk.Scrollbar(FrameSelectedFields, orient="horizontal", command=TreeSelectedFieldList.xview)
+TreeSelectedFieldListHScroll.pack(side='bottom', fill='x')
+TreeSelectedFieldList.configure(xscrollcommand=TreeSelectedFieldListHScroll.set)
+
+# Load the list.  Entries without a BROWSENAME string are ignored.
+# First, set up list/map arrays.
+
+AvailableFieldList = []
+SelectedFieldList = []
+SelectedFieldMap = {}
+FieldListMap = {}
+MasterFieldList = []
+MaxColWidth = 0
+
+
+# Load unselected fields box
+
+load_field_list_to_box(TreeUnselectedFieldList,"N")
+
+# Pack unselected field list
+
+TreeUnselectedFieldList.pack(fill=BOTH,expand=TRUE)
+FrameUnselectedFields.pack(side=LEFT,fill=BOTH,expand=TRUE)
+
+# Field select buttons and frame
+
+AddFieldButtonFrame = Frame(FrameSelectButtons)
+AddFieldButton = ttk.Button(AddFieldButtonFrame,text="Select -->",width=15,command=lambda: add_field_callback(TreeUnselectedFieldList,TreeSelectedFieldList));
+AddFieldButton.pack(side=TOP,expand=TRUE)
+RemoveFieldButtonFrame = Frame(FrameSelectButtons)
+RemoveFieldButton = ttk.Button(RemoveFieldButtonFrame,text="<-- Remove",width=15,command=lambda: remove_field_callback(TreeSelectedFieldList,TreeUnselectedFieldList));
+RemoveFieldButton.pack(side=TOP,expand=TRUE)
+AddFieldButtonFrame.pack(side=TOP,expand=TRUE,fill=Y)
+RemoveFieldButtonFrame.pack(side=BOTTOM,expand=TRUE,fill=Y)
+
+# Selected fields frame and list
+
+# Alter the columns so that the scrollbar will work.  Set the description column (2) max width
+# to the calculated max width needed.
+
+#TreeSelectedFieldList.column('#0',width=0,minwidth=100,stretch=True)
+#TreeSelectedFieldList.column('#1',width=0,minwidth=100,stretch=True)
+#TreeSelectedFieldList.column('#2',width=0,minwidth=MaxColWidth,stretch=True)
+load_field_list_to_box(TreeSelectedFieldList,"Y")
+
+# Pack selected field list
+TreeSelectedFieldList.pack(side=LEFT,fill=BOTH,expand=TRUE)
+
+# Inputs for date range
+
+DateRangeStartLabel = Label(FrameDateRange,text="Start Date:",width=20,anchor=E)
+DateRangeStartEntry = Entry(FrameDateRange,width=25)
+DateRangeEndLabel = Label(FrameDateRange,text="End:",anchor=E)
+DateRangeEndEntry = Entry(FrameDateRange,width=25)
+DateRangeStartLabel.pack(side=LEFT)
+DateRangeStartEntry.pack(side=LEFT)
+DateRangeEndLabel.pack(side=LEFT)
+DateRangeEndEntry.pack(side=LEFT)
+
+# Inputs for accession range
+AccessionRangeStartLabel = Label(FrameAccessionRange,text="Accession Start:",width=20,anchor=E)
+AccessionRangeStartEntry = Entry(FrameAccessionRange,width=25)
+AccessionRangeEndLabel = Label(FrameAccessionRange,text="End:",anchor=E)
+AccessionRangeEndEntry = Entry(FrameAccessionRange,width=25)
+AccessionRangeStartLabel.pack(side=LEFT)
+AccessionRangeStartEntry.pack(side=LEFT)
+AccessionRangeEndLabel.pack(side=LEFT)
+AccessionRangeEndEntry.pack(side=LEFT)
+
+# Pack field selection frames
+
+FrameUnselectedFields.pack(fill=BOTH,expand=TRUE,side=LEFT)
+FrameSelectButtons.pack(fill=Y,expand=FALSE,side=LEFT)
+FrameSelectedFields.pack(fill=BOTH,expand=TRUE,side=LEFT)
+FrameFieldSelect.pack(fill=BOTH,expand=TRUE,side=TOP)
+
+# Pack range subframes
+
+FrameDateRange.pack(fill=BOTH,expand=TRUE)
+FrameAccessionRange.pack(fill=BOTH,expand=TRUE)
+
+# Progress frame
+# --------------
+ProgressVar = StringVar()
+ProgressVar.set("Waiting for selections")
+FrameProgress = LabelFrame(FrameFieldAndProgress,text="Progress",font="Helvetica 12 bold")
+LabelProgress = Label(FrameProgress,textvariable=ProgressVar,width=40,anchor=W,font="Courier 10 bold")
+LabelProgress.pack(side=LEFT,fill=X,expand=TRUE)
+FrameProgress.pack(fill=BOTH,expand=TRUE,side=BOTTOM)
+
+# Start button
+# ------------
+StartButtonFrame = Frame(FrameFieldAndProgress)
+StartButton = ttk.Button(StartButtonFrame,text="START",width=15,command=lambda: start_process(LabelProgress));
+StartButton.pack(expand=TRUE,side=RIGHT)
+StartButtonFrame.pack(expand=TRUE,fill=BOTH)
+CancelButton = ttk.Button(StartButtonFrame,text="Cancel",width=15,command=lambda: close_window_func(Root));
+CancelButton.pack(expand=FALSE,side=LEFT)
+StartButtonFrame.pack(expand=TRUE,fill=BOTH)
+
+# Initialize globals for range selection, database paths, etc.
+
+StartDateStamp = 0
+EndDateStamp = 0
+StartAccession = ""
+EndAccession = ""
+
+DBPath = ""
+ExportPath = ""
+ZipFileName = ""
+
+# Main GUI event loop
+
+Root.mainloop()
+
+

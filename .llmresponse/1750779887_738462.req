@@ -1,0 +1,158 @@
+[[CHAT START]]
+{'id': 'chatcmpl-05d9bb5a-9bcc-49a6-902c-2399fa165287', 'object': 'chat.completion', 'created': 1750779900, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': 'Based on the provided documents, some of the weapons tested at China Lake include:\n\n1. HARM (High-Speed Anti-Radiation Missile) - evaluated during a deployment by the 4486th Fighter Weapons Squadron personnel.\n2. Shrike air-to-surface missile - developed by the Bureau of Naval Weapons and Naval Ordnance Test Station, China Lake.\n3. Sidewinder guided missile - developed by China Lake.\n4. DU (Depleted Uranium) rounds - tested for accuracy, with projectiles fired at targets suspended from poles 3,000 meters away.\n5. FAE (Fuel-Air Explosive) weapons - developed and applied by China Lake, including grenades, 2,000-pound bombs, and surface-launched units.\n6. Anti-tank mine-dispenser system (Deneye) - tested at China Lake.\n7. Balloon-borne flare (Briteye) - tested at China Lake.\n8. Submunitions, fuzes, launchers, and other special-purpose weapons - tested at China Lake.\n\nPlease note that this is not an exhaustive list, as the provided documents may not cover all the weapons tested at China Lake.'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 3198, 'completion_tokens': 238, 'total_tokens': 3436}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=0.521066
+[[START CONTENT]]
+ton of the Attack Weapons Depanment's ARM Weapons's Office said China Lake provides not only range time to the Air Force, but does test planning, collects data, conducts data analysis, provides targets, sets them up and gives the evaluation squadrons an end-game analysis. China Lakers also conduct six-degree- of-freedom simulations with HARM to determine missile firing boundaries for each test. More than 12 China Lake per- sonnel from the. Range and Attack Weapons departments participated in making Combat Hammer possible, according to Featherston The missiles were  evaluated during a deployment by 4486th Fighter Weapons Squadron personnel deployed to George AFB. The actual evaluations took place on the then Naval Weapons Center's ranges. During Combat Hammer evaluations, units from active duty, Air National Guard and Air Force Reserves fly combat scenarios against simulated ground and air threat arrays to fire against a realistic target. "This was the most successful HARM evaluation to date," said Ist Lt. Kur
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d866d', 'fragment': '6'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.623007
+[[START CONTENT]]
+@uri=1043110
+@title=File: TI-630607-01.jpg; 
+@cdate=2024-07-20 20:57:41
+@archive_group_title=China Lake Museum
+@archive_title=Vehicles
+@item_id=1043110
+archive_group_title=China Lake Museum
+archive_title=Vehicles
+item_id=1043110
+item_path=n823405x n1021055x n1021101x n1092254x n1092850x n1043109x n1043110x
+
+File: TI-630607-01.jpg; 
+OCR Text: U. NAVAL ORDNANCE TEST STATION. CHINA LAKE. CALIF. , June 7 Shrike air-to-surface missile developed by me Bureau of Naval Weapons and Naval Ordnance Test Station. China Lake, with production engineering provided by Texas Instruments c R lax 174 nALLAlalexAI   Incorporated, Dauaa, Texas. 
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000feaa6', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.641648
+[[START CONTENT]]
+@uri=880604
+@title=File: Rktr1.17.1969.pdf  Page     4; 
+@cdate=2024-03-03 19:36:30
+@archive_group_title=China Lake Museum
+@archive_title=Rocketeer Newspaper
+@item_id=880604
+archive_group_title=China Lake Museum
+archive_title=Rocketeer Newspaper
+item_id=880604
+item_path=n823405x n933908x n933913x n874945x n876593x n880604x
+
+File: Rktr1.17.1969.pdf  Page     4; 
+OCR Text: -- Paqe Four ROCKETEER Friday, January 17, 1969 Q:l:lT ~'II ,(,,\Q ROCKETEER : ,U0 1 1Pfi'l Page Five Local Glass Mountain Possible Ancient Weapons Forge. Local historians may find it necessary to change the rec- ords of the Naval Weapons Center. It is quite possible that NWC scientists and engi- neers at China Lake were not the first to produce effective weapons within the confines of the Center. Long before the Whit. man arrived in the .r      , prehistor. ic inh.bitantl and Indlanl "w VOlt outcroppings of block ob- ,Idian (v 0 I can i c rhyolitic- glall) at Su"arloof Mountain in the northwelt lection of the Center'1 Coso bombing range near
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d6fdc', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.643767
+[[START CONTENT]]
+d-fuel weapon; Briteye balloon-borne flare; and Deneye anti- tank mine-dispenser sys- tem-as well as some special-purpose weapons, submunitions. fuzes. launchers. and FAE-Though the fuel-air cloud was actually some distance away from this house, the shock wave from the explosion demolished that side 01 the structure. supporting systems. China Lake also developed and applied the technology of Fael-Air Explosive (FAE) Weapons. from grenades to 2.000-pound bombs to surface-launched units. GUIDED MISSILES Nearly every guided missile in the U.S. inventory today owes a major debt to China Lake R&D efforts in sensors. guidance. control. fuzing. propulsion. warheads. and materials technology. China Lake bas made significant contri- butions to every aspect of guided missile technology and development. Sidewinder is certainly China Lake's best-known success. although far from being its only one. Guided missiles were originally outside of the Station'S char- ter. Sidewinder was developed by China Lake. however. beginnin
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d87b5', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.652287
+[[START CONTENT]]
+@uri=886819
+@title=File: Rktr2.25.1993.pdf  Page     6; 
+@cdate=2024-03-03 23:29:53
+@archive_group_title=China Lake Museum
+@archive_title=Rocketeer Newspaper
+@item_id=886819
+archive_group_title=China Lake Museum
+archive_title=Rocketeer Newspaper
+item_id=886819
+item_path=n823405x n933908x n933917x n878390x n879618x n886819x
+
+File: Rktr2.25.1993.pdf  Page     6; 
+OCR Text: '. 6 THE ROCKETEER February 25, 1993 VACUUM from Poge 1 Rob Ostrom of China Lake's Range Department Test Management Office coordinated the cleanup effort for China Lake. "Because the Range Department, Alliant Techsystems and the Army knew from the beginning that the DU rounds would eventually have to be cleaned up, they tried to contain the contamination during test- ing," he explained. To test for accuracy, projectiles were fired at targets suspended from poles 3,000 meters away. A 60-foot-Iong steel catch box was constructed on the hillside behind the target and filled with sand, and most of the projectiles entered the box's 20-by-20-foot f
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d8823', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.677542
+[[START CONTENT]]
+, the U.S. Govanma.. the [)dense or High Dc:5crt Nc,rs,,-pen:. Inc. . conLCnt is cdilCd, prq.rcd and provided by the Public Albin Office of the IW'.poo,._C'n...... China Lake. Com:apandcncc and nal.Crial for publication sbould be R<XXElCER., Code 0031. N....al Weapons Center. China lake.. CA .",,'  6<01;1 9)9   3354; E-Mail SCF::Roc:kdee:r. Dudline (<< r  eivina I\Orics and photOl a- COl' publication on Friday of thal wa::k. Icr::::~~,.- CAPT. OOUGLAS W. COOK fAlUor     STEVE BOSTER 11 [)Ira:lor        WIlLIAM PORTER swr Wrtler  - JUUE PAULSEN Affairs OfTker .- BEN DUFfY Edllor'" AabIant        PEGGY SHOAF l'tIatoaraPMr     PHAN CARY K. BRADY   Published by Hish Desert N~, Inc." private fum in no w.y connecced with the 000 or U.S. N.vy, under ad.llliw. wriaar. ocnnct willi the NAVWPNCEN. ThiI eanmacial enterprise newspe.pe:t is an ,"thcrized JIIolbticIlion (Of manbcn of the. military scMca.. Con&oua o( the. Rock   deeI' lie not ncc:eaarily the olf"lcial views of, 01 eadonocI by the U.S. Government. the Depart
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d7ef5', 'fragment': '7'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.687013
+[[START CONTENT]]
+@uri=877173
+@title=File: Rktr5.20.1961AFD.pdf  Page     2; 
+@cdate=2024-03-03 18:39:43
+@archive_group_title=China Lake Museum
+@archive_title=Rocketeer Newspaper
+@item_id=877173
+archive_group_title=China Lake Museum
+archive_title=Rocketeer Newspaper
+item_id=877173
+item_path=n823405x n933908x n933913x n874937x n875683x n877173x
+
+File: Rktr5.20.1961AFD.pdf  Page     2; 
+OCR Text: Page A-2 ~ Captain W_ IW_ Hollister ,commander, NOTS THE ROCKETEER Welcome to the U. S. Naval Ordnance Test Station. This is one of the Navy's principal centers for the research, design, development, and testing of new weapons. You will find here the latest and finest laboratory equipment for scientific research, a completely equipped machine shop, pilot plants for the development of new missile propellants and explosives, and test ranges thoroughly instrumented to recorn the per- formance of new weapons. We are proud of our people at NOTS, a civilian-military team. They combine the latest technological advances with operational require
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d6275', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.688124
+[[START CONTENT]]
+ted bY carbon dioxide gas, cross bows, sling shots and bows and arrows. Because of the frequency of such complaints, China Lake police have concluded that residents are unaware of the regulation which prohibits the firing of BB guns I!IId similar weapons in the housing I!IId community areas of the Naval Weapons Center. In order to eliminate any possible confusion about this matter, China Lake police called attention to NWC instruction 5510.3C, dated Aug. 5, 1970, which deftnes all of the weapons men- tioned above as "other weapons" and sets forth the following con- ditions under which they can be ftred: "The firing or shooting of other weapons is permitted in remote areas at least 300 yards from any road 01" building, and only by Center employee or when a Center employee or other adult resident is present and responsible for compliance with this instruction and other applicable regulations." Anyone with questions regarding this matter is asked to call A. E. Edmunson, the China Lake Police Juvenile Offtcer, at
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d7112', 'fragment': '16'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.690586
+[[START CONTENT]]
+. The Naval Weapons Center's Housing staff appreciates his hard work and his interest in providing the China Lake residents this impoltant service. This c:ommercial aacrprise (CE) newsp'pc:r is m authorized publication. Contents 01 NWC R<XlCETEER &Ie not nccc:narily the ofticial view 01, or mdoned by, the U.S. Govanment, the Dr:ptrtmcnl ~ Defense or Hi8h nc.cn Nc:wspapen. Inc. The editorial c:onrcnt is edi\ed, pepuai and provided by the Public Main Office d ~ Naval Welp<lM CClua, China Laic. Com::apondmce and material for publication should be add.ft:ued to: Edi&or, NWC ROCKE1.EER. Code 0033, Naval Weapons Cat- Commuder - CAPT, DOUGLAS W. COOK TechnkallNttdor - WILLIAM PORTER Adina Public Arr.ln OfTkt...ELEANOR JOHNSEN f.dJtor        STEVE BOSTER Starr Writer - JUUE PAULSEN SlatrWriter.. PEGGY SHOAF Phototrapher .. PHAN CARY K. BRADY _ 0Una Laic, CA 9355S-  lOI; ldcphone (619) 939  3354; E  Mail SCF::Roclr.etecr. Deadline forru:eivina AOrica and phOlOC is 4 pm. TuClday for publication on Friuy of that wack. P
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d82b7', 'fragment': '6'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.699754
+[[START CONTENT]]
+@uri=888644
+@title=File: CLComHist1958+copy.PDF  Page     3; 
+@cdate=2024-03-04 00:16:52
+@archive_group_title=China Lake Museum
+@archive_title=Major Programs and Facilities
+@item_id=888644
+archive_group_title=China Lake Museum
+archive_title=Major Programs and Facilities
+item_id=888644
+item_path=n823405x n1021054x n1021071x n1021074x n880009x n888644x
+
+File: CLComHist1958+copy.PDF  Page     3; 
+OCR Text: Chapter VII CONTENTS References Introduction Rocketry Guided Missiles Aircraft Fire Control Systems Propellants and. Explosives Underwater Ordnance The Test Effort Research Weapons Planning Figures 1 - 3 . . .. Graphs of Program Effort and Expenditures Figures 1 - 211 ....Graphs of Major Weapons Systems 1 3 'I. 6 3 n 13 15 19 20 23 i  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d8f44', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

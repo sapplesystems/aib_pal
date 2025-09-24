@@ -1,0 +1,16 @@
+[[CHAT START]]
+{'id': 'chatcmpl-88c8bdab-733a-4d80-b72f-2a70d2110779', 'object': 'chat.completion', 'created': 1750415783, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': 'Pacific Grove is a charming coastal city located on the Monterey Peninsula in California, USA. It\'s a popular tourist destination known for its natural beauty, rich history, and unique attractions. Here are some things that make Pacific Grove special:\n\n1. **Monarch Butterfly Sanctuary**: Pacific Grove is home to the famous Monarch Butterfly Sanctuary, a protected area where millions of monarch butterflies migrate to every winter. Visitors can walk through the sanctuary and observe these magnificent creatures up close.\n2. **Victorian-era architecture**: The city has a rich history, and its architecture reflects that. Pacific Grove is filled with beautifully preserved Victorian-era homes, many of which have been converted into bed-and-breakfast inns, shops, and restaurants.\n3. **Beaches and coastal scenery**: Pacific Grove has several beautiful beaches, including Asilomar State Beach, which is a popular spot for swimming, surfing, and sunbathing. The city also offers stunning coastal views, including the famous Point Pinos Lighthouse.\n4. **Golfing and outdoor activities**: Pacific Grove has several golf courses, including the famous Pacific Grove Golf Links, which offers scenic views of the Monterey Bay. The city also has many parks, hiking trails, and bike paths for outdoor enthusiasts.\n5. **Art and culture**: Pacific Grove has a thriving arts community, with numerous galleries, studios, and festivals throughout the year. The city is also home to the Pacific Grove Art Center, which features local and regional artists.\n6. **Restaurants and cuisine**: Pacific Grove is known for its fresh seafood, and visitors can enjoy a variety of dining options, from casual eateries to fine dining restaurants. The city is also famous for its "Artichoke Capital of the World" moniker, with many artichoke-themed restaurants and shops.\n7. **Tourist attractions**: Pacific Grove has a range of tourist attractions, including the Pacific Grove Museum of Natural History, the Point Pinos Lighthouse, and the historic Pacific Grove Railroad Station.\n\nOverall, Pacific Grove is a unique and charming destination that offers something for everyone. Its natural beauty, rich history, and cultural attractions make it a popular spot for tourists and locals alike.'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 17, 'completion_tokens': 439, 'total_tokens': 456}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=0.342638
+[[START CONTENT]]
+ PACIFIC GROVE, CALIFORRIA  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000b4684', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

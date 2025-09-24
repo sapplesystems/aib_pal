@@ -1,0 +1,142 @@
+<?php
+$saveTitle = '';
+if ($apiResponseRef['info']['records'][0]['item_ref'] == $item_id) {
+    if ($apiResponseRef['info']['records'][0]['item_title'] != '') {
+        $saveTitle = "<strong  class='yelloBckTitle'>My Scrapbook Title: </strong> &nbsp;" . $apiResponseRef['info']['records'][0]['item_title'];
+    } else {
+        $saveTitle = "<strong  class='yelloBckTitle'>My Scrapbook Title: </strong> &nbsp;" . $apiResponse['info']['records'][0]['item_title'];
+    }
+}
+$item_title = '';
+end($apiResponse['info']['records']);
+$key = key($apiResponse['info']['records']);
+if ($apiResponse['info']['records'][$key]['item_title'] != '') {
+    $item_title = $apiResponse['info']['records'][$key]['item_title'];
+}
+?>
+<?php if ($themeName == 'custom') { ?>
+    <div class="row">
+        <div class="col-md-5"><span class="itemHeading"><?php echo ($apiResponse['info']['records'][0]['item_type'] == 'RE') ? 'Record Title:' : 'Item Title:'; ?></span></div>
+        <div class="col-md-7">
+            <span class="itemDesc">
+                <label id='original_item_title' <?php if ($displayEditOption == 'yes') { ?> class='update-item-fields' <?php } ?> data-type='item' data-item_id='<?php $apiResponse['info']['records'][0]['item_id'] ?>'><label><?php echo urldecode($apiResponse['info']['records'][0]['item_title']); ?></label><?php if ($displayEditOption == 'yes') { ?><img style="cursor: pointer; margin-left: 10px;" src='<?php echo IMAGE_PATH . 'edit_yellow.png' ?>' alt='' title='Edit' /><?php } ?></label>
+                <label id='update_original_item_title' style='display: none; position: relative;'>
+                    <span id='item_loader' style="display:none; padding-bottom:0px; position: absolute; right: 80px; top: 4px;"><img style="width:20px" src="public/images/loading.gif" alt="Loading..."> </span>
+                    <input style="width: 75%; display: inline-block;" type='text' data-type='item' class='form-control' name='edit_item_title' id='edit_item_title' data-item_id='<?php echo $apiResponse['info']['records'][0]['item_id'] ?>' value='<?php echo urldecode($apiResponse['info']['records'][0]['item_title']); ?>'>
+                    <img style="cursor:pointer; margin-left: 5px; " class="update_field_value" data-type='item' src="<?php echo IMAGE_PATH . 'save_yellow.png' ?>" title='Save' />
+                    <img style="cursor:pointer; margin-left: 3px;" class="cancel_field_value" data-type='item'  src="<?php echo IMAGE_PATH . 'cancel_yellow.png' ?>" title='Cancel' />
+                </label>
+            </span>
+        </div>
+    </div>
+    <?php
+    if (count($apiResponse['info']['records'][0]['fields']) > 0 || !empty($apiTagResponse['info']['records'])) {
+        foreach ($apiResponse['info']['records'][0]['fields'] as $key => $recordsArray) {
+            if ($recordsArray['field_value'] != '' && $recordsArray['field_title'] != 'OCR Text') {
+                ?>
+                <div class="row">
+                    <div class="col-md-5"><span class="itemHeading"><?php echo $recordsArray['field_title']; ?>:</span></div>
+                    <div class="col-md-7">
+                        <span class="itemDesc">
+                            <p id='item_fields_<?php echo $recordsArray['field_id'] ?>' <?php if ($displayEditOption == 'yes') { ?> class='update-item-fields' <?php } ?> data-type='fields' data-field-id='<?php echo $recordsArray['field_id'] ?>' data-item_id='<?php $apiResponse['info']['records'][0]['item_id'] ?>'><span><?php echo urldecode($recordsArray['field_value']); ?></span><?php if ($displayEditOption == 'yes') { ?><img style="cursor: pointer; margin-left: 10px;" src='<?php echo IMAGE_PATH . 'edit_yellow.png' ?>' alt='' title='Edit' /><?php } ?></p>
+                            <p id='update_item_fields_<?php echo $recordsArray['field_id'] ?>' style='display: none; position: relative;'>
+                                <span id='fields_loader_<?php echo $recordsArray['field_id'] ?>' style="display:none; padding-bottom:0px; position: absolute; right: 80px; top: 4px;"><img style="width:20px" src="public/images/loading.gif" alt="Loading..."> </span>
+                                <?php if ($recordsArray['field_data_type'] == 'BIGTEXT') { ?>
+                                    <textarea rows="4" style="width: 75%; display: inline-block;" data-type='fields' class='form-control' data-field-id='<?php echo $recordsArray['field_id'] ?>' name='edit_field_<?php echo $recordsArray['field_id'] ?>' id='edit_field_<?php echo $recordsArray['field_id'] ?>' data-item_id='<?php echo $apiResponse['info']['records'][0]['item_id'] ?>'><?php echo urldecode($recordsArray['field_value']); ?></textarea>
+                <?php } else { ?>
+                                    <input style="width: 75%; display: inline-block;" type='text' data-type='fields' class='form-control' data-field-id='<?php echo $recordsArray['field_id'] ?>' name='edit_field_<?php echo $recordsArray['field_id'] ?>' id='edit_field_<?php echo $recordsArray['field_id'] ?>' data-item_id='<?php echo $apiResponse['info']['records'][0]['item_id'] ?>' value='<?php echo urldecode($recordsArray['field_value']); ?>'>
+                <?php } ?>
+                                <img style="cursor:pointer; margin-left: 5px; " class="update_field_value" data-type='fields' data-field-id='<?php echo $recordsArray['field_id'] ?>' src="<?php echo IMAGE_PATH . 'save_yellow.png' ?>" title='Save' />
+                                <img style="cursor:pointer; margin-left: 3px;" class="cancel_field_value" data-type='fields' data-field-id='<?php echo $recordsArray['field_id'] ?>' src="<?php echo IMAGE_PATH . 'cancel_yellow.png' ?>" title='Cancel' />
+                            </p>
+                        </span>
+                    </div>
+                </div>
+            <?php }
+        }if (!empty($apiTagResponse['info']['records'])) {
+            ?> 
+            <div class="row">
+                <div class="col-md-5"><span class="itemHeading">Tags:</span></div>
+                <div class="col-md-7">
+                    <span class="itemDesc">
+                        <p id='item_fields_tags' <?php if ($displayEditOption == 'yes') { ?> class='update-item-fields' <?php } ?> data-type='tags' data-item_id='<?php $apiResponse['info']['records'][0]['item_id'] ?>'><span><?php echo implode(',', $apiTagResponse['info']['records']); ?></span><?php if ($displayEditOption == 'yes') { ?><img style="cursor: pointer; margin-left: 10px;" src='<?php echo IMAGE_PATH . 'edit_yellow.png' ?>' alt='' title='Edit' /><?php } ?></p>
+                        <p id='update_item_fields_tags' style='display: none; position: relative;'>
+                            <span id='tag_loader' style="display:none; padding-bottom:0px; position: absolute; right: 80px; top: 4px;"><img style="width:20px" src="public/images/loading.gif" alt="Loading..."> </span>
+                            <textarea rows="4" style="width: 75%; display: inline-block;" data-type='tags' class='form-control' name='edit_field_tags' id='edit_field_tags' data-item_id='<?php echo $apiResponse['info']['records'][0]['item_id'] ?>'><?php echo implode(',', $apiTagResponse['info']['records']); ?></textarea>
+                            <img style="cursor:pointer; margin-left: 5px; " class="update_field_value" data-type='tags' src="<?php echo IMAGE_PATH . 'save_yellow.png' ?>" title='Save' />
+                            <img style="cursor:pointer; margin-left: 3px;" class="cancel_field_value" data-type='tags'  src="<?php echo IMAGE_PATH . 'cancel_yellow.png' ?>" title='Cancel' />
+                        </p>
+                    </span>
+                </div>
+            </div>
+        <?php
+        }
+    }
+    ?>
+<?php } elseif ($themeName == 'custom1') { ?>
+
+<?php } else { ?>
+    <div class="myTitle"><span class="desccription_item_details"><?php echo $saveTitle; ?></span></div>
+    <span class="tableSection">
+        <h4>Description 
+            <span class="desccription_item_details paddLeftNone">
+                <strong><?php echo ($apiResponse['info']['records'][0]['item_type'] == 'RE') ? 'Record Title:' : 'Item Title:'; ?></strong> 
+                <label id='original_item_title' <?php if ($displayEditOption == 'yes') { ?> class='update-item-fields' <?php } ?> data-type='item' data-item_id='<?php $apiResponse['info']['records'][0]['item_id'] ?>'><label><?php echo urldecode($apiResponse['info']['records'][0]['item_title']); ?></label><?php if ($displayEditOption == 'yes') { ?><img style="cursor: pointer; margin-left: 10px;" src='<?php echo IMAGE_PATH . 'edit.png' ?>' alt='' title='Edit' /><?php } ?></label>
+                <label id='update_original_item_title' style='display: none; position: relative;'>
+                    <span id='item_loader' style="display:none; padding-bottom:10px; position: absolute; right: 75px; top: 7px;"><img style="width:20px" src="public/images/loading.gif" alt="Loading..."> </span>
+                    <input style="width: 75%; display: inline-block;" type='text' data-type='item' class='form-control' name='edit_item_title' id='edit_item_title' data-item_id='<?php echo $apiResponse['info']['records'][0]['item_id'] ?>' value='<?php echo urldecode($apiResponse['info']['records'][0]['item_title']); ?>'>
+                    <img style="cursor:pointer; margin-left: 5px; " class="update_field_value" data-type='item' src="<?php echo IMAGE_PATH . 'save.png' ?>" title='Save' />
+                    <img style="cursor:pointer; margin-left: 3px;" class="cancel_field_value" data-type='item'  src="<?php echo IMAGE_PATH . 'cancel.png' ?>" title='Cancel' />
+                </label>
+            </span>
+        </h4>
+
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+    <?php
+    if (count($apiResponse['info']['records'][0]['fields']) > 0 || !empty($apiTagResponse['info']['records'])) {
+        foreach ($apiResponse['info']['records'][0]['fields'] as $key => $recordsArray) {
+            if ($recordsArray['field_value'] != '' && $recordsArray['field_title'] != 'OCR Text') {
+                ?>
+                        <tr>
+                            <td width="20%"><span style="position: relative;z-index: 1;"><?php echo $recordsArray['field_title']; ?>:</span></td>
+                            <td>
+                                <p id='item_fields_<?php echo $recordsArray['field_id'] ?>' <?php if ($displayEditOption == 'yes') { ?> class='update-item-fields' <?php } ?> data-type='fields' data-field-id='<?php echo $recordsArray['field_id'] ?>' data-item_id='<?php $apiResponse['info']['records'][0]['item_id'] ?>'><span><?php echo urldecode($recordsArray['field_value']); ?></span><?php if ($displayEditOption == 'yes') { ?><img style="cursor: pointer; margin-left: 10px;" src='<?php echo IMAGE_PATH . 'edit.png' ?>' alt='' title='Edit' /><?php } ?></p>
+                                <p id='update_item_fields_<?php echo $recordsArray['field_id'] ?>' style='display: none;position:relative;'>
+                                    <span id='fields_loader_<?php echo $recordsArray['field_id'] ?>' style="display:none; padding-bottom:10px; position: absolute; right: 95px; top: 17px;"><img style="width:20px" src="public/images/loading.gif" alt="Loading..."> </span>
+                <?php if ($recordsArray['field_data_type'] == 'BIGTEXT') { ?>
+                                        <textarea rows="4" style="width: 80%; display: inline-block;" data-type='fields' class='form-control' data-field-id='<?php echo $recordsArray['field_id'] ?>' name='edit_field_<?php echo $recordsArray['field_id'] ?>' id='edit_field_<?php echo $recordsArray['field_id'] ?>' data-item_id='<?php echo $apiResponse['info']['records'][0]['item_id'] ?>'><?php echo urldecode($recordsArray['field_value']); ?></textarea>
+                <?php } else { ?>
+                                        <input style="width: 80%; display: inline-block;" type='text' data-type='fields' class='form-control' data-field-id='<?php echo $recordsArray['field_id'] ?>' name='edit_field_<?php echo $recordsArray['field_id'] ?>' id='edit_field_<?php echo $recordsArray['field_id'] ?>' data-item_id='<?php echo $apiResponse['info']['records'][0]['item_id'] ?>' value='<?php echo urldecode($recordsArray['field_value']); ?>'>
+                        <?php } ?>
+                                    <img style="cursor:pointer; margin-left: 5px; " class="update_field_value" data-type='fields' data-field-id='<?php echo $recordsArray['field_id'] ?>' src="<?php echo IMAGE_PATH . 'save.png' ?>" title='Save' />
+                                    <img style="cursor:pointer; margin-left: 3px;" class="cancel_field_value" data-type='fields' data-field-id='<?php echo $recordsArray['field_id'] ?>' src="<?php echo IMAGE_PATH . 'cancel.png' ?>" title='Cancel' />
+                                </p>
+                            </td>
+                        </tr>
+            <?php }
+        } if (!empty($apiTagResponse['info']['records'])) { ?> 
+                    <tr>
+                        <td width="20%"><span>Tags:</span></td>
+                        <td>
+                            <p id='item_fields_tags' <?php if ($displayEditOption == 'yes') { ?> class='update-item-fields' <?php } ?> data-type='tags' data-item_id='<?php $apiResponse['info']['records'][0]['item_id'] ?>'><span><?php echo implode(',', $apiTagResponse['info']['records']); ?></span><?php if ($displayEditOption == 'yes') { ?><img style="cursor: pointer; margin-left: 10px;" src='<?php echo IMAGE_PATH . 'edit.png' ?>' alt='' title='Edit' /><?php } ?></p>
+                            <p id='update_item_fields_tags' style='display: none; position: relative;'>
+                                <span id='tag_loader' style="display:none; padding-bottom:10px; position: absolute; right: 95px; top: 17px;"><img style="width:20px" src="public/images/loading.gif" alt="Loading..."> </span>
+                                <textarea rows="4" style="width: 80%; display: inline-block;" data-type='tags' class='form-control' name='edit_field_tags' id='edit_field_tags' data-item_id='<?php echo $apiResponse['info']['records'][0]['item_id'] ?>'><?php echo implode(',', $apiTagResponse['info']['records']); ?></textarea>
+                                <!--<input style="width: 85%; display: inline-block;" type='text' data-type='tags' class='form-control' name='edit_field_tags' id='edit_field_tags' data-item_id='<?php echo $apiResponse['info']['records'][0]['item_id'] ?>' value='<?php echo implode(',', $apiTagResponse['info']['records']); ?>'>-->
+                                <img style="cursor:pointer; margin-left: 5px; " class="update_field_value" data-type='tags' src="<?php echo IMAGE_PATH . 'save.png' ?>" title='Save' />
+                                <img style="cursor:pointer; margin-left: 3px;" class="cancel_field_value" data-type='tags'  src="<?php echo IMAGE_PATH . 'cancel.png' ?>" title='Cancel' />
+                            </p>
+                        </td>
+                    </tr>
+        <?php }
+    } else { ?>
+                <tr><td colspan="2">No fields found.</td></tr>
+    <?php } ?>
+        </table>
+    </span>
+<?php } ?>
+<script>
+    $(document).ready(function () {
+        $('.item_title').text('<?php echo $item_title; ?>');
+    });
+</script>

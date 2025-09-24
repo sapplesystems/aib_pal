@@ -1,0 +1,71 @@
+Session key = 958cea12342fbaf5eedcbbe09f045b6d
+RESULT: array (
+  'status' => 'OK',
+  'info' => 
+  array (
+    'records' => 
+    array (
+      0 => 
+      array (
+        'properties' => 
+        array (
+        ),
+        'fields' => 
+        array (
+        ),
+        'files' => 
+        array (
+          0 => 
+          array (
+            'file_id' => '1037',
+            'file_original_name' => '3163f7bff9dca786eb306b8a648ebe61-colorful-abstract-background-with-stripes (1).jpg',
+            'file_mime_type' => ' image/jpeg; charset=binary',
+            'file_stored_stamp' => '1520572665.9941',
+            'file_stored_string' => '2018.03.08.21.17.45',
+            'file_type' => 'or',
+            'file_size' => '152002',
+          ),
+          1 => 
+          array (
+            'file_id' => '1038',
+            'file_original_name' => '3163f7bff9dca786eb306b8a648ebe61-colorful-abstract-background-with-stripes (1).jpg',
+            'file_mime_type' => 'image/jpeg',
+            'file_stored_stamp' => '1520572666.0661',
+            'file_stored_string' => '2018.03.08.21.17.46',
+            'file_type' => 'pr',
+            'file_size' => '151543',
+          ),
+          2 => 
+          array (
+            'file_id' => '1039',
+            'file_original_name' => '01520572665_932653.jpg',
+            'file_mime_type' => 'image/jpeg',
+            'file_stored_stamp' => '1520572666.1321',
+            'file_stored_string' => '2018.03.08.21.17.46',
+            'file_type' => 'tn',
+            'file_size' => '12246',
+          ),
+        ),
+        'item_id' => '7',
+        'item_type' => 'RE',
+        'item_title' => 'Abhinav adding record 1',
+        'item_ref' => '-1',
+        'item_source_type' => 'I',
+        'item_source_info' => '',
+        'item_create_stamp' => '1520636409.9104',
+        'item_create_string' => '2018.03.09.15.00.09',
+        'thumb_id' => -1,
+        'thumb_data' => '',
+        'thumb_mime' => '',
+        'primary_id' => -1,
+        'primary_data' => '',
+        'primary_mime' => '',
+        'first_thumb' => NULL,
+        'is_link' => 'Y',
+        'link_id' => '10',
+        'link_type' => 'L',
+      ),
+    ),
+  ),
+)
+DEBUG: 1

@@ -1,0 +1,211 @@
+<?php 
+$rel_con_count = 0;
+if ($themeName == 'custom') {
+    if (!empty($relatedItemsData)) {
+        ?>
+        <ul class="related_content">
+            <?php
+            $previous_item = [];
+            $count = 0;
+            foreach ($relatedItemsData as $dataArray) {
+                $file_name = 'home.html';
+				if ($dataArray['top_parent'] == '_STDUSER') {
+					$file_name = 'people.html';
+				}
+				if ($dataArray['item_type'] == 'RE') {
+					$file_name = 'item-details.html';
+				}
+                if ($count == 0) {
+                    $show = true;
+                    $previous_item[] = $dataArray['item_id'];
+                } else {
+                    if (in_array($dataArray['item_id'], $previous_item)) {
+                        $show = false;
+                    } else {
+                        $previous_item[] = $dataArray['item_id'];
+                        $show = true;
+                    }
+                }
+                if ($dataArray['thumbId']) {
+                    $thumbFile = RECORD_THUMB_URL . '?id=' . $dataArray['thumbId'];
+                } elseif (isset($dataArray['ag_thumb'])) {
+                    $thumbFile = ($dataArray['ag_thumb'] != '' && file_exists(ARCHIVE_IMAGE . $dataArray['ag_thumb'])) ? ARCHIVE_IMAGE . $dataArray['ag_thumb'] : IMAGE_PATH . 'no-image1.png';
+                } else {
+                    $thumbFile = IMAGE_PATH . 'folder.png';
+                }
+                ?>
+                <li>
+					<a target="_blank" href="<?php echo $file_name; ?>?q=<?php echo encryptQueryString('folder_id=' . $dataArray['item_id']); ?>">
+						<img src="<?php echo $thumbFile; ?>" alt="Image-1" /><span><?php echo $dataArray['item_title']; ?></span>
+					</a>
+				</li>
+        <?php } ?> 
+        </ul>
+    <?php } else {
+        echo "No related content found";
+    }
+} elseif ($themeName == 'custom1') {
+    if (!empty($relatedItemsData)) {
+        ?>
+        <ul class="relContent_tab">
+            <?php
+            $previous_item = [];
+            $count = 0;
+            foreach ($relatedItemsData as $dataArray) {
+                $file_name = 'home.html';
+				if ($dataArray['top_parent'] == '_STDUSER') {
+					$file_name = 'people.html';
+				}
+				if ($dataArray['item_type'] == 'RE') {
+					$file_name = 'item-details.html';
+				}
+                if ($count == 0) {
+                    $show = true;
+                    $previous_item[] = $dataArray['item_id'];
+                } else {
+                    if (in_array($dataArray['item_id'], $previous_item)) {
+                        $show = false;
+                    } else {
+                        $previous_item[] = $dataArray['item_id'];
+                        $show = true;
+                    }
+                }
+                if ($dataArray['thumbId']) {
+                    $thumbFile = RECORD_THUMB_URL . '?id=' . $dataArray['thumbId'];
+                } elseif (isset($dataArray['ag_thumb'])) {
+                    $thumbFile = ($dataArray['ag_thumb'] != '' && file_exists(ARCHIVE_IMAGE . $dataArray['ag_thumb'])) ? ARCHIVE_IMAGE . $dataArray['ag_thumb'] : IMAGE_PATH . 'no-image1.png';
+                } else {
+                    $thumbFile = IMAGE_PATH . 'folder.png';
+                }
+                ?>
+                <li>
+					<a target="_blank" href="<?php echo $file_name; ?>?q=<?php echo encryptQueryString('folder_id=' . $dataArray['item_id']); ?>">
+						<img src="<?php echo $thumbFile; ?>" alt="Image-1" /><span><?php echo str_replace("+"," ",$dataArray['item_title']); ?></span>
+					</a>
+				</li>
+        <?php } ?> 
+        </ul>
+    <?php } else {
+        echo "<strong>No related content found</strong>";
+    } } else { ?>
+    <div id="tab1" class="tab-content">
+        <div class="leftSection">
+            <span id="relatedContentNo" style="display:none"><?php echo count($relatedItemsData); ?></span>
+            <!--<h4 class="">Public Connections <a href="#">View All</a></h4>-->
+                <?php
+                if (!empty($relatedItemsData)) {
+                    ?>
+                <ul class="contentRelated">
+                    <?php
+                    $previous_item = [];
+                    $count = 0;
+                    foreach ($relatedItemsData as $dataArray) {
+                        $rel_con_count++;
+                        $file_name = 'home.html';
+                        if ($dataArray['top_parent'] == '_STDUSER') {
+                            $file_name = 'people.html';
+                        }
+                        if ($dataArray['item_type'] == 'RE') {
+                            $file_name = 'item-details.html';
+                        }
+                        if ($count == 0) {
+                            $show = true;
+                            $previous_item[] = $dataArray['item_id'];
+                        } else {
+                            if (in_array($dataArray['item_id'], $previous_item)) {
+                                $show = false;
+                            } else {
+                                $previous_item[] = $dataArray['item_id'];
+                                $show = true;
+                            }
+                        }
+                        ?>
+                                <?php if ($show) { ?> <li><a target="_blank" href="<?php echo $file_name; ?>?q=<?php echo encryptQueryString('folder_id=' . $dataArray['item_id']); ?>">
+                                    <?php if ($dataArray['thumbId']) { ?>
+                                        <img class="" src="<?php echo RECORD_THUMB_URL . '?id=' . $dataArray['thumbId']; ?>" alt="" />
+                                        <?php
+                                    } elseif (isset($dataArray['ag_thumb'])) {
+                                        $imageName = ($dataArray['ag_thumb'] != '' && file_exists(ARCHIVE_IMAGE . $dataArray['ag_thumb'])) ? ARCHIVE_IMAGE . $dataArray['ag_thumb'] : IMAGE_PATH . 'no-image1.png';
+                                        ?>
+                                        <img class="" src="<?php echo $imageName; ?>" alt="" />
+                            <?php } else { ?>
+                                        <img class="" src="<?php echo IMAGE_PATH . 'folder.png'; ?>" alt="" />
+                            <?php } ?>
+                                    <span><?php echo str_replace("+"," ",$dataArray['item_title']); ?></span></a></li><?php } ?>
+                    <?php
+                    $count ++;
+                }
+                ?>
+                </ul>
+        <?php } else { ?>
+                <strong>No Related Items Found.</strong>
+        <?php } ?>
+        </div>
+    </div>
+    <div id="tab2" class="tab-content">
+        <?php
+        if (!empty($relatedItemsData)) {
+            $file_name = 'home.html';
+            if ($userDetails['user_type'] == 'U') {
+                $file_name = 'people.html';
+            }
+            ?>
+            <div class="related-scroll">
+                <ul class="imageDisplay">
+                    <?php
+                    $previous_item = [];
+                    $count = 0;
+                    foreach ($relatedItemsData as $dataArray) {
+                        if ($dataArray['item_type'] == 'RE') {
+                            $file_name = 'item-details.html';
+                        }
+                        if ($count == 0) {
+                            $show = true;
+                            $previous_item[] = $dataArray['item_id'];
+                        } else {
+                            if (in_array($dataArray['item_id'], $previous_item)) {
+                                $show = false;
+                            } else {
+                                $previous_item[] = $dataArray['item_id'];
+                                $show = true;
+                            }
+                        }
+                        ?>
+                                <?php if ($show) { ?> 
+
+                            <li><a data-folder-id="<?php echo $itemDataArray['item_id']; ?>" target="_blank" href="<?php echo $file_name; ?>?folder_id=<?php echo $dataArray['item_id']; ?>">
+                                    <?php
+                                    if ($dataArray['thumbId']) {
+                                        $thumbFile = RECORD_THUMB_URL . '?id=' . $dataArray['thumbId'];
+                                    } elseif (isset($dataArray['ag_thumb'])) {
+                                        $thumbFile = ($dataArray['ag_thumb'] != '' && file_exists(ARCHIVE_IMAGE . $dataArray['ag_thumb'])) ? ARCHIVE_IMAGE . $dataArray['ag_thumb'] : IMAGE_PATH . 'no-image1.png';
+                                    } else {
+                                        $thumbFile = IMAGE_PATH . 'folder.png';
+                                    }
+                                    ?>
+
+                                    <div class="ch-item">
+
+                                        <div class="ch-info">
+                                            <div class="ch-info-front" style="background-image:url(<?php echo $thumbFile ?>);"></div>
+                                            <div class="ch-info-back">
+                                                <h3 title="<?php echo $dataArray['item_title']; ?>"><?php echo str_replace("+"," ",$dataArray['item_title']); ?></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </a><h3 title="<?php echo $dataArray['item_title']; ?>"><?php echo str_replace("+"," ",$dataArray['item_title']); ?></h3></li><?php } ?>
+                <?php
+                $count ++;
+            }
+            ?>
+                </ul>
+            </div>
+    <?php } else { ?>
+            <strong>No Related Items Found.</strong>
+    <?php } ?>
+    </div>
+<?php } ?>
+<script type="text/javascript">
+$('#rel_con_count').html('(<?php echo $rel_con_count; ?>)');
+</script>

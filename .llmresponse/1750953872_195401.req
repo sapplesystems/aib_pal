@@ -1,0 +1,148 @@
+[[CHAT START]]
+{'id': 'chatcmpl-17666cc0-6f0e-4b6a-9acb-15550f117d7e', 'object': 'chat.completion', 'created': 1750953884, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': 'Based on the provided context, China Lake appears to be a location in California, USA. It is mentioned in several documents as a place where various events took place, such as a camp for Chinese miners, a lake with placer gold, and a naval base.'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 2172, 'completion_tokens': 52, 'total_tokens': 2224}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=0.391196
+[[START CONTENT]]
+ocated at China Lake.  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d732e', 'fragment': '19'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.611011
+[[START CONTENT]]
+oettig, 205 Shan- grila Circle, China Lake.   
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000f9e9f', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.612031
+[[START CONTENT]]
+UNTAIN 634 S. China Lake Blvd.     375-3071  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d8a37', 'fragment': '11'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.614350
+[[START CONTENT]]
+ED They did not gather borax cotton balls or scrape up potash as some stories have it, because it wasn't there. I have it from an authoritative source - an outstanding geologist who has made a study of the area - that there is no more than a trace of either. But, he reports, there is finer placer gold there. The Chinese dry- placered fine gold with a feather. It took much time and perserverance. The Chinese had both. They had a camp on the east side of the lake. So it's quite prob. ",ble it was referred to as China Lake in 1873. So that's how China Lake got its name. Another version - some pioneers looking down from the top of Wild Horse Mesa at that vast wilderness obser ved that it looked like a china bowl - so, when there was water in it- it was China Lake. Seems reasonable - but no proof. POP HAS HIS OWN VERSION   Another version - my own - possibly a box of chinaware ..fell off of a freight wagon. They threw the pieces into the lake._ - so it became China Lake. Many places have gotten names just as accid
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d68b7', 'fragment': '11'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.623839
+[[START CONTENT]]
+@uri=886029
+@title=File: Rktr6.18.1992.pdf  Page     2; 
+@cdate=2024-03-03 23:05:26
+@archive_group_title=China Lake Museum
+@archive_title=Rocketeer Newspaper
+@item_id=886029
+archive_group_title=China Lake Museum
+archive_title=Rocketeer Newspaper
+item_id=886029
+item_path=n823405x n933908x n933917x n878386x n879475x n886029x
+
+File: Rktr6.18.1992.pdf  Page     2; 
+OCR Text: 2 OOMMENTARY China Lake Calendar Friday, June 19 -Hail & Farewell, 5: 30 p.m., Barefoot Bar Patio Saturday, June 20 -MOWC 5 and 10K R un/Walk events for crash victims' families,'8 a.m., Solar Park - High Desert Doubles Tennis Tournament, June 20-2 1, at Chino Lake Tennis Courts Tuesday, June 23 - VAdm. Bowes All Hands talk ofJune 12 rebroadcast over Chino Lake FOTS system at 1 p.m. Wednesday, June 24 , - IEEE luncheon, 11 :30 a.m., EI Charro, Sterling Haaland, guest speaker. Friday, June 26 - Commedy Night at Community Pool bandstand area, 8 p.m., $7 per person ~ , THE-ROCKETEER NAVAL AIR WARFARE CENTER WEAPONS DIVISION COMMANDER RAdm. Willia
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d850d', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.703740
+[[START CONTENT]]
+@uri=886742
+@title=File: Rktr12.2.1993.pdf  Page    12; 
+@cdate=2024-03-03 23:27:29
+@archive_group_title=China Lake Museum
+@archive_title=Rocketeer Newspaper
+@item_id=886742
+archive_group_title=China Lake Museum
+archive_title=Rocketeer Newspaper
+item_id=886742
+item_path=n823405x n933908x n933917x n878390x n879608x n886742x
+
+File: Rktr12.2.1993.pdf  Page    12; 
+OCR Text: 11 TIlE ROC.KETEER - DECEMBER 2, 1993 China Lake's 50th Anniversary 'Salute to China Lakers' James Colvard praises people who made China Lake great (EdllOr's Note: The complete text ofDr. James Colvard's speech at the "Salute 10 China Laken" dinner Is reproduced belowfor the benefit ofthose wIIo could not aI/end.) Wemeet tonight to celebrate the golden anniversary of Navy presence in the Mojave desert. Only "true" visionaries thought fifty years ago that a small organization located half way between nothing and nowhere in Inyokern, California, would become known everywhere in the world of Navy ordnance. The organization that evolved from that
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d87d6', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.720111
+[[START CONTENT]]
+ and served food, but also bow ...,11he has seasoned it, Dr. Yu e:a:plained. There is no comparison between food served bY Chinese restaurants in the United States and that served by restaurants in Hong Kong and Taiwan, he said. However, be did say that a few Chinese restaurants in this country do a fair job, especially if a person orders from the Cltinese language portion of the menu and not the English language part. He also reconunends a few restaurants in Los Angeles OIinatown. These include the Grandview Garden and Man- darin Plaza, as well as otherswhich specialize in food native to certa,in provinces in China. 'China Lake' hard to explain Dr. Yu said the fact that he worl<s at a place named "China Lake" has been a matter of special interest to friends and relatives in the Far East.     "They are always curious about the name and they think that it must be a very big lake. But when I e~in that it is a small, dry lake, they are puzzled." Dr. Yu said that when he tells people he is from China Lake they ar
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d7568', 'fragment': '21'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.723575
+[[START CONTENT]]
+@uri=885739
+@title=File: Rktr10.17.1991.pdf  Page    11; 
+@cdate=2024-03-03 22:56:14
+@archive_group_title=China Lake Museum
+@archive_title=Rocketeer Newspaper
+@item_id=885739
+archive_group_title=China Lake Museum
+archive_title=Rocketeer Newspaper
+item_id=885739
+item_path=n823405x n933908x n933917x n878378x n879389x n885739x
+
+File: Rktr10.17.1991.pdf  Page    11; 
+OCR Text: 14 October 17, 1991 Sports DWP's Haiwee Reservoir open for fishing Grass roots, constitutional rights effort by fishing group succeeds after 41 years of 'closure' By Barry Md)ouId Rocketeer saIf Writer Small _ lap slowly 81 the boat ramp at the northeast shore of upper Haiwee Lake, an hour north of China Lake on Highway 395. A large metal building sits secured in good condition at the back of the lot. Perforated metal decking provides a surface.more durable than blacktop around the building. A large pontoon float labeled "U.S. Navy   and two very small craft leSt on the lalce side of the property several yards from the waJer. The Navy hasn'
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d83eb', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.726775
+[[START CONTENT]]
+reside at 306-A F 0 wi e r Street, China Lake. (Continued on p. 5) ROBERT ARNALDO RICHARD A. SCHMITT F. D. GROUTAGE KEITH E. CLARK LARRY LEV5EN JAMl5DIXON JOHN LORCH JOHN BRAMMER JAMES MAR.SHAl.L RONALD COHN PHILLIP HARRY RICHARD SMITH DON D. PAUL M. L. SCHMITT LLOYD SMITH  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d703a', 'fragment': '14'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.732498
+[[START CONTENT]]
+@uri=1021506
+@title=Record: Lake at China Lake waves ddmmmyy.jpg; 
+@cdate=2024-07-13 21:44:37
+@archive_group_title=China Lake Museum
+@archive_title=China Lake Art
+@item_id=1021506
+archive_group_title=China Lake Museum
+archive_title=China Lake Art
+item_id=1021506
+item_path=n823405x n1155960x n1023736x n1021333x n1021506x
+
+Record: Lake at China Lake waves ddmmmyy.jpg; 
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000f9642', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

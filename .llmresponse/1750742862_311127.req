@@ -1,0 +1,127 @@
+[[CHAT START]]
+{'id': 'chatcmpl-dcea33af-715f-4dd1-bb64-16492019821e', 'object': 'chat.completion', 'created': 1750742875, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': 'Based on the provided context, Pacific Grove appears to be a city located on the Monterey Peninsula in California. It is described as a city of homes, with many beautiful, modern, and modest homes. The city has a rich history, with a date of founding in 1875 and a date of incorporation in 1889. It is also mentioned that Pacific Grove has a 501(c)(3) organization, which was incorporated in 1976 as a California Nonprofit Public Benefit Corporation.'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 1595, 'completion_tokens': 99, 'total_tokens': 1694}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=0.413550
+[[START CONTENT]]
+en the plunge is closed. Pacific Grove is a city of homes. There are many beautiful, modern, modest in size, homes. You will not see them illustrated, for what group of women, especially business women, would dare to choose from such a selection. Produced by ELMARIE HURLBERT DYKE Former Monterey County Consultant in Elementary Education Past Grand President, Native Daughters of the Golden West Former Member of Pacific Grove City Council Illustrations by Louise Lauritzen McCaslin Cover Color Photo by Lee Blaisdell  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000e6408', 'fragment': '4'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.418004
+[[START CONTENT]]
+ Pacific Grove, a 501 (c)(3) organization, was incorporated July 1976 as a California Nonprofit Public Benefit Corporation.  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '00091db9', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.418004
+[[START CONTENT]]
+ Pacific Grove, a 501 (c)(3) organization, was incorporated July 1976 as a California Nonprofit Public Benefit Corporation.  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000a8495', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.431825
+[[START CONTENT]]
+@uri=868912
+@title=File: 301 - 500_s 16TH ST_044.pdf  Page     1; 
+@cdate=2024-02-04 22:42:01
+@archive_group_title=Heritage Society of Pacific Grove
+@archive_title=Historical Collections
+@item_id=868912
+archive_group_title=Heritage Society of Pacific Grove
+archive_title=Historical Collections
+item_id=868912
+item_path=n539319x n596134x n656387x n656760x n868905x n868906x n868912x
+
+File: 301 - 500_s 16TH ST_044.pdf  Page     1; 
+OCR Text: Archited, Phase II format, utilizing the Pacific Grove Guidelines for Historic Assessments; March 24, 2008. D. Historical Background Historical Context of the Study Area: The City of Pacific Grove is located on the Monterey Peninsula, which is 120 miles south of San Francisco, 60 miles south of San Jose, and 345 miles north of Los Angeles. The peninsula is bordered by Monterey Bay to the north, the Pacific Ocean to the west, and Carmel Bay to the south. Although characterized by cool, dry summers and wet winters, the regions of Monterey County exhibit considerable climatic div
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d4230', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.442238
+[[START CONTENT]]
+ip down. Best wishes on your success with the National Register--and continu- ing research on Pacific Grove. Incidentally, a friend of mine who lives in Ocean Grove, New Jersey, said that documents there indicated that a group from Ocean Grove was very deeply involved in the early development of Pacific Grove. I don't believe I had read that in any of the material I have about it. Sincerely, C   ~,/1 ~ I ,Q ~ 7y1.,G'4.~ !r, S ~ s~-~   t ~,~ e ~ ~l~LYQ'a G~ /~ Y  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000b4b8b', 'fragment': '4'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.443819
+[[START CONTENT]]
+Grove is born of that higher sense that comes of education and refinement. Something is being done all the time for public and private betterment. New streets are being paved, new sidewalks, new build   ings, beautiful gardens and lawns add rapidly and effectively to its already abundant charms. THE WATER SUPPLY An unlimited supply of pure mountain water from the headwaters of the Carmel River has been introduced throughout Pacific Grove. This splendid water is conveyed in large mains for a distance of twenty-five miles. SEA BATHING Sea bathing can be indulged in with safety and comfort on a beautiful sandy beach. Hot baths and swmming tanks have been provided for in the Beach Bath House. Pacific Grove High School BUILD WITH BRICK, STONE AND CEMENT ERNEST H. RAYMOND Telephone 1250 722 Granite Street Pacific Grove, California Small boats can be had for sailing, rowing and fishing. The Glass-bottom boat is here for those who care to see marine life at its best. STORES The stores of Pacific Grove contain everyth
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000e6431', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.457708
+[[START CONTENT]]
+ PACIFIC GROVE, CALIFORRIA  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000b4684', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.479184
+[[START CONTENT]]
+@uri=943147
+@title=File: Pacific Grove Chamber Promotional undated.pdf  Page     4; 
+@cdate=2024-04-24 20:32:35
+@archive_group_title=Heritage Society of Pacific Grove
+@archive_title=Historical Collections
+@item_id=943147
+archive_group_title=Heritage Society of Pacific Grove
+archive_title=Historical Collections
+item_id=943147
+item_path=n539319x n596134x n653648x n942469x n942470x n943147x
+
+File: Pacific Grove Chamber Promotional undated.pdf  Page     4; 
+OCR Text: PACIFIC GROVE STATISTICS LOCATION: Pacific Grove is located on the Mon   terey Peninsula adjacent to the cities of Monterey and Carmel approximately 132 miles south of San Francisco and 23 miles west of the county seat, Salinas. It is bounded on the north and northeast by Monterey bay, on the east and southeast by Mon   terey, on the south by Del Monte Forest, and on the west by the Asilomar Conference Grounds, and the county. DATE OF FOUNDING: 1875 DATE OF INCORPORATION: July 16, 1889. CITY GOVERNMENT Council   Manager POPULATION: 14,500 AREA: 2.7 s
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000e642b', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.507114
+[[START CONTENT]]
+ Pacific Grove, a 501(c)(3) organization, was incorporamed July 1976 as a California Nonprofit Public Benefit Corporation. b  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000dba20', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.514826
+[[START CONTENT]]
+Pacific Grove 2  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000da46a', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

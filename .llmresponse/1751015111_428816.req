@@ -1,0 +1,99 @@
+[[CHAT START]]
+{'id': 'chatcmpl-bbaeb9f7-3285-4ee8-b7d4-4398dcd013db', 'object': 'chat.completion', 'created': 1751015124, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': 'Based on the provided context, the Pacific Ocean is mentioned several times. It appears to be a significant geographical feature, with references to its proximity to various locations, such as Monterey, Pacific Grove, and Asilomar.'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 2356, 'completion_tokens': 45, 'total_tokens': 2401}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=0.869096
+[[START CONTENT]]
+ the Pacific .'oast what Nantucket, Martha   s Vineyard and Ocean Grove re to Atlantic seaside resorts.  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000e6277', 'fragment': '4'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.870141
+[[START CONTENT]]
+ongs distinctively to early California. Rich in historical treasures and superlatively endowed with nat   ural beauty, she is, to-day, a city of adobe ruins, and gullied streets, overlooking the bay from one of the grandest and most beautiful town sites nature ever formed. The harbor in Monterey Bay is unequalcd on the Pacific ocean. The largest battle-ships of our navy find shelter within 100 feet of shore: and, during heavy storms at sea, it is not unusual to see ships of different nations anchored in the calm waters thereof. The most noted navigators credit this bay as the safest, and predict the day is not far off when this will be one of the first ports of the nation. The fishing is incomparable for quality, quantity, and variety. top-water and deep-sea fishing. About two miles from Monterey is PACIFIC GROVE If beauty and grandure of scenery, a delightful climate, a genial sun, a blue sky and soft breezes make an earthly paradise, then indeed Pacific Grave is fully entitled to that name. Cer   tainly no 
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000e62d4', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.872784
+[[START CONTENT]]
+But it is the Pacific that exercises the most direct and obvious power upon the climate. At sun- set, for months together, vast, wet melancholy fogs arise and come shoreward from the ocean. 12 9  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000aec78', 'fragment': '5'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.876117
+[[START CONTENT]]
+es of the Pacific, forms the southern boundry of the bay. Out upon this promontory, ro- mantically situated, overlooking the mountain environed bay, lies Pacific Grove. A glance at the map of Pacific Grove and its surroundings must at once con- vince the reader that this rural city has an ideal location. What a grand and exalt- ing panorama is seen from the heights of this promontory! What enchanting views one must have everywhere, whether standing on some stern rock on the wave wash- ed shore or sauntering through the ozone laden pine forests! What charming nooks and corners these forests and this ocean worn coast must afford! The natural beau- REMNANTS OF THE PAST  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000e6273', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.892368
+[[START CONTENT]]
+which includes the origi   nal sixty acres of conference grounds acquired by the YWCA a half century ago, now com   prises ninety-eight acres of beautiful shore line on the Pacific Ocean side of the headland. If only this round earth of ours, so beautiful as God created it, its continents en   closed by blue unsullied oceans, were for all peoples, like Asilomar, a Sanctuary by the Sea! Pacific Grove lies on a headland: on the West the Pacific Ocean, on the East, Monterey Bay. Asilomar is on its Western side, fronting the sea that lies between it and the far world of the East. From Monterey a scenic highway runs along the coast to Asilomar. It runs past the flowering coastal park and Lover's Point, planted by Hayes Perkins and Julia Platt, the latter a former mayor of Pacific Grove (see articles elsewhere in this volume), past the ex   tensive municipal golf course, to Asilomar and along the coast on the Seventeen Mile Drive. Asilomar may also be approached more directly across the City of Pacific Grove down S
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000e64e0', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.926076
+[[START CONTENT]]
+ in California secondary schools 192E-1963; faculty and staff Monter:y Institute of Foreign Studies 1964-1969. After retirement from Los Angeles City Schools, cams to Pacific Grove, built home in sand dunes overlooking Pacific Ocean between Asiloa~r and the Lig hthouse on Calle de los Amigos. Born March 17, 1904, in San Francisco (in sand dunes there, south of Golden Gate Park, on shores of the Pacific). I. Pacific Grove's location - on tip of rlonterey Peninsula - "the peninsula of the Peninsula" (Pacific Grove - 1375-1975, Evelyn Grantham Miller et al.) "The sea around us" - (Robert Louis StAv~nson, The Old Pacific Capital) Note comments~of R. L. S. in 1879 as printed in Chamber of Commerce brochure about Pacific Grove (Pacific Grovo - the City of Homns) -publication date not given, probably 1940. A. Street names reflecting location on shores of the Pacific:     n u o n e ~ , n Pacific - Asilomar ( coined word meaning r_tr.,2~t by the s.,a - Y.W.C.A. 1913) Ocea   ~ View - Beach - Arena (Sand) -Sunset -Sea V
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000b479f', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.938197
+[[START CONTENT]]
+nding-board. as though for an orchestra. The houses were all tightly shuttered. there was no smoke. no sound but the waves. no moving thing. 1 have never been in any The New Pacific Capital San Francisco THE Pacific coast of the United States. as you may see by the map. and still better in that admirable book. Two Years Before the Afast, b) Dana. is one of the most exposed and shelterless on earth. The trade-wind blows fresh. the huge Pacific swell booms along degree after degree of an unbroken line of coast. South of the joint firth of the Columbia and Williamette, there flows in no considerable river. south of Puget Sound there is no protected inlet of the ocean. Along the whole seaboard of California there are but two unexceptionable anchorages -- the bight of the Bay of Monterey. and the inland sea that takes its name from San Francisco. Whether or not it was here that Drake put in in 1597. we cannot tell. There is no other place so suitable. and yet the narrative of Francis Pretty scarcelv seems to suit 
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000aec7e', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.945233
+[[START CONTENT]]
+, said when at the Grove:    In my exten   sive travels in the Old World and in the New, I have found no drive of equal extent which, in varied beauty and grandeur, surpasses that of the Seventeen Mile Drive at Pacific Grove.    Prof. C. S. Nash of Pacific Theological Seminary Berkeley, Calif., says:    Pacific Grove is one of the most charming resorts on the Pacific Coast. The matchless Bay and the great Ocean just beyond are endlessly fascinating Especially in winter have 1 found the place restful and invigorating.    Rev. Edwin Sidney Williams of Saratoga, Calif, (for   merly of Minneapolis, Minn.), says:    1 have visited every resort of note on the Pacific Coast, from Vancouver to San Diego, and my deliberate and hearty conviction is that in climate, scenery and the folks who live there. Pacific Grove surpasses them all. Its winter climate sur   passes that of summer.    Rev. Geo. C. Adams, D. D., pastor of the First Congre   gational Church, San Francisco, says:    1 can speak in the highest terms of Pa
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000e6405', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.952782
+[[START CONTENT]]
+ sounding-board. as though for an orchestra. The houses were all tightly shuttered: there was no smoke. no sound but the waves. no moving thing. I have never been in an> The New Pacific Capital San Francisco THE Pacific coast of the United States. as you may see by the map. and still better in that admirable book. 7'wo Years Before the Afast, by Dana. is one of the most exposed and shelterless on earth. The trade-wind blows fresh; the huge Pacific swell booms along degree after degree of an unbroken line of coast. South of the joint firth of the Columbia and Williamette. there flows in no considerable river. south of Puget Sound there is no protected inlet of the ocean. Along the whole seaboard of California there are but two unexceptionable anchorages -- the bight of the Bay of Monterey. and the inland sea that takes its name from San Francisco. Whether or not it was here that Drake put in in 1597. we cannot tell. There is no other place so suitable. and yet the narrative of Francis Pretty scareely seems to 
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000aec5c', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.963228
+[[START CONTENT]]
+en   sive travels in the Old World and in the New, I have found no drive of equal extent which, in varied beauty and grandeur, surpasses that of the Seventeen Mile Drive at Pacific Grove.    n NaSh Bl P   ific Theological Semibary, Berkeley, Calii., says: Pacific Grove is one of the most charming resorts on the Pacific Coast. The matchless Bay and the great Ocean just beyond are endlessly fascinating Especially in winter have I found the place restful and invigorating.    Rev. Edwin Sidney Williams of Saratoga, Calif, (for- merly of Minneapolis, Minn.), says:    I have visited every resort of note on the Pacific Coast, from Vancouver to San Diego, and my deliberate and hearty conviction is that in climate, scenery and the folks who live there, Pacific Grove surpasses them all. Its winter climate sur   passes that of summer.    Rev. Geo. C. Adams, D. D., pastor of the First Congre   gational Church, San Francisco, says:    1 can speak in the highest terms of Pacific Grove, as one of the best places for Christi
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000e64ac', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

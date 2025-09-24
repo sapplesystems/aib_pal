@@ -1,0 +1,11 @@
+Array
+(
+    [47] => 1
+    [42] => 0
+    [10002] => http://develop.archiveinabox.com/api/comments.php
+    [74] => 0
+    [19913] => 1
+    [75] => 0
+    [13] => 300
+    [10015] => _key=87fc0d6d9689d84ab48f583175f9522d&_session=fba2beadeb687b1ddfb5e4c3c041fbec&_user=1&_op=cmnt_lstcmnt&parent_thread=6851
+)

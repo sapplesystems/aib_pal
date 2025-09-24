@@ -1,0 +1,177 @@
+[[CHAT START]]
+{'id': 'chatcmpl-3af77afd-0daa-41fb-a6ce-dc5a4fd1102a', 'object': 'chat.completion', 'created': 1750461211, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': "Based on the provided documents, it appears that President John F. Kennedy visited China Lake on June 7, 1963. There are several documents that mention his visit, including:\n\n* Document id '00108e0b_1' mentions Kennedy's visit to the Naval Air Facility during his 8 June 1963 visit to China Lake.\n* Document id '00108e23_1' shows Kennedy disembarking from Air Force 1 at Armitage Field, China Lake, June 7, 1963.\n* Document id '00108e1d_1' also shows Kennedy disembarking from Air Force 1 at Armitage Field, China Lake, June 7, 1963.\n* Document id '00108e21_1' shows Kennedy arriving at the grandstand for a NOTS weapon demonstration, June 7, 1963.\n\nThese documents suggest that Kennedy's visit to China Lake was on June 7, 1963, and that he visited the Naval Air Facility, disembarked from Air Force 1, and attended a NOTS weapon demonstration."}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 1835, 'completion_tokens': 225, 'total_tokens': 2060}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=0.549298
+[[START CONTENT]]
+ocated at China Lake.  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d732e', 'fragment': '19'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.559305
+[[START CONTENT]]
+@uri=1084939
+@title=File: KennedyVisitsWithPilots.jpg; 
+@cdate=2024-08-05 00:41:48
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1084939
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1084939
+item_path=n823405x n1021057x n1084913x n1084915x n1084938x n1084939x
+
+File: KennedyVisitsWithPilots.jpg; 
+OCR Text: Hi    \i iv   n    m SNNMMV    \l. NX   I II   !    HIM   President John F. Kennedy greets pilots at the Naval Air Facility during his 8 June 1963 visit to China Lake. Behind him are California Governor Edmund G. Brown and Capt. 7 US. Navy photo, courtesy US. Naval Museum of Annamth and Technology 
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '00108e0b', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.687117
+[[START CONTENT]]
+reside at 306-A F 0 wi e r Street, China Lake. (Continued on p. 5) ROBERT ARNALDO RICHARD A. SCHMITT F. D. GROUTAGE KEITH E. CLARK LARRY LEV5EN JAMl5DIXON JOHN LORCH JOHN BRAMMER JAMES MAR.SHAl.L RONALD COHN PHILLIP HARRY RICHARD SMITH DON D. PAUL M. L. SCHMITT LLOYD SMITH  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d703a', 'fragment': '14'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.743900
+[[START CONTENT]]
+@uri=1084963
+@title=File: KennedyDisembarksFromAirForce1+(1).jpg; 
+@cdate=2024-08-05 00:41:49
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1084963
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1084963
+item_path=n823405x n1021057x n1084913x n1084915x n1084962x n1084963x
+
+File: KennedyDisembarksFromAirForce1+(1).jpg; 
+OCR Text: President John F. Kennedy disembarks from Air Force 1 at Armitage Field, China Lake, June 7, 1963. US. Navy photo, LHL L085674. Maturango Museum, Howard Auld collection   
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '00108e23', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.746133
+[[START CONTENT]]
+@uri=1084957
+@title=File: KennedyDisembarksFromAirForce1.jpg; 
+@cdate=2024-08-05 00:41:49
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1084957
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1084957
+item_path=n823405x n1021057x n1084913x n1084915x n1084956x n1084957x
+
+File: KennedyDisembarksFromAirForce1.jpg; 
+OCR Text: President John F. Kennedy disembarks from Air Force 1 at Armitage Field, China Lake, June 7, 1963. US. Navy photo, LHL L085674. Maturango Museum, Howard Auld collection   
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '00108e1d', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.758266
+[[START CONTENT]]
+UNTAIN 634 S. China Lake Blvd.     375-3071  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d8a37', 'fragment': '11'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.764155
+[[START CONTENT]]
+@uri=1084961
+@title=File: KennedyArrivesAtGrandstand+(1).jpg; 
+@cdate=2024-08-05 00:41:49
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1084961
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1084961
+item_path=n823405x n1021057x n1084913x n1084915x n1084960x n1084961x
+
+File: KennedyArrivesAtGrandstand+(1).jpg; 
+OCR Text: China Lake Police sergeant greets President Kennedy as he enters the reviewing stand for a NOTS weapon demonstration, June 7, 1963. US. Navy Photo LHL L085689. Maturango Museum, Howard Auld collection   
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '00108e21', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.771096
+[[START CONTENT]]
+@uri=1084955
+@title=File: KennedyArrivesAtGrandstand.jpg; 
+@cdate=2024-08-05 00:41:49
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1084955
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1084955
+item_path=n823405x n1021057x n1084913x n1084915x n1084954x n1084955x
+
+File: KennedyArrivesAtGrandstand.jpg; 
+OCR Text: China Lake Police sergeant greets President Kennedy as he enters the reviewing stand for a NOTS weapon demonstration, June 7, 1963. US. Navy Photo LHL L085689. Maturango Museum, Howard Auld collection   
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '00108e1b', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.782108
+[[START CONTENT]]
+unwanted Items Into cash - call 375-4481                                                     ~                                 1                                                                                                                                                1 Best Lot in Private Heritage Village. 2 yr. new 3 BO/2 BA single family home. Next to Formal Park at end of cul-de-sac. Private comm., gym, pool, jacuzzi & ree. area. Must see. 213 Kennedy Court. 619-446-7936. $111,870. c:;: AP~I.A. RATINGS 5-7 Days. (Guaranteed) China Lake Class Begins May 9th Call for Information Aviation Ground School of America 619-967-APIA (2742)  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d829f', 'fragment': '13'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.788068
+[[START CONTENT]]
+@uri=1084940
+@title=Record: KennedyLaVScouts.jpg; 
+@cdate=2024-08-05 00:41:48
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1084940
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1084940
+item_path=n823405x n1021057x n1084913x n1084915x n1084940x
+
+Record: KennedyLaVScouts.jpg; 
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '00108e0c', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

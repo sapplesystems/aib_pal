@@ -1,0 +1,158 @@
+[[CHAT START]]
+{'id': 'chatcmpl-ee14ed73-7ba5-409f-b022-f192db614e66', 'object': 'chat.completion', 'created': 1750779578, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': "Based on the provided context, I found the following information related to President Kennedy's visit to China Lake:\n\n1. Document (id='00108e0b_1'): This document mentions President John F. Kennedy's visit to China Lake on June 8, 1963. He was greeted by pilots at the Naval Air Facility during his visit.\n2. Document (id='000d8d62_3'): This document provides more information about President Kennedy's visit to China Lake. It mentions that he was escorted by Capt. Charles Blerunan Jr., NOTS Commander, and Dr. W. D. McLean, Technical Director. During his visit, he witnessed a demonstration of the U.S. Navy's carrier aircraft against ground targets on the Station ranges.\n3. Document (id='000d732e_19'): This document does not provide specific information about President Kennedy's visit to China Lake.\n4. Document (id='000d6536_21'): This document mentions a letter from Dr. G. W. Reonard, president of the China Lake Community Council, to President Kennedy, appealing for support at the highest level of the national government for the proposed transfer of a tract of land from the U.S. Naval Ordnance Test Station to Kern County.\n5. Document (id='000d7e12_2'): This document mentions that President Kennedy visited China Lake 25 years ago, on November 25, 1963. He was the only president to have visited China Lake during his time in office.\n6. Document (id='000d900a_1'): This document provides information about the Station's recognition, special events, honors, and visitors, including President Kennedy's visit on June 7, 1963.\n7. Document (id='000d68c4_1'): This document mentions a fundraising campaign to provide a national memorial to President Kennedy, which will be built on the banks of the Charles River in Boston, Mass.\n\nThese documents suggest that President Kennedy visited China Lake on June 8, 1963, and that his visit was a significant event for the Station."}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 2599, 'completion_tokens': 434, 'total_tokens': 3033}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=0.616408
+[[START CONTENT]]
+@uri=1084939
+@title=File: KennedyVisitsWithPilots.jpg; 
+@cdate=2024-08-05 00:41:48
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1084939
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1084939
+item_path=n823405x n1021057x n1084913x n1084915x n1084938x n1084939x
+
+File: KennedyVisitsWithPilots.jpg; 
+OCR Text: Hi    \i iv   n    m SNNMMV    \l. NX   I II   !    HIM   President John F. Kennedy greets pilots at the Naval Air Facility during his 8 June 1963 visit to China Lake. Behind him are California Governor Edmund G. Brown and Capt. 7 US. Navy photo, courtesy US. Naval Museum of Annamth and Technology 
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '00108e0b', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.782075
+[[START CONTENT]]
+ radiation missiles; the various free-fall weapons; the first electro-optical guided weapon, Walleye, and its successor, Maverick; the famous air-to-air Sidewinder; Harpoon; FAE (fuel-air explosive); and many others. Also on dis- play are photographs and memorabilia from President John F. Kennedy's 1963 visit to China Lake to a time-line display showing the development of various weapons systems and major technical facilities, as well as photographs of the early years and many other relics ofChina Lake's history. The China Lake Museum Foundation HISTORY-chino Lake Exhibit Center houses many replica weapons. is a non-profit corporation founded in the foundation's request to the Secretary 1993 to assist the Naval Air Weapons of the Navy to designate the China Lake Station in the development of an arma- Exhibit Center as an official naval muse- ment museum to house, preserve, exhibit urn. and interpret the heritage oftechnological The foundation, through its volunteer achievements ofChina Lake in particular, pro
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d8d62', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.800771
+[[START CONTENT]]
+ocated at China Lake.  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d732e', 'fragment': '19'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.809469
+[[START CONTENT]]
+f the China Lake Community Council this week appealed to President John F. Kennedy for support at the highest level of the national government for the proposed transfer oC a tract of 106 acres oC land from the U. S. Naval Ordnance Test Station to Kern County. It is hoped by the Naval Sta   tion civic group that the land in question, located between China Lake Blvd. and Desert Park (the Wherry housing project), can be used for needed local govern- mental services and public rec- reation. I The letter from Dr. G. W. r.eonard, president of the China Lake Community Council, to President Kennedy was approv   ed for sending at Tuesday night's meeting of the Council, and read, in part, as follows: The issue in point is a proposed transfer of land presently a part of the United States Naval Ordnance Test Sta   tion to the County of Kern, to enable the county to provide residents of this area with ur    , gently needed local gove~nment   al services (public recreation). "In particular, the proposed land transCer will 
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d6536', 'fragment': '21'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.826248
+[[START CONTENT]]
+ve years ago today, November 25,1963. was a national day of mourning for the 35th Presi- dent of the Uniled States and China Lakers. like millions ofother Ameri- cans, bowed theirheads in sorrowand in memory of their fallen leader. During his brief visit here, Presi- delll Kennedy was escorted by Capt. Charles Blerunan Jr., NOTS Com- mander, and Dr.WiDiam B. McLean. HarS technical director. During the several bours spent on board NOTS, the President witnessed an aw=me demonstra- tion of the U.S. Navy's carrier auack aircraft against ground targets on the Station ranges. Nine targets were attacked by a variety of Navy aircraft using modem air-IO-ground weapons including the Bullpup missileand the Zuni five-inch rocIceL KENNEDY AT MICHELSON LAB-John F. Kennedy visited the Naval Weapons Center 25 years ago. He Is the only president to have visited China Lake during his time In office. RE:S'7"4URP- __ #1 IN SERVICE - QUALITY FOOD & FRIENDLY ATMOSPHERE GUARANTEED 20 MINUTE LUNCHES or It's Y:! Price!! Dally Special
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d7e12', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.838902
+[[START CONTENT]]
+@uri=888842
+@title=File: CLComHist1963+copy.PDF  Page    24; 
+@cdate=2024-03-04 00:18:43
+@archive_group_title=China Lake Museum
+@archive_title=Major Programs and Facilities
+@item_id=888842
+archive_group_title=China Lake Museum
+archive_title=Major Programs and Facilities
+item_id=888842
+item_path=n823405x n1021054x n1021071x n1021075x n880019x n888842x
+
+File: CLComHist1963+copy.PDF  Page    24; 
+OCR Text: OPNAV REPORT 5750-5 CHAPTER V STATION RECOGNITION, SPECIAL EVENTS, HONORS, VISITORS PRESIDENTIAL VISIT Perhaps the most important single incident in the Station's 20' year history was the visit of President John F. Kennedy on 7 June. In a comprehensive four-hour presentation, NOTS provided a vivid demonstration of the Station's eminence as a leading Navy in-house laboratory. The nationwide publicity and demonstrations for the Nation's Chief Executive provided effective evidence of the role of the Navy's in-house R&D laboratories. This presentation was recorded on documentary films which have had wide distribut
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d900a', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.848108
+[[START CONTENT]]
+@uri=878788
+@title=File: Rktr6.19.1964.pdf  Page     4; 
+@cdate=2024-03-03 18:54:49
+@archive_group_title=China Lake Museum
+@archive_title=Rocketeer Newspaper
+@item_id=878788
+archive_group_title=China Lake Museum
+archive_title=Rocketeer Newspaper
+item_id=878788
+item_path=n823405x n933908x n933913x n874940x n875960x n878788x
+
+File: Rktr6.19.1964.pdf  Page     4; 
+OCR Text: Page Four Editorial Kennedy Library Seen As Living Memorial Since the tragic death of President John F. Kennedy Nov. 22, 1963, many public facilities such as airports, schools and parks have been dedicated in his honor. While all of these are fitting tributes, a fund  raising cam   paign is currently underway to provide a national memorial to President Kennedy whicb will stand above all others in belping to keep his memory alive. The funds will be used to build the John F. Kennedy Library on the banks of the Charles River in Boston, Mass. - a site the President chose himself eight weeks before his death. This library will be more than simply 
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d68c4', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.848230
+[[START CONTENT]]
+ China Lake's contributions to Navy weaponry and tours of the Michel- son Laboratory Complex are planned. The Weapons Exhibit Center will be open all three days as the focal point for a walking tour of China Lake projects and programs from World War " to the 1990s. Adinission is free to the air show and the technical and historical displays. Wally Schirm, a former NASA astro- naut and a one-time test pilot at China Lake, is the featured speaker at a Friday evening reception to honor the military personnel, past and present, who served at China Lake. The reception is sponsored by the Itidgecrest Chamber of Commerce Mili- tary Affairs Committee. Admission is SI0 per person. Several former NOTS and NWC commanders are expected to attend. Also on Saturday, the "Salute to China Lakers - An Evening of Celebra- tion" gala dinner is planned for Hangar Three. Seating is limited and tickets are $25 per person. Wrapping-up the three days of cele- bration is Sunday's China Laker Reunion and Picnic. Anyone who worked at Ch
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d88d9', 'fragment': '9'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.866258
+[[START CONTENT]]
+@uri=1074106
+@title=Record: National Security Action Memorandum 258 - John F. Kennedy. pdf.png; 
+@cdate=2024-07-27 23:52:37
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1074106
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1074106
+item_path=n823405x n1021057x n1021080x n1074042x n1074106x
+
+Record: National Security Action Memorandum 258 - John F. Kennedy. pdf.png; 
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '001063ba', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.870608
+[[START CONTENT]]
+@uri=1074105
+@title=File: National Security Action Memorandum 258 - John F. Kennedy. pdf.pdf  Page     1; 
+@cdate=2024-07-27 23:52:37
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1074105
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1074105
+item_path=n823405x n1021057x n1021080x n1074042x n1074104x n1074105x
+
+File: National Security Action Memorandum 258 - John F. Kennedy. pdf.pdf  Page     1; 
+OCR Text: 1/21/11 1:42 PM National Security Action Memorandum 258 - John F. Kennedy Presidential Library & Museum Page 1 of 1 http://www.jfklibrary.org/Asset-Viewer/KDpRULS3kEyvCS2x5v6MQQ.aspx National Security Action Memorandum 258 ABOUT IMAGE National Security Action Memorandum Number 258: Assignment of Highest National Priority to Prog. 437, August 6, 1963 Date: 08/06/1963 Creator: The Papers of John F. Kennedy, Presidential Papers, National Security Files, Meetings and Memoranda Series, National Security Action Memoranda, National Security Action Memorandum Number 258. 
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '001063b9', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

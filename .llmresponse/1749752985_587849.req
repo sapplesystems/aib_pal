@@ -1,0 +1,29 @@
+[[CHAT START]]
+{'id': 'chatcmpl-6547daae-2633-468f-9579-348daed0ce36', 'object': 'chat.completion', 'created': 1749753121, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': 'I\'m happy to help you with that!\n\nAs a text-based AI assistant, I don\'t have the capability to display visual maps. However, I can provide you with information and resources to help you find the maps you\'re looking for.\n\nHere are a few options:\n\n1. **Online Map Services**: You can use online map services like Google Maps, MapQuest, or OpenStreetMap (OSM) to find maps of various regions, cities, or countries. Simply type in the location you\'re interested in, and the service will provide you with a map and directions.\n2. **Government Websites**: Many government websites, such as those of national parks, cities, or countries, offer maps of their territories. You can search for the website of the relevant government agency and look for the "Maps" or "GIS" section.\n3. **Travel Guides**: Travel guides, such as Lonely Planet or Michelin, often include maps of the regions they cover. You can find these guides at your local library or purchase them online.\n4. **Specialized Map Websites**: If you\'re looking for a specific type of map, such as topographic maps, historical maps, or vintage maps, you can try searching for specialized map websites like the US Geological Survey (USGS) or the Library of Congress.\n\nRemember to always verify the accuracy and reliability of any map you find, especially if you\'re planning a trip or making important decisions based on the information.\n\nI hope this helps! If you have any specific questions or need further assistance, feel free to ask.'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 14, 'completion_tokens': 314, 'total_tokens': 328}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=0.841509
+[[START CONTENT]]
+pographical map of local area  in 7.5 min series done in 2014
+Creator: US dept. of the Interior  US Geological Survey
+Source: above
+Publisher: US Govt.
+Date: 2014
+Contributor: unknown
+Rights: the people
+Relation: various
+Format: Topo map 27 5/8 x 18 3/4
+Language: english
+Type: map
+Identifier: Omeka 1910
+Coverage: Nehalem Quadrangle
+OCR Text: NO IMAGE 
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000ce5e0', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

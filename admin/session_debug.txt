@@ -1,0 +1,1001 @@
+SESSION in API: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 5656a7e5056e06b5983d8c47bbb4ba8c
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                )
+
+        )
+
+)
+
+SESSION in archive page: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+)
+SESSION in API: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 6543bdb854ba92f7ba471d0d143b4f7b
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                )
+
+        )
+
+)
+
+SESSION in archive page: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 6543bdb854ba92f7ba471d0d143b4f7b
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                )
+
+        )
+
+)
+SESSION in API: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 2907aa59f42b2483ee0c9f6f977cdbd6
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                )
+
+        )
+
+)
+
+SESSION in archive page: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 2907aa59f42b2483ee0c9f6f977cdbd6
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                )
+
+        )
+
+)
+SESSION in API: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 2bb93834c713ce2880c2b64c53b4c81b
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                    [accept_security_questions] => 0
+                )
+
+        )
+
+)
+
+SESSION in archive page: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 2bb93834c713ce2880c2b64c53b4c81b
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                    [accept_security_questions] => 0
+                )
+
+        )
+
+)
+
+SESSION in archive page: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 2bb93834c713ce2880c2b64c53b4c81b
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                    [accept_security_questions] => 0
+                )
+
+        )
+
+)
+
+SESSION in archive page: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 2bb93834c713ce2880c2b64c53b4c81b
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                    [accept_security_questions] => 0
+                )
+
+        )
+
+)
+SESSION in API: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => fc3b2c783b9d0938b5e48f583fa2751d
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                    [accept_security_questions] => 0
+                )
+
+        )
+
+)
+
+SESSION in archive page: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => fc3b2c783b9d0938b5e48f583fa2751d
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                    [accept_security_questions] => 0
+                )
+
+        )
+
+)
+
+SESSION in archive page: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => fc3b2c783b9d0938b5e48f583fa2751d
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                    [accept_security_questions] => 0
+                )
+
+        )
+
+)
+SESSION in API: 37idn0jc3cpa9kelrpsd04c6m7
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 4e7badeb1a1f9a1e48850e87a82e4e2d
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                    [accept_security_questions] => 0
+                )
+
+        )
+
+)
+
+SESSION in archive page: 37idn0jc3cpa9kelrpsd04c6m7
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 4e7badeb1a1f9a1e48850e87a82e4e2d
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                    [accept_security_questions] => 0
+                )
+
+        )
+
+)
+
+SESSION in archive page: 37idn0jc3cpa9kelrpsd04c6m7
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 4e7badeb1a1f9a1e48850e87a82e4e2d
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                    [accept_security_questions] => 0
+                )
+
+        )
+
+)
+SESSION in API: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 1a28f75e0a8b5efd598a1163acfe04fe
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                    [accept_security_questions] => 0
+                )
+
+        )
+
+)
+
+SESSION in archive page: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 1a28f75e0a8b5efd598a1163acfe04fe
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                    [accept_security_questions] => 0
+                )
+
+        )
+
+)
+
+SESSION in archive page: 2a9r79om3k102uoqedj7jmlesi
+Array
+(
+    [aib] => Array
+        (
+            [session_key] => 1a28f75e0a8b5efd598a1163acfe04fe
+            [user_data] => Array
+                (
+                    [user_id] => 1
+                    [user_login] => root
+                    [user_title] =>      
+                    [user_primary_group] => 1
+                    [user_top_folder] => 1
+                    [user_type] => R
+                    [user_owner] => NULL
+                    [user_default_rights] => 
+                    [properties] => Array
+                        (
+                            [accept_term_service] => %7B%22terms_and_conditions_1%22%3A%222020-02-21+10%3A43%3A56%22%7D
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [user_prop] => Array
+                        (
+                            [accept_term_service] => {"terms_and_conditions_1":"2020-02-21 10:43:56"}
+                            [answer_1199447] => sheffy
+                            [answer_1199449] => India
+                            [email_verify] => yes
+                            [occasional_update] => Y
+                            [question_id_1199447] => 1199447
+                            [question_id_1199449] => 1199449
+                            [security_question_answers] => 1
+                            [status] => a
+                            [term_service] => Y
+                            [timestamp] => 1582310539
+                        )
+
+                    [item_title] => 
+                    [terms_condition] => Y
+                    [terms_and_conditions_up_to_date] => 0
+                    [accept_security_questions] => 0
+                )
+
+        )
+
+)

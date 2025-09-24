@@ -1,0 +1,173 @@
+[[CHAT START]]
+{'id': 'chatcmpl-2ae9e219-5221-4519-bcbe-119ff138d5b9', 'object': 'chat.completion', 'created': 1750633165, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': 'Yes, according to the provided documents, President John F. Kennedy visited China Lake on June 7, 1963.'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 2299, 'completion_tokens': 25, 'total_tokens': 2324}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=0.595077
+[[START CONTENT]]
+@uri=1084939
+@title=File: KennedyVisitsWithPilots.jpg; 
+@cdate=2024-08-05 00:41:48
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1084939
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1084939
+item_path=n823405x n1021057x n1084913x n1084915x n1084938x n1084939x
+
+File: KennedyVisitsWithPilots.jpg; 
+OCR Text: Hi    \i iv   n    m SNNMMV    \l. NX   I II   !    HIM   President John F. Kennedy greets pilots at the Naval Air Facility during his 8 June 1963 visit to China Lake. Behind him are California Governor Edmund G. Brown and Capt. 7 US. Navy photo, courtesy US. Naval Museum of Annamth and Technology 
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '00108e0b', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.653895
+[[START CONTENT]]
+ve years ago today, November 25,1963. was a national day of mourning for the 35th Presi- dent of the Uniled States and China Lakers. like millions ofother Ameri- cans, bowed theirheads in sorrowand in memory of their fallen leader. During his brief visit here, Presi- delll Kennedy was escorted by Capt. Charles Blerunan Jr., NOTS Com- mander, and Dr.WiDiam B. McLean. HarS technical director. During the several bours spent on board NOTS, the President witnessed an aw=me demonstra- tion of the U.S. Navy's carrier auack aircraft against ground targets on the Station ranges. Nine targets were attacked by a variety of Navy aircraft using modem air-IO-ground weapons including the Bullpup missileand the Zuni five-inch rocIceL KENNEDY AT MICHELSON LAB-John F. Kennedy visited the Naval Weapons Center 25 years ago. He Is the only president to have visited China Lake during his time In office. RE:S'7"4URP- __ #1 IN SERVICE - QUALITY FOOD & FRIENDLY ATMOSPHERE GUARANTEED 20 MINUTE LUNCHES or It's Y:! Price!! Dally Special
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d7e12', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.829116
+[[START CONTENT]]
+@uri=1084957
+@title=File: KennedyDisembarksFromAirForce1.jpg; 
+@cdate=2024-08-05 00:41:49
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1084957
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1084957
+item_path=n823405x n1021057x n1084913x n1084915x n1084956x n1084957x
+
+File: KennedyDisembarksFromAirForce1.jpg; 
+OCR Text: President John F. Kennedy disembarks from Air Force 1 at Armitage Field, China Lake, June 7, 1963. US. Navy photo, LHL L085674. Maturango Museum, Howard Auld collection   
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '00108e1d', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.835839
+[[START CONTENT]]
+@uri=1084963
+@title=File: KennedyDisembarksFromAirForce1+(1).jpg; 
+@cdate=2024-08-05 00:41:49
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1084963
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1084963
+item_path=n823405x n1021057x n1084913x n1084915x n1084962x n1084963x
+
+File: KennedyDisembarksFromAirForce1+(1).jpg; 
+OCR Text: President John F. Kennedy disembarks from Air Force 1 at Armitage Field, China Lake, June 7, 1963. US. Navy photo, LHL L085674. Maturango Museum, Howard Auld collection   
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '00108e23', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.838945
+[[START CONTENT]]
+@uri=888842
+@title=File: CLComHist1963+copy.PDF  Page    24; 
+@cdate=2024-03-04 00:18:43
+@archive_group_title=China Lake Museum
+@archive_title=Major Programs and Facilities
+@item_id=888842
+archive_group_title=China Lake Museum
+archive_title=Major Programs and Facilities
+item_id=888842
+item_path=n823405x n1021054x n1021071x n1021075x n880019x n888842x
+
+File: CLComHist1963+copy.PDF  Page    24; 
+OCR Text: OPNAV REPORT 5750-5 CHAPTER V STATION RECOGNITION, SPECIAL EVENTS, HONORS, VISITORS PRESIDENTIAL VISIT Perhaps the most important single incident in the Station's 20' year history was the visit of President John F. Kennedy on 7 June. In a comprehensive four-hour presentation, NOTS provided a vivid demonstration of the Station's eminence as a leading Navy in-house laboratory. The nationwide publicity and demonstrations for the Nation's Chief Executive provided effective evidence of the role of the Navy's in-house R&D laboratories. This presentation was recorded on documentary films which have had wide distribut
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d900a', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.843265
+[[START CONTENT]]
+ocated at China Lake.  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d732e', 'fragment': '19'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.843677
+[[START CONTENT]]
+ high officials as President Lyndon Johnson and Russian Premier Alexi Kosygin. Major Plasterer was accompanied to China Lake by his wife, Lesley.  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d71f9', 'fragment': '37'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.863075
+[[START CONTENT]]
+@uri=1074106
+@title=Record: National Security Action Memorandum 258 - John F. Kennedy. pdf.png; 
+@cdate=2024-07-27 23:52:37
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1074106
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1074106
+item_path=n823405x n1021057x n1021080x n1074042x n1074106x
+
+Record: National Security Action Memorandum 258 - John F. Kennedy. pdf.png; 
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '001063ba', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.867504
+[[START CONTENT]]
+f the China Lake Community Council this week appealed to President John F. Kennedy for support at the highest level of the national government for the proposed transfer oC a tract of 106 acres oC land from the U. S. Naval Ordnance Test Station to Kern County. It is hoped by the Naval Sta   tion civic group that the land in question, located between China Lake Blvd. and Desert Park (the Wherry housing project), can be used for needed local govern- mental services and public rec- reation. I The letter from Dr. G. W. r.eonard, president of the China Lake Community Council, to President Kennedy was approv   ed for sending at Tuesday night's meeting of the Council, and read, in part, as follows: The issue in point is a proposed transfer of land presently a part of the United States Naval Ordnance Test Sta   tion to the County of Kern, to enable the county to provide residents of this area with ur    , gently needed local gove~nment   al services (public recreation). "In particular, the proposed land transCer will 
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d6536', 'fragment': '21'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.871317
+[[START CONTENT]]
+@uri=1074105
+@title=File: National Security Action Memorandum 258 - John F. Kennedy. pdf.pdf  Page     1; 
+@cdate=2024-07-27 23:52:37
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1074105
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1074105
+item_path=n823405x n1021057x n1021080x n1074042x n1074104x n1074105x
+
+File: National Security Action Memorandum 258 - John F. Kennedy. pdf.pdf  Page     1; 
+OCR Text: 1/21/11 1:42 PM National Security Action Memorandum 258 - John F. Kennedy Presidential Library & Museum Page 1 of 1 http://www.jfklibrary.org/Asset-Viewer/KDpRULS3kEyvCS2x5v6MQQ.aspx National Security Action Memorandum 258 ABOUT IMAGE National Security Action Memorandum Number 258: Assignment of Highest National Priority to Prog. 437, August 6, 1963 Date: 08/06/1963 Creator: The Papers of John F. Kennedy, Presidential Papers, National Security Files, Meetings and Memoranda Series, National Security Action Memoranda, National Security Action Memorandum Number 258. 
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '001063b9', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

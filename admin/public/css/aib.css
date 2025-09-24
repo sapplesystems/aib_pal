@@ -1,0 +1,86 @@
+#createForms .col-md-2{width:13%;}
+#createForms .col-md-3{width:22%;}
+#createForms .col-md-4{width:20%;}
+
+.createForms .col-md-2{width:13%;}
+.createForms .col-md-3{width:22%;}
+.createForms .col-md-4{width:20%;}
+
+.paddLeftNone{padding-left:0px;}
+
+.checkboxStyle{margin-left:10px;}
+
+.checkboxStyle label{cursor:default;}
+
+.aib-tree-nav-div{background-color:transparent !important; border:0px !important; height:auto !important;}
+.aib-nav-tree-li li{font-family:lato !important;}
+.aib-nav-tree-li{font-family:lato !important;}
+.aib-formfield-def-div{background-color:transparent !important; border:0px !important; font-size:16px;}
+.aib-formfield-def-div .aib-add-field-button{background:#15345a; border:1px solid #0e223c; padding:5px 10px; color:#fff; width:100%;}
+.aib-formfield-def-div .aib-remove-field-button{background:#d51919; border:1px solid #bd1616; padding:5px 10px; color:#fff; width:100%;}
+button[disabled], html input[disabled]{background:#ccc !important; color:#333333 !important; border:1px solid #999 !important;}
+#aib_start_upload_button{background:#15345a; border:1px solid #0e223c; padding:5px 10px; color:#fff;}
+table.aib-field-list-table tr td{padding:5px;}
+.aib-field-list-title-cell b{font-family:oswald; font-weight:normal; font-size:15px; color:#15345a;background: #fbd42f; display:block; padding:5px 10px;}
+.aib-center-table{font-family:lato !important;}
+.aib-center-table .aib-input-title-box{font-family:lato !important;}
+.aib-form-section-title-cell{font-family:oswald !important;color: #15345a !important;font-weight: normal !important;background: #fbd42f;padding: 5px 10px;font-size:15px !important;}
+.aib-form-section-cell{background-color:#fbd42f !important;}
+.aib-input-field-box{font-family:lato !important; border:0px !important;}
+.aib-center-table .aib-text-input{border-radius: 0px !important;border: 1px solid #ccc !important; padding:3px !important;}
+.aib-center-table .aib-dropdown{border: 1px solid #ccc !important;padding:3px !important; height:28px; line-height:28px;}
+.aib-center-table .aib-template-select-class{border: 1px solid #ccc !important;padding:3px !important; height:28px; line-height:28px;}
+#aib_select_form_button{background: #15345a;border: 1px solid #0e223c;padding: 4px 10px;border-radius: 0px;color: #fff; font-size:13px;}
+.aib-center-table .aib-button-table{width:100%;}
+.aib-center-table .aib-button-field-box{text-align:center;}
+#aib_submit_button{background:#15345a; border:1px solid #0e223c; padding:5px 10px; border-radius:0px; color:#fff;}
+#aib_reset_button{background:ededed; border:1px solid #ccc; padding:5px 10px; border-radius:0px;}
+.aib-center-table .aib-input-table{width:100%;}
+.progress{background-color:transparent;}
+.parent-folder-info-link-cell a{background: #15345a;border: 1px solid #0e223c;padding: 5px 10px;border-radius: 0px;color: #fff;}
+.aib-parent-folder-title-span{font-family:oswald;}
+#title-box-itemrecord_upload{margin-top:10px;}
+#fileupload{float:left;}
+#input-box-itemrecord_upload{margin-top:15px;}
+#input-box-itemrecord_fileattach{margin-top:10px;}
+#input-box-itemrecord_custom_template{margin-top:10px;}
+#title-box-itemrecord_custom_template{margin-top:10px;}
+#title-box-itemrecord_title{margin-top:10px;}
+#input-box-itemrecord_title{margin-top:10px;}
+#itemrecord-user-def-fields input[type="text"]{border-radius: 0px !important;border: 1px solid #ccc !important; padding:3px !important; margin-bottom:5px; margin-left:5px; width:77.4%;}
+#itemrecord-user-def-fields textarea{border-radius: 0px !important;border: 1px solid #ccc !important; padding:3px !important; margin-left:5px; width:77.4%;}
+#itemrecord-user-def-fields .aib-input-title-divider-cell{width:5px; display:none;}
+.aib-user-field-area-table{background:none !important;}
+#itemrecord-user-def-fields .aib-user-def-field-title-cell{font-family:lato !important;}
+.aib-help-link{background-color:#fbd42f !important; height:13px !important; width:13px !important;}
+
+/*.manageInfo .row{background:#fff;}*/
+.bgNone{background:none !important;}
+.manageInfo h3{font-size: 24px;font-family: oswald;background: #fbd42f;padding: 10px; margin-bottom:5px; margin-top:5px;}
+.hedingSub h3{border-bottom:1px solid #ccc; font-family:lato; font-size:18px; font-weight:bold;}
+.padd5{padding:5px 0 5px 0;}
+.paddLeft15{padding-left:15px;}
+	.btn-success {
+    background: #15345a !important;
+    border: 1px solid #00295c !important;
+	padding:0px !important;
+	color:#fff !important;
+	height:35px !important;
+	line-height:30px !important;
+	border-radius:5px;
+}
+#regOtherUpdate{margin-top:15px !important;}
+
+.manageInfo .marginTop20{margin-top:5px !important;}
+table.aib-page-table>tbody>tr:first-child{display:none;}
+ul.aib-nav-tree-ul{background:#fbd42f; padding:10px 10px 10px 30px;}
+ul.aib-nav-tree-ul li ul li ul li ul li input[checked]{}
+#aib-selected-tree-items ul{list-style:none; padding:0px;}
+#aib-selected-tree-items ul li{background: #15345a;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding:10px;
+    border-radius: 0px;
+    color: #fff; width:90%; margin-left:10px;}
+	
+
+

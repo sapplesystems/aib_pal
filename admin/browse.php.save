@@ -1,0 +1,1769 @@
+<?php
+//
+// login.php
+//
+
+// FUNCTIONAL INCLUDES
+
+include('config/aib.php');
+include("include/folder_tree.php");
+include("include/fields.php");
+include('include/aib_util.php');
+
+define('AIB_RECORD_COLUMN_COUNT','4');
+define('AIB_RECORD_COLLECTION_ICON','/images/collection.png');
+define('AIB_RECORD_LINK_ICON','/images/link.png');
+define('AIB_SCROLLABLE_IMAGE_WIDTH','150');
+define('AIB_SCROLL_LEFT_BUTTON_IMAGE','/images/monoicons/circleleft32.png');
+define('AIB_SCROLL_RIGHT_BUTTON_IMAGE','/images/monoicons/circleright32.png');
+
+function show_error_page($Title,$Message)
+{
+	print("<head><title>ERROR: $Title</title></head>");
+	print("<body><h1>$Title</h1><br>");
+	print("<div>$Message</div>");
+	print("</body>");
+	exit(0);
+}
+
+// #########
+// MAIN CODE
+// #########
+
+	// Check session.  If none present, create one.
+
+	$ErrorMessage = false;
+	session_start();
+	$CheckResult = aib_check_session();
+	$UserID = -1;
+	$UserRecord = array("user_id" => -1, "user_title" => "Guest", "user_login" => "_public", "user_type" => AIB_USER_TYPE_PUBLIC);
+	$UserType = AIB_USER_TYPE_PUBLIC;
+	if ($CheckResult[0] == "OK")
+	{
+		// If there is a user, get the profile.  Otherwise, "_public" is the profile.
+
+		$SessionInfo = $CheckResult[1];
+		if (isset($SessionInfo['login']) != false)
+		{
+			$UserLogin = $SessionInfo["login"];
+			if ($UserLogin == "_public")
+			{
+				$UserID = -1;
+				$UserType = AIB_USER_TYPE_PUBLIC;
+			}
+			else
+			{
+				$UserInfo = aib_get_user_info($SessionInfo["login"]);
+				if ($UserInfo[0] == "OK")
+				{
+					$UserID = $UserInfo[1]["user_id"];
+					$UserType = $UserInfo[1]["user_type"];
+					$UserLogin = $UserInfo[1]["user_login"];
+				}
+			}
+		}
+	}
+	else
+	{
+		aib_init_session("_public");
+	}
+
+	$FormData = aib_get_form_data();
+
+	// Get the current parent folder.  If there isn't one, start at the archive groups level.
+
+	if (aib_open_db() == false)
+	{
+		show_error_page("SYSTEM ERROR","Cannot connect to database");
+	}
+
+	$ChildOfRecord = false;
+	$ParentRecord = false;
+	$ParentFolderType = false;
+	$CurrentParent = aib_get_with_default($FormData,"parent",false);
+	if ($CurrentParent === false)
+	{
+		$CurrentParent = ftree_get_object_by_path($GLOBALS["aib_db"],FTREE_OBJECT_TYPE_FOLDER.AIB_ARCHIVE_GROUP_ROOT);
+		$ParentRecord = ftree_get_item($GLOBALS["aib_db"],$CurrentParent);
+		$ParentFolderType = false;
+	}
+	else
+	{
+		// Get the current parent folder record
+
+		$ParentRecord = ftree_get_item($GLOBALS["aib_db"],$CurrentParent);
+		if ($ParentRecord == false)
+		{
+			aib_close_db();
+			show_error_page("SYSTEM ERROR","Cannot retrieve item information");
+		}
+
+		// Get parent folder type
+
+		$RootFolder = ftree_get_object_by_path($GLOBALS["aib_db"],FTREE_OBJECT_TYPE_FOLDER.AIB_ARCHIVE_GROUP_ROOT);
+		if ($CurrentParent != $RootFolder)
+		{
+			$ParentFolderType = ftree_get_property($GLOBALS["aib_db"],$CurrentParent,AIB_FOLDER_PROPERTY_FOLDER_TYPE);
+			if ($ParentFolderType == false)
+			{
+				$ParentFolderType = AIB_ITEM_TYPE_ITEM;
+			}
+		}
+
+	}
+
+	// If an item, then change to a record and set flag
+
+	if ($ParentFolderType == AIB_ITEM_TYPE_ITEM)
+	{
+		$ParentOfParent = $ParentRecord["item_parent"];
+		$ChildOfRecord = $CurrentParent;
+		$ParentFolderType = AIB_ITEM_TYPE_RECORD;
+		$CurrentParent = $ParentOfParent;
+		$FormData["parent"] = $CurrentParent;
+		$ParentRecord = ftree_get_item($GLOBALS["aib_db"],$CurrentParent);
+	}
+
+	// Set up display data array and set page title based on the user type
+
+	$DisplayData = array("popup_list" => array());
+	// Include menu data
+
+	switch($UserRecord["user_type"])
+	{
+		case FTREE_USER_TYPE_ROOT:
+			include("template/top_menu_data.php");
+			include("template/top_menu_admin_data.php");
+			$DisplayData["page_title"] = "SUPER USER: BROWSE ARCHIVES";
+			break;
+
+		case FTREE_USER_TYPE_ADMIN:
+			include("template/top_menu_data.php");
+			$DisplayData["page_title"] = "ADMINISTRATOR: BROWSE ARCHIVES";
+			break;
+
+		case FTREE_USER_TYPE_SUBADMIN:
+			include("template/top_menu_subadmin_data.php");
+			$DisplayData["page_title"] = urldecode($UserRecord["user_title"])." (".$UserRecord["user_login"]."): BROWSE ARCHIVES";
+			break;
+
+		default:
+			include("template/top_public_menu.php");
+			$DisplayData["page_title"] = "BROWSE ARCHIVES";
+			if ($CurrentParent !== false)
+			{
+				$SearchURL = $DisplayData["menu"]["Menu"]["Search Archives"]["link"];
+				$SearchURL .= "?parent=$CurrentParent";
+				$DisplayData["menu"]["Menu"]["Search Archives"]["link"] = $SearchURL;
+			}
+
+			break;
+	}
+
+	// Set up initialization JavaScript based on the opcode
+
+	$DisplayData["head_script"] = "";
+
+	// Include the page header
+
+include('template/common_header.php');
+
+	// Set up footer script information
+
+	$FooterScriptLines = array();
+	
+	// Set up output buffer.  Start with a table row.
+
+	$OutBuffer = array("<tr><td colspan='99'>");
+
+	// Get list of child items if needed
+
+	$ItemRecordParent = false;
+	$ChildItemList = array();
+	$ChildItemCount = 0;
+	$LowBannerScrollValue = 0;
+	$HighBannerScrollValue = 0;
+	if ($ParentFolderType != AIB_ITEM_TYPE_RECORD && $ParentFolderType != AIB_ITEM_TYPE_ITEM && $CurrentParent >= 0)
+	{
+		$TempItemList = ftree_list_child_objects($GLOBALS["aib_db"],$CurrentParent,false,false,false,false,true);
+		$ChildItemList = array();
+		foreach($TempItemList as $TempRecord)
+		{
+			if ($TempRecord["item_type"] == FTREE_OBJECT_TYPE_FOLDER || $TempRecord["item_type"] == FTREE_OBJECT_TYPE_LINK)
+			{
+				$ChildItemList[] = $TempRecord;
+			}
+		}
+
+		$ChildItemCount = count($ChildItemList);
+	}
+	else
+	{
+		if ($ParentFolderType == AIB_ITEM_TYPE_RECORD)
+		{
+			$ChildItemList = ftree_list_child_objects($GLOBALS["aib_db"],$CurrentParent,false,false,false,false,true);
+			$ChildItemCount = count($ChildItemList);
+		}
+	}
+
+	if ($CurrentParent > 0)
+	{
+		$ArchiveInfo = aib_get_archive_and_archive_group($GLOBALS["aib_db"],$CurrentParent);
+		if (isset($ArchiveInfo["archive"]) != false && isset($ArchiveInfo["archive_group"]) != false)
+		{
+			$BrowseArchive = $ArchiveInfo["archive"];
+			$BrowseArchiveGroup = $ArchiveInfo["archive_group"];
+			if ($BrowseArchive != false)
+			{
+				$BrowseArchiveTitle = urldecode($BrowseArchive["item_title"]);
+			}
+
+			if ($BrowseArchiveGroup != false)
+			{
+				$BrowseArchiveGroupTitle = urldecode($BrowseArchiveGroup["item_title"]);
+			}
+		}
+	}
+	else
+	{
+		$BrowseArchive = false;
+		$BrowseArchiveGroup = false;
+		$BrowseArchiveTitle = "";
+		$BrowseArchiveGroupTitle = "";
+	}
+
+	// Based on the user and the current folder, show items in folder
+
+	$PreloadID = false;
+	$ShowItemID = false;
+	$DisplayMode = aib_get_with_default($FormData,"display_mode","rec");
+	$CurrentURLList = array();
+	foreach($FormData as $FieldName => $FieldValue)
+	{
+		if ($FieldName == 'display_mode')
+		{
+			continue;
+		}
+
+		$CurrentURLList[] = $FieldName."=".$FieldValue;
+	}
+
+	// If this folder has a parent, list it
+
+	$TempRecord = ftree_get_item($GLOBALS["aib_db"],$ParentRecord["item_parent"]);
+	$UpLink = "/browse.php?parent=".$ParentRecord["item_parent"];
+	$TempType = ftree_get_property($GLOBALS["aib_db"],$ParentRecord["item_parent"],AIB_FOLDER_PROPERTY_FOLDER_TYPE);
+	$RootFolder = ftree_get_object_by_path($GLOBALS["aib_db"],FTREE_OBJECT_TYPE_FOLDER.AIB_ARCHIVE_GROUP_ROOT);
+	switch($TempType)
+	{
+		case AIB_ITEM_TYPE_ARCHIVE_GROUP:
+			$UpTitle = "Go Back Up To Organization: <span class='uplink-item-title'>".urldecode($TempRecord["item_title"])."</span>";
+			break;
+
+		case AIB_ITEM_TYPE_ARCHIVE:
+			$UpTitle = "Go Back Up To Archive: <span class='uplink-item-title'>".urldecode($TempRecord["item_title"])."</span>";
+			break;
+
+		case AIB_ITEM_TYPE_COLLECTION:
+			$UpTitle = "Go Back Up To Collection: <span class='uplink-item-title'>".urldecode($TempRecord["item_title"])."</span>";
+			break;
+
+		case AIB_ITEM_TYPE_SUBGROUP:
+			$UpTitle = "Go Back Up To Sub-Group: <span class='uplink-item-title'>".urldecode($TempRecord["item_title"])."</span>";
+			break;
+
+		case AIB_ITEM_TYPE_RECORD:
+			$UpTitle = "Go Back Up To Record: <span class='uplink-item-title'>".urldecode($TempRecord["item_title"])."</span>";
+			break;
+
+		default:
+			if ($ParentRecord["item_parent"] == $RootFolder)
+			{
+				$UpTitle = "Go Back Up To: <span class='uplink-item-title'>ORGANIZATIONS</span>";
+			}
+			else
+			{
+				$UpLink = false;
+			}
+
+			break;
+	}
+
+	$CurrentURL = join("&",$CurrentURLList);
+	$RecURL = "/browse.php?$CurrentURL&display_mode=rec";
+	$SubURL = "/browse.php?$CurrentURL&display_mode=sub";
+	$OutBuffer[] = "<div class='browse-content-div'>";
+	if ($UpLink != false)
+	{
+		$OutBuffer[] = "<div class='browse-uplink-div'><a href='$UpLink' class='browse-uplink-link'>$UpTitle</a></div>";
+	}
+
+	switch($ParentFolderType)
+	{
+		// List of archive groups
+
+		case false:
+			$OutBuffer[] = "<table class='browse-title-table'>";
+			$OutBuffer[] = "<tr class='browse-title-row'>";
+			$OutBuffer[] = "<td class='browse-title-cell'>";
+			$OutBuffer[] = "Organizations";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "</tr>";
+			$OutBuffer[] = "</table>";
+			$OutBuffer[] = "<br>";
+			$OutBuffer[] = "<table class='browse-archive-groups-collection-table'>";
+			foreach($ChildItemList as $ChildRecord)
+			{
+				$ChildID = $ChildRecord["item_id"];
+				$ChildTitle = $ChildRecord["item_title"];
+				$ChildItemType = ftree_get_property($GLOBALS["aib_db"],$ChildID,AIB_FOLDER_PROPERTY_FOLDER_TYPE);
+				if ($ChildItemType != AIB_ITEM_TYPE_ARCHIVE_GROUP)
+				{
+					continue;
+				}
+
+				// Row consists of title which is a link to the child entry
+
+				$OutBuffer[] = "<tr class='browse-archive-group-row'>";
+
+				// Show title
+
+				$OutBuffer[] = "<td class='browse-archive-group-title-cell'>";
+				$OutBuffer[] = "<a href='/browse.php?parent=$ChildID' class='aib-browse-archive-group-link'>$ChildTitle</a>";
+				$OutBuffer[] = "</td>";
+
+				// Show logo, if any
+
+				$OutBuffer[] = "<td class='browse-archive-group-logo-cell'>";
+				$ChildItemIcon = ftree_get_property($GLOBALS["aib_db"],$ChildID,AIB_FOLDER_PROPERTY_FOLDER_ICON);
+				if ($ChildItem != false)
+				{
+					$OutBuffer[] = "<a href='/browse.php?parent=$ChildID'><img class='browse-archive-group-logo-image' src='$ChildItemIcon'></a>";
+				}
+
+				$OutBuffer[] = "</td>";
+				$OutBuffer[] = "</tr>";
+
+				// Separator row if needed
+
+				if ($ChildItemCount > 1)
+				{
+					$OutBuffer[] = "<tr class='browse-archive-group-row-separator'>";
+					$OutBuffer[] = "<td colspan='99' class='browse-archive-group-row-separator-cell'> </td>";
+					$OutBuffer[] = "</td><tr>";
+				}
+			}
+
+			$OutBuffer[] = "</table>";
+
+			// Create right-hand navigation div and populate.  First, create template for display.
+
+			$IndicatorEntryTemplate = "<a class='aib-loc-path-link' href='/browse.php?&parent=[[ITEMID]]'>[[TITLE]]</a>";
+
+			// Set up display options
+
+			$IndicatorOptions = array("entry_template" => $IndicatorEntryTemplate, "ul_template" => "<ul class='aib-loc-indicator-list'>");
+			$IndicatorOptions["pad_cell_template"] = "<td width='5'></td>";
+			$IndicatorOptions["entry_cell_template"] = "<td colspan='99'>";
+			$IndicatorOptions["symbol_cell_template"] = "<td style='width:0.5em; padding:0;'><span style='font-size:1.5em; color:#a0a0a0;'>&#9492;</span></td>";
+			$IndicatorOptions["table_template"] = "<table width='100%' cellpadding='0' cellspacing='0'>";
+			$IndicatorOptions["archive_groups_title"] = "Organizations";
+
+			// Get ID path for current parent
+
+			$IDPathList = ftree_get_item_id_path($GLOBALS["aib_db"],$CurrentParent);
+
+			// Generate nav display on right
+
+			$RightColContentLines = array();
+			$RightColContentLines[] = "<div class='aib-loc-indicator-title-div'>";
+			$RightColContentLines[] = "<span class='aib-loc-indicator-title-span'>Your Current Location</span>";
+			$RightColContentLines[] = "</div>";
+			$RightColContentLines[] = "<div class='aib-loc-indicator-div'>";
+			$RightColContentLines[] = aib_generate_loc_indicator_table($GLOBALS["aib_db"],$IndicatorOptions,$IDPathList);
+			$RightColContentLines[] = "<div class='clearitall'></div>";
+			$RightColContentLines[] = "</div>";
+			$DisplayData["right_col"] = join("\n",$RightColContentLines);
+			break;
+
+		// List of archives
+
+		case AIB_ITEM_TYPE_ARCHIVE_GROUP:
+			$OutBuffer[] = "<table class='browse-title-table'>";
+			$OutBuffer[] = "<tr class='browse-title-row'>";
+			$OutBuffer[] = "<td class='browse-title-cell'>";
+			$OutBuffer[] = "Archives In \"".$ParentRecord["item_title"]."\"";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "</tr>";
+			$OutBuffer[] = "</table>";
+			$OutBuffer[] = "<br>";
+			$OutBuffer[] = "<table class='browse-archive-group-table'>";
+			foreach($ChildItemList as $ChildRecord)
+			{
+				$ChildID = $ChildRecord["item_id"];
+				$ChildTitle = urldecode($ChildRecord["item_title"]);
+				$ChildItemType = ftree_get_property($GLOBALS["aib_db"],$ChildID,AIB_FOLDER_PROPERTY_FOLDER_TYPE);
+				if ($ChildItemType != AIB_ITEM_TYPE_ARCHIVE)
+				{
+					continue;
+				}
+
+				// Row consists of title which is a link to the child entry
+
+//				$ArchiveCode = ftree_get_property($GLOBALS["aib_db"],$ChildID,AIB_FOLDER_PROPERTY_ARCHIVE_CODE);
+//				if ($ArchiveCode != false)
+//				{
+//					$ChildTitle .= " ($ArchiveCode)";
+//				}
+
+				$OutBuffer[] = "<tr class='browse-archive-row'>";
+
+				// Show title
+
+				$OutBuffer[] = "<td class='browse-archive-title-cell'>";
+				$OutBuffer[] = "<a href='/browse.php?parent=$ChildID' class='aib-browse-archive-link'>$ChildTitle</a>";
+				$OutBuffer[] = "</td>";
+
+				// Show logo, if any
+
+				$OutBuffer[] = "<td class='browse-archive-logo-cell'>";
+				$ChildItemIcon = ftree_get_property($GLOBALS["aib_db"],$ChildID,AIB_FOLDER_PROPERTY_FOLDER_ICON);
+				if ($ChildItemIcon != false)
+				{
+					$OutBuffer[] = "<a href='/browse.php?parent=$ChildID'><img class='browse-archive-logo-image' src='$ChildItemIcon'></a>";
+				}
+
+				$OutBuffer[] = "</td>";
+				$OutBuffer[] = "</tr>";
+
+				// Separator row if needed
+
+				if ($ChildItemCount > 1)
+				{
+					$OutBuffer[] = "<tr class='browse-archive-row-separator'>";
+					$OutBuffer[] = "<td colspan='99' class='browse-archive-row-separator-cell'> </td>";
+					$OutBuffer[] = "</td><tr>";
+				}
+			}
+
+			$OutBuffer[] = "</table>";
+
+			// Create right-hand navigation div and populate.  First, create template for display.
+
+			$IndicatorEntryTemplate = "<a class='aib-loc-path-link' href='/browse.php?&parent=[[ITEMID]]'>[[TITLE]]</a>";
+
+			// Set up display options
+
+			$IndicatorOptions = array("entry_template" => $IndicatorEntryTemplate, "ul_template" => "<ul class='aib-loc-indicator-list'>");
+			$IndicatorOptions["pad_cell_template"] = "<td width='5'></td>";
+			$IndicatorOptions["entry_cell_template"] = "<td colspan='99'>";
+			$IndicatorOptions["symbol_cell_template"] = "<td style='width:0.5em; padding:0;'><span style='font-size:1.5em; color:#a0a0a0;'>&#9492;</span></td>";
+			$IndicatorOptions["table_template"] = "<table width='100%' cellpadding='0' cellspacing='0'>";
+			$IndicatorOptions["archive_groups_title"] = "Organizations";
+
+			// Get ID path for current parent
+
+			$IDPathList = ftree_get_item_id_path($GLOBALS["aib_db"],$CurrentParent);
+
+			// Generate nav display on right
+
+			$RightColContentLines = array();
+			$RightColContentLines[] = "<div class='aib-loc-indicator-title-div'>";
+			$RightColContentLines[] = "<span class='aib-loc-indicator-title-span'>Your Current Location</span>";
+			$RightColContentLines[] = "</div>";
+			$RightColContentLines[] = "<div class='aib-loc-indicator-div'>";
+			$RightColContentLines[] = aib_generate_loc_indicator_table($GLOBALS["aib_db"],$IndicatorOptions,$IDPathList);
+			$RightColContentLines[] = "<div class='clearitall'></div>";
+			$RightColContentLines[] = "</div>";
+			$DisplayData["right_col"] = join("\n",$RightColContentLines);
+			break;
+
+		// List of collections in an archive
+
+		case AIB_ITEM_TYPE_ARCHIVE:
+			$ParentTitle = urldecode($ParentRecord["item_title"]);
+			$ArchiveCode = ftree_get_property($GLOBALS["aib_db"],$CurrentParent,AIB_FOLDER_PROPERTY_ARCHIVE_CODE);
+			if ($ArchiveCode != false)
+			{
+				$ParentTitle .= " ($ArchiveCode)";
+			}
+
+			$OutBuffer[] = "<table class='browse-title-table'>";
+			$OutBuffer[] = "<tr class='browse-title-row'>";
+			$OutBuffer[] = "<td class='browse-title-cell'>";
+			$OutBuffer[] = "$BrowseArchiveTitle";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "</tr>";
+			$OutBuffer[] = "</table>";
+			$OutBuffer[] = "<br>";
+			$OutBuffer[] = "<table class='browse-collection-table'>";
+			$RecordSectionTitle = false;
+			foreach($ChildItemList as $ChildRecord)
+			{
+				if ($RecordSectionTitle == false)
+				{
+					$OutBuffer[] = "<tr class='browse-record-title-row'>";
+					$OutBuffer[] = "<td class='browse-record-title-cell' colspan='99'>";
+					$OutBuffer[] = "<span class='browse-record-title-span'>Collections</span>";
+					$OutBuffer[] = "</td>";
+					$OutBuffer[] = "</tr>";
+					$RecordSectionTitle = true;
+				}
+
+				$ChildID = $ChildRecord["item_id"];
+				$ChildTitle = urldecode($ChildRecord["item_title"]);
+				$ChildItemType = ftree_get_property($GLOBALS["aib_db"],$ChildID,AIB_FOLDER_PROPERTY_FOLDER_TYPE);
+				if ($ChildItemType != AIB_ITEM_TYPE_COLLECTION)
+				{
+					continue;
+				}
+
+				// Row consists of title which is a link to the child entry
+
+				$OutBuffer[] = "<tr class='browse-collection-row'>";
+
+				// Show title
+
+				$OutBuffer[] = "<td class='browse-collection-title-cell'>";
+				$OutBuffer[] = "<a href='/browse.php?parent=$ChildID' class='aib-browse-collection-link'>$ChildTitle</a>";
+				$OutBuffer[] = "</td>";
+
+				// Show logo, if any
+
+				$OutBuffer[] = "<td class='browse-collection-logo-cell'>";
+				$ChildItemIcon = ftree_get_property($GLOBALS["aib_db"],$ChildID,AIB_FOLDER_PROPERTY_FOLDER_ICON);
+				if ($ChildItemIcon != false)
+				{
+					$OutBuffer[] = "<a href='/browse.php?parent=$ChildID'><img class='browse-collection-logo-image' src='$ChildItemIcon'></a>";
+				}
+
+				$OutBuffer[] = "</td>";
+				$OutBuffer[] = "</tr>";
+
+				// Separator row if needed
+
+				if ($ChildItemCount > 1)
+				{
+					$OutBuffer[] = "<tr class='browse-collection-row-separator'>";
+					$OutBuffer[] = "<td colspan='99' class='browse-collection-row-separator-cell'> </td>";
+					$OutBuffer[] = "</td><tr>";
+				}
+			}
+
+			$OutBuffer[] = "</table>";
+
+			// Create right-hand navigation div and populate.  First, create template for display.
+
+			$IndicatorEntryTemplate = "<a class='aib-loc-path-link' href='/browse.php?&parent=[[ITEMID]]'>[[TITLE]]</a>";
+
+			// Set up display options
+
+			$IndicatorOptions = array("entry_template" => $IndicatorEntryTemplate, "ul_template" => "<ul class='aib-loc-indicator-list'>");
+			$IndicatorOptions["pad_cell_template"] = "<td width='5'></td>";
+			$IndicatorOptions["entry_cell_template"] = "<td colspan='99'>";
+			$IndicatorOptions["symbol_cell_template"] = "<td style='width:0.5em; padding:0;'><span style='font-size:1.5em; color:#a0a0a0;'>&#9492;</span></td>";
+			$IndicatorOptions["table_template"] = "<table width='100%' cellpadding='0' cellspacing='0'>";
+			$IndicatorOptions["archive_groups_title"] = "Organizations";
+
+			// Get ID path for current parent
+
+			$IDPathList = ftree_get_item_id_path($GLOBALS["aib_db"],$CurrentParent);
+
+			// Generate nav display on right
+
+			$RightColContentLines = array();
+			$RightColContentLines[] = "<div class='aib-loc-indicator-title-div'>";
+			$RightColContentLines[] = "<span class='aib-loc-indicator-title-span'>Your Current Location</span>";
+			$RightColContentLines[] = "</div>";
+			$RightColContentLines[] = "<div class='aib-loc-indicator-div'>";
+			$RightColContentLines[] = aib_generate_loc_indicator_table($GLOBALS["aib_db"],$IndicatorOptions,$IDPathList);
+			$RightColContentLines[] = "<div class='clearitall'></div>";
+			$RightColContentLines[] = "</div>";
+			$DisplayData["right_col"] = join("\n",$RightColContentLines);
+			break;
+
+
+		// List of subgroups
+
+		case AIB_ITEM_TYPE_COLLECTION:
+			$OutBuffer[] = "<table class='browse-title-table'>";
+			$OutBuffer[] = "<tr class='browse-title-row'>";
+			$OutBuffer[] = "<td class='browse-title-cell'>";
+			$OutBuffer[] = "$BrowseArchiveTitle";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "</tr>";
+			$OutBuffer[] = "</table>";
+			$OutBuffer[] = "<br>";
+			$OutBuffer[] = "<table class='browse-subgroup-table'>";
+			$RecordSectionTitle = false;
+			foreach($ChildItemList as $ChildRecord)
+			{
+				if ($RecordSectionTitle == false)
+				{
+					$OutBuffer[] = "<tr class='browse-record-title-row'>";
+					$OutBuffer[] = "<td class='browse-record-title-cell' colspan='99'>";
+					$OutBuffer[] = "<span class='browse-record-title-span'>Sub-Groups</span>";
+					$OutBuffer[] = "</td>";
+					$OutBuffer[] = "</tr>";
+					$RecordSectionTitle = true;
+				}
+
+				$ChildID = $ChildRecord["item_id"];
+				$ChildTitle = urldecode($ChildRecord["item_title"]);
+				$ChildItemType = ftree_get_property($GLOBALS["aib_db"],$ChildID,AIB_FOLDER_PROPERTY_FOLDER_TYPE);
+				if ($ChildItemType != AIB_ITEM_TYPE_SUBGROUP)
+				{
+					continue;
+				}
+
+				// Row consists of title which is a link to the child entry
+
+				$OutBuffer[] = "<tr class='browse-subgroup-row'>";
+
+				// Show title
+
+				$OutBuffer[] = "<td class='browse-subgroup-title-cell'>";
+				$OutBuffer[] = "<a href='/browse.php?parent=$ChildID' class='aib-browse-subgroup-link'>$ChildTitle</a>";
+				$OutBuffer[] = "</td>";
+
+				// Show logo, if any
+
+				$OutBuffer[] = "<td class='browse-subgroup-logo-cell'>";
+				$ChildItemIcon = ftree_get_property($GLOBALS["aib_db"],$ChildID,AIB_FOLDER_PROPERTY_FOLDER_ICON);
+				if ($ChildItemIcon != false)
+				{
+					$OutBuffer[] = "<a href='/browse.php?parent=$ChildID'><img class='browse-subgroup-logo-image' src='$ChildItemIcon'></a>";
+				}
+
+				$OutBuffer[] = "</td>";
+				$OutBuffer[] = "</tr>";
+
+				// Separator row if needed
+
+				if ($ChildItemCount > 1)
+				{
+					$OutBuffer[] = "<tr class='browse-subgroup-row-separator'>";
+					$OutBuffer[] = "<td colspan='99' class='browse-subgroup-row-separator-cell'> </td>";
+					$OutBuffer[] = "</td><tr>";
+				}
+			}
+
+			$OutBuffer[] = "</table>";
+
+			// Create right-hand navigation div and populate.  First, create template for display.
+
+			$IndicatorEntryTemplate = "<a class='aib-loc-path-link' href='/browse.php?&parent=[[ITEMID]]'>[[TITLE]]</a>";
+
+			// Set up display options
+
+			$IndicatorOptions = array("entry_template" => $IndicatorEntryTemplate, "ul_template" => "<ul class='aib-loc-indicator-list'>");
+			$IndicatorOptions["pad_cell_template"] = "<td width='5'></td>";
+			$IndicatorOptions["entry_cell_template"] = "<td colspan='99'>";
+			$IndicatorOptions["symbol_cell_template"] = "<td style='width:0.5em; padding:0;'><span style='font-size:1.5em; color:#a0a0a0;'>&#9492;</span></td>";
+			$IndicatorOptions["table_template"] = "<table width='100%' cellpadding='0' cellspacing='0'>";
+			$IndicatorOptions["archive_groups_title"] = "Organizations";
+
+			// Get ID path for current parent
+
+			$IDPathList = ftree_get_item_id_path($GLOBALS["aib_db"],$CurrentParent);
+
+			// Generate nav display on right
+
+			$RightColContentLines = array();
+			$RightColContentLines[] = "<div class='aib-loc-indicator-title-div'>";
+			$RightColContentLines[] = "<span class='aib-loc-indicator-title-span'>Your Current Location</span>";
+			$RightColContentLines[] = "</div>";
+			$RightColContentLines[] = "<div class='aib-loc-indicator-div'>";
+			$RightColContentLines[] = aib_generate_loc_indicator_table($GLOBALS["aib_db"],$IndicatorOptions,$IDPathList);
+			$RightColContentLines[] = "<div class='clearitall'></div>";
+			$RightColContentLines[] = "</div>";
+			$DisplayData["right_col"] = join("\n",$RightColContentLines);
+			break;
+
+
+		// List of subgroups and/or records
+
+		case AIB_ITEM_TYPE_SUBGROUP:
+			$OutBuffer[] = "<table class='browse-title-table'>";
+			$OutBuffer[] = "<tr class='browse-title-row'>";
+			$OutBuffer[] = "<td class='browse-title-cell'>";
+			$OutBuffer[] = "$BrowseArchiveTitle";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "</tr>";
+			$OutBuffer[] = "</table>";
+			$OutBuffer[] = "<br>";
+			$DisplayMode = aib_get_with_default($FormData,"display_mode","rec");
+
+			$SubgroupSectionTitle = false;
+			$RecordSectionTitle = false;
+
+			// Count the number of items and subgroups.  If there are no items, change display mode to "sub".
+
+			$FileCount = 0;
+			$SubCount = 0;
+			$NewChildItemList = array();
+			foreach($ChildItemList as $ChildRecord)
+			{
+				$ChildID = $ChildRecord["item_id"];
+				$ChildItemType = ftree_get_property($GLOBALS["aib_db"],$ChildID,AIB_FOLDER_PROPERTY_FOLDER_TYPE);
+				if ($ChildItemType != AIB_ITEM_TYPE_SUBGROUP)
+				{
+					$FileCount++;
+				}
+				else
+				{
+					$SubCount++;
+				}
+
+				$NewRecord = $ChildRecord;
+				$NewRecord["_item_type"] = $ChildItemType;
+				$NewChildItemList[] = $NewRecord;
+			}
+
+			// Show subgroups
+
+			if ($DisplayMode == "rec")
+			{
+				if ($FileCount < 1)
+				{
+					$DisplayMode = "sub";
+				}
+			}
+
+			if ($DisplayMode == "sub")
+			{
+				if ($SubCount < 1)
+				{
+					$DisplayMode = "rec";
+				}
+			}
+
+			switch($DisplayMode)
+			{
+				case "sub":
+					$OutBuffer[] = "<table class='browse-subgroup-table'>";
+
+					// Show button if there are items to see as well as subgroups
+
+					if ($FileCount > 0)
+					{
+						$OutBuffer[] = "<tr class='browse-mode-button-row'>";
+						$OutBuffer[] = "<td class='browse-mode-button-cell' colspan='99'>";
+						$OutBuffer[] = "<button type='button' onclick=\"change_display_mode('rec',$CurrentParent);\" class='browse-mode-button'>Show $FileCount Records</button>";
+						$OutBuffer[] = "</td></tr>";
+					}
+
+					$RecordSectionTitle = false;
+					foreach($NewChildItemList as $ChildRecord)
+					{
+						if ($RecordSectionTitle == false)
+						{
+							$OutBuffer[] = "<tr class='browse-record-title-row'>";
+							$OutBuffer[] = "<td class='browse-record-title-cell' colspan='99'>";
+							$OutBuffer[] = "<span class='browse-record-title-span'>Sub-Groups</span>";
+							$OutBuffer[] = "</td>";
+							$OutBuffer[] = "</tr>";
+							$RecordSectionTitle = true;
+						}
+
+						$ChildID = $ChildRecord["item_id"];
+						$ChildTitle = urldecode($ChildRecord["item_title"]);
+						$ChildItemType = $ChildRecord["_item_type"];
+						if ($ChildItemType != AIB_ITEM_TYPE_SUBGROUP)
+						{
+							continue;
+						}
+
+						$OutBuffer[] = "<tr class='browse-subgroup-row'>";
+						$OutBuffer[] = "<td class='browse-subgroup-title-cell'>";
+						$OutBuffer[] = "<a href='/browse.php?parent=$ChildID' class='aib-browse-subgroup-link'>$ChildTitle</a>";
+						$OutBuffer[] = "</td>";
+
+						// Show logo, if any
+
+						$OutBuffer[] = "<td class='browse-subgroup-logo-cell'>";
+						$ChildItemIcon = ftree_get_property($GLOBALS["aib_db"],$ChildID,AIB_FOLDER_PROPERTY_FOLDER_ICON);
+						if ($ChildItemIcon != false)
+						{
+							$OutBuffer[] = "<a href='/browse.php?parent=$ChildID'><img class='browse-subgroup-logo-image' src='$ChildItemIcon'></a>";
+						}
+
+						$OutBuffer[] = "</td>";
+						$OutBuffer[] = "</tr>";
+
+						// Separator row if needed
+
+						if ($ChildItemCount > 1)
+						{
+							$OutBuffer[] = "<tr class='browse-subgroup-row-separator'>";
+							$OutBuffer[] = "<td colspan='99' class='browse-subgroup-row-separator-cell'> </td>";
+							$OutBuffer[] = "</td><tr>";
+						}
+					}
+
+					$OutBuffer[] = "</table>";
+					break;
+
+				case "rec":
+				default:
+					// Show records as a series of three-column rows
+
+					$OutBuffer[] = "<table class='browse-item-table'>";
+
+					// Show button if there are subgroups
+
+					if ($SubCount > 0)
+					{
+						$OutBuffer[] = "<tr class='browse-mode-button-row'>";
+						$OutBuffer[] = "<td class='browse-mode-button-cell' colspan='99'>";
+						$OutBuffer[] = "<button type='button' onclick=\"change_display_mode('sub',$CurrentParent);\" class='browse-mode-button'>Show $SubCount Sub-Groups</button>";
+						$OutBuffer[] = "</td></tr>";
+					}
+
+
+					// Show records and then subgroups
+
+					$ColumnNumber = 0;
+					$RecordSectionTitle = false;
+					foreach($NewChildItemList as $ChildRecord)
+					{
+						if ($RecordSectionTitle == false)
+						{
+							$OutBuffer[] = "<tr class='browse-record-title-row'>";
+							$OutBuffer[] = "<td class='browse-record-title-cell' colspan='99'>";
+							$OutBuffer[] = "<span class='browse-record-title-span'>Records</span>";
+							$OutBuffer[] = "</td>";
+							$OutBuffer[] = "</tr>";
+							$RecordSectionTitle = true;
+						}
+
+						$ChildID = $ChildRecord["item_id"];
+						$ChildTitle = urldecode($ChildRecord["item_title"]);
+						$ChildItemType = $ChildRecord["_item_type"];
+						if ($ChildItemType != AIB_ITEM_TYPE_RECORD)
+						{
+							continue;
+						}
+
+						if ($RecordSectionTitle == false)
+						{
+							$OutBuffer[] = "<tr class='browse-record-title-row'>";
+							$OutBuffer[] = "<td class='browse-record-title-cell' colspan='99'>";
+							$OutBuffer[] = "<span class='browse-record-title-span'>Records</span>";
+							$OutBuffer[] = "</td>";
+							$OutBuffer[] = "</tr>";
+							$RecordSectionTitle = true;
+						}
+
+						if ($ColumnNumber >= AIB_RECORD_COLUMN_COUNT)
+						{
+							$OutBuffer[] = "</tr>";
+							$OutBuffer[] = "<tr class='browse-record-row-separator'>";
+							$OutBuffer[] = "<td colspan='99' class='browse-record-row-separator-cell'> </td>";
+							$OutBuffer[] = "</td><tr>";
+							$ColumnNumber = 0;
+						}
+
+						if ($ColumnNumber == 0)
+						{
+							$OutBuffer[] = "<tr class='browse-record-row'>";
+						}
+
+						$OutBuffer[] = "<td class='browse-record-cell'>";
+						$OutBuffer[] = "<table class='browse-record-cell-table'>";
+						$OutBuffer[] = "<tr class='browse-record-cell-image-row'>";
+						$OutBuffer[] = "<td class='browse-record-cell-image-cell' colspan='99'>";
+						$LocalThumbID = aib_get_first_record_thumb($GLOBALS["aib_db"],$ChildID);
+						if ($LocalThumbID < 0 || $LocalThumbID === false)
+						{
+							$ThumbURL = "/images/no_image.png";
+						}
+						else
+						{
+							$ThumbURL = "/get_thumb.php?id=$LocalThumbID";
+						}
+
+						$OutBuffer[] = "<a class='aib-browse-record-thumb-link' href='/browse.php?parent=$ChildID'><img class='browse-record-thumb-image' src=\"$ThumbURL\"></a>";
+						$OutBuffer[] = "</td></tr>";
+						$OutBuffer[] = "<tr class='browse-record-cell-title-row'>";
+						$OutBuffer[] = "<td class='browse-record-cell-title-cell' colspan='99'>";
+						$OutBuffer[] = "<a href='/browse.php?parent=$ChildID' class='aib-browse-record-link'>$ChildTitle</a>";
+						$OutBuffer[] = "</td></tr>";
+
+						// Get count of children and count of links
+
+						$ChildCount = ftree_list_child_objects($GLOBALS["aib_db"],$ChildID,false,false,false,true,false);
+						$LinkCount = ftree_count_child_object_property($GLOBALS["aib_db"],$ChildID,false,false,false,AIB_ITEM_PROPERTY_LINK_URL);
+
+						// Show icon with child count underneath
+
+						$OutBuffer[] = "<tr class='browse-record-cell-icons-row'>";
+						$OutBuffer[] = "<td class='browse-record-cell-icon-cell'>";
+						$OutBuffer[] = "<img src='".AIB_RECORD_COLLECTION_ICON."' class='browse-record-cell-item-count-icon'><br>";
+						$OutBuffer[] = "<span class='browse-record-cell-item-count-text'>$ChildCount</span>";
+						$OutBuffer[] = "</td>";
+
+						// Show icon with link count underneath
+
+						$OutBuffer[] = "<td class='browse-record-cell-icon-cell'>";
+						$OutBuffer[] = "<img src='".AIB_RECORD_LINK_ICON."' class='browse-record-cell-link-count-icon'><br>";
+						$OutBuffer[] = "<span class='browse-record-cell-item-count-text'>$LinkCount</span>";
+						$OutBuffer[] = "</td>";
+
+
+						$OutBuffer[] = "</table>";
+						$OutBuffer[] = "</td>";
+						$ColumnNumber++;
+					}
+
+					if ($ColumnNumber >= AIB_RECORD_COLUMN_COUNT)
+					{
+						$OutBuffer[] = "</tr>";
+					}
+					else
+					{
+						while($ColumnNumber < AIB_RECORD_COLUMN_COUNT)
+						{
+							$OutBuffer[] = "<td class='browse-record-cell'>";
+							$OutBuffer[] = "<table class='browse-record-cell-table>";
+							$OutBuffer[] = "<tr class='browse-record-cell-image-row'>";
+							$OutBuffer[] = "<td class='browse-record-cell-image-cell'>";
+							$OutBuffer[] = "</td></tr>";
+							$OutBuffer[] = "<tr class='browse-record-cell-title-row'>";
+							$OutBuffer[] = "<td class='browse-record-cell-title-cell'>";
+							$OutBuffer[] = "</td></tr>";
+							$OutBuffer[] = "</table>";
+							$ColumnNumber++;
+						}
+
+						$OutBuffer[] = "</tr>";
+					}
+
+
+					$OutBuffer[] = "</table>";
+					break;
+			}
+
+			// Create right-hand navigation div and populate.  First, create template for display.
+
+			$IndicatorEntryTemplate = "<a class='aib-loc-path-link' href='/browse.php?&parent=[[ITEMID]]'>[[TITLE]]</a>";
+
+			// Set up display options
+
+			$IndicatorOptions = array("entry_template" => $IndicatorEntryTemplate, "ul_template" => "<ul class='aib-loc-indicator-list'>");
+			$IndicatorOptions["pad_cell_template"] = "<td width='5'></td>";
+			$IndicatorOptions["entry_cell_template"] = "<td colspan='99'>";
+			$IndicatorOptions["symbol_cell_template"] = "<td style='width:0.5em; padding:0;'><span style='font-size:1.5em; color:#a0a0a0;'>&#9492;</span></td>";
+			$IndicatorOptions["table_template"] = "<table width='100%' cellpadding='0' cellspacing='0'>";
+			$IndicatorOptions["archive_groups_title"] = "Organizations";
+
+			// Get ID path for current parent
+
+			$IDPathList = ftree_get_item_id_path($GLOBALS["aib_db"],$CurrentParent);
+
+			// Generate nav display on right
+
+			$RightColContentLines = array();
+			$RightColContentLines[] = "<div class='aib-loc-indicator-title-div'>";
+			$RightColContentLines[] = "<span class='aib-loc-indicator-title-span'>Your Current Location</span>";
+			$RightColContentLines[] = "</div>";
+			$RightColContentLines[] = "<div class='aib-loc-indicator-div'>";
+			$RightColContentLines[] = aib_generate_loc_indicator_table($GLOBALS["aib_db"],$IndicatorOptions,$IDPathList);
+			$RightColContentLines[] = "<div class='clearitall'></div>";
+			$RightColContentLines[] = "</div>";
+			$DisplayData["right_col"] = join("\n",$RightColContentLines);
+			break;
+
+
+		// List of items
+
+		case AIB_ITEM_TYPE_RECORD:
+
+			// Get the next and previous records in the sub-group
+
+			$ParentOfParent = $ParentRecord["item_parent"];
+			$TempParentRecordList = ftree_list_child_objects($GLOBALS["aib_db"],$ParentOfParent,false,false,FTREE_OBJECT_TYPE_FOLDER,false,true);
+			$ParentRecordList = array();
+			$NextParentItem = false;
+			$PrevParentItem = false;
+			$TempPrev = false;
+			$TempParentListSize = count($TempParentRecordList);
+			if ($TempParentListSize > 1)
+			{
+				foreach($TempParentRecordList as $TempRecord)
+				{
+					$TempFolderType = ftree_get_property($GLOBALS["aib_db"],$TempRecord["item_id"],AIB_FOLDER_PROPERTY_FOLDER_TYPE);
+					if ($TempFolderType != AIB_ITEM_TYPE_RECORD)
+					{
+						continue;
+					}
+
+					if ($TempRecord["item_id"] == $ParentRecord["item_id"])
+					{
+						$PrevParentItem = $TempPrev;
+						$TempPrev = $ParentRecord["item_id"];
+						continue;
+					}
+					else
+					{
+						if ($TempPrev != $ParentRecord["item_id"])
+						{
+							$TempPrev = $TempRecord["item_id"];
+						}
+					}
+
+					if ($TempPrev == $ParentRecord["item_id"])
+					{
+						$NextParentItem = $TempRecord["item_id"];
+						break;
+					}
+				}
+			}
+
+			// Count items visible
+			
+			$VisibleItemCount = 0;
+			foreach($ChildItemList as $ChildRecord)
+			{
+				$ChildID = $ChildRecord["item_id"];
+
+				// Show thumbnail, if any available.  Otherwise a title indicating that the file can be opened
+
+				$FileList = aib_get_files_for_item($GLOBALS["aib_db"],$ChildID);
+				foreach($FileList as $FileRecord)
+				{
+					$TempMIME = urldecode($FileRecord["file_mime_type"]);
+					if ($FileRecord["file_class"] == AIB_FILE_CLASS_THUMB && preg_match("/image/",$TempMIME) != false)
+					{
+						$VisibleItemCount++;
+						break;
+					}
+				}
+			}
+
+			$OutBuffer[] = "<table class='browse-title-table'>";
+			$OutBuffer[] = "<tr class='browse-title-row'>";
+			$OutBuffer[] = "<td class='browse-title-cell'>";
+			$OutBuffer[] = "<span class='browse-title-main-heading'>".urldecode($ParentRecord["item_title"])."</span>";
+			$OutBuffer[] = "<div class='browse-title-nextprev'>";
+			if ($PrevParentItem !== false)
+			{
+				$OutBuffer[] = "<a class='browse-link-nextprev' href='/browse.php?parent=$PrevParentItem'>Prev Record</a>";
+			}
+			else
+			{
+				$OutBuffer[] = "<a class='browse-link-nextprev' href='' style='color:#a0a0a0;'>Prev Record</a>";
+			}
+
+			$OutBuffer[] = " &nbsp; &nbsp; ";
+			if ($NextParentItem !== false)
+			{
+				$OutBuffer[] = "<a class='browse-link-nextprev' href='/browse.php?parent=$NextParentItem'>Next Record</a>";
+			}
+			else
+			{
+				$OutBuffer[] = "<a class='browse-link-nextprev' href='' style='color:#a0a0a0;'>Next Record</a>";
+			}
+
+			$OutBuffer[]= "</div>";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "</tr>";
+			$OutBuffer[] = "<tr class='browse-title-row'>";
+			$OutBuffer[] = "<td class='browse-title-cell'>";
+			$OutBuffer[] = "<span class='browse-title-sub-heading'>Record File Content: $VisibleItemCount</span>";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "</tr>";
+			$OutBuffer[] = "</table>";
+			$OutBuffer[] = "<br>";
+
+			// Create a table where there are two columns:  Left is for scrolling
+			// photo banner, right is for field data
+
+			$OutBuffer[] = "<table class='browse-item-table'>";
+
+			// Banner area
+
+			$OutBuffer[] = "<tr class='record-item-banner-row'>";
+			$BannerWidth = (count($ChildItemList) + 1) * AIB_SCROLLABLE_IMAGE_WIDTH;
+			$LowBannerScrollValue = $BannerWidth * -1;
+			$OutBuffer[] = "<td class='record-item-banner-cell' colspan='99'>";
+			$OutBuffer[] = "<table width='100%' class='browse-item-banner-table' cellpadding='0' cellspacing='0'>";
+			$OutBuffer[] = "<tr class='browse-item-banner-table-row'>";
+			$OutBuffer[] = "<td class='browse-item-banner-table-left-page-cell'>";
+			$OutBuffer[] = "<button type='button' class='browse-item-banner-table-left-page-button' onclick=\"move_banner(this,'left');\" id='left_page_button'><img id='left_page_button_image' src='".AIB_SCROLL_LEFT_BUTTON_IMAGE."' class='left-page-button-image'></button>";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "<td class='browse-item-banner-table-banner-cell'>";
+			$OutBuffer[] = "<div class='browse-item-banner-container'>";
+			$OutBuffer[] = "<div class='browse-item-banner' style='width:$BannerWidth"."px;' id='browse_item_banner'>";
+			$ParentID = $ParentRecord["item_id"];
+			$PreloadID = $ParentID;
+//			$OutBuffer[] = "<img class='browse-item-thumb-image' src=\"/images/folder-pictures.png\" onclick=\"load_record_data($ParentID);\" id='record_thumb' style='height:75px; width:75px;'>";
+			$OutBuffer[] = "<img class='browse-item-info-image' src=\"/images/smallvinyl.png\" onclick=\"load_record_data($ParentID);\" id='record_thumb'>";
+
+			$ThumbCount = 0;
+			$FirstThumbID = false;
+			$DisplayChildList = array();
+			foreach($ChildItemList as $ChildRecord)
+			{
+				$ChildID = $ChildRecord["item_id"];
+				$ChildTitle = urldecode($ChildRecord["item_title"]);
+
+				// Show thumbnail, if any available.  Otherwise a title indicating that the file can be opened
+
+				$FileList = aib_get_files_for_item($GLOBALS["aib_db"],$ChildID);
+				$ThumbURL = "/images/no_image.png";
+				$TempChildRecord = false;
+				foreach($FileList as $FileRecord)
+				{
+					$TempMIME = urldecode($FileRecord["file_mime_type"]);
+					if ($FileRecord["file_class"] == AIB_FILE_CLASS_THUMB && preg_match("/image/",$TempMIME) != false)
+					{
+						$TempChildRecord = $FileRecord;
+						$ThumbID = $FileRecord["record_id"];
+						$ThumbURL = "/get_thumb.php?id=$ThumbID";
+						$ThumbCount++;
+						if ($FirstThumbID === false)
+						{
+							$FirstThumbID = $ChildID;
+						}
+
+						break;
+					}
+				}
+
+				if ($TempChildRecord != false)
+				{
+					$DisplayChildList[] = $ChildRecord;
+					$RefName = "child_item_".$ChildID;
+					$OutBuffer[] = "<img class='browse-item-thumb-image' src=\"$ThumbURL\" onclick=\"load_item_data('$RefName',$ChildID);\" id='$RefName'>";
+				}
+			}
+
+			$OutBuffer[] = "</div></div>";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "<td class='browse-item-banner-table-right-page-cell'>";
+			$OutBuffer[] = "<button type='button' class='browse-item-banner-table-right-page-button' onclick=\"move_banner(this,'right');\" id='right_page_button'><img id='right_page_button_image' src='".AIB_SCROLL_RIGHT_BUTTON_IMAGE."' class='right-page-button-image'></button>";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "</tr></table>";
+			$OutBuffer[] = "<td>";
+
+			// End of banner row
+
+			$OutBuffer[] = "</tr>";
+
+			// Photo and field area
+
+			$OutBuffer[] = "<tr><td colspan='99' class='record-item-content-spacer-cell'> &nbsp; </td></tr>";
+			$OutBuffer[] = "<tr class='record-item-content-row'>";
+			$ImageCount = count($DisplayChildList) + 1;
+			$HighBannerScrollValue = (AIB_SCROLLABLE_IMAGE_WIDTH / 4) * -1;
+			if ($HighBannerScrollValue < 0)
+			{
+				$HighBannerScrollValue = 0;
+			}
+
+			if ($ImageCount > 1)
+			{
+				$BannerWidth = $ImageCount * AIB_SCROLLABLE_IMAGE_WIDTH;
+				$LowBannerScrollValue = ($BannerWidth - AIB_SCROLLABLE_IMAGE_WIDTH) * -1;
+			}
+			else
+			{
+				$BannerWidth = $ImageCount * AIB_SCROLLABLE_IMAGE_WIDTH;
+				$LowBannerScrollValue = $BannerWidth * -1;
+			}
+
+			$OutBuffer[] = "<td class='record-item-photo-cell' id='item_photo_cell'>";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "<td class='record-item-separator-cell'> </td>";
+
+			// Field column
+
+			$OutBuffer[] = "<td class='record-item-field-cell' id='item_field_cell'>";
+
+			// End of image/field row
+
+			$OutBuffer[] = "</tr>";
+
+			// End of table
+
+			$OutBuffer[] = "</table>";
+
+			// Create right-hand navigation div and populate.  First, create template for display.
+
+			$IndicatorEntryTemplate = "<a class='aib-loc-path-link' href='/browse.php?&parent=[[ITEMID]]'>[[TITLE]]</a>";
+
+			// Set up display options
+
+			$IndicatorOptions = array("entry_template" => $IndicatorEntryTemplate, "ul_template" => "<ul class='aib-loc-indicator-list'>");
+			$IndicatorOptions["pad_cell_template"] = "<td width='5'></td>";
+			$IndicatorOptions["entry_cell_template"] = "<td colspan='99'>";
+			$IndicatorOptions["symbol_cell_template"] = "<td style='width:0.5em; padding:0;'><span style='font-size:1.5em; color:#a0a0a0;'>&#9492;</span></td>";
+			$IndicatorOptions["table_template"] = "<table width='100%' cellpadding='0' cellspacing='0'>";
+			$IndicatorOptions["archive_groups_title"] = "Organizations";
+
+			// Get ID path for current parent
+
+			$IDPathList = ftree_get_item_id_path($GLOBALS["aib_db"],$CurrentParent);
+
+			// Generate nav display on right
+
+			$RightColContentLines = array();
+			$RightColContentLines[] = "<div class='aib-loc-indicator-title-div'>";
+			$RightColContentLines[] = "<span class='aib-loc-indicator-title-span'>Your Current Location</span>";
+			$RightColContentLines[] = "</div>";
+			$RightColContentLines[] = "<div class='aib-loc-indicator-div'>";
+			$RightColContentLines[] = aib_generate_loc_indicator_table($GLOBALS["aib_db"],$IndicatorOptions,$IDPathList);
+			$RightColContentLines[] = "<div class='clearitall'></div>";
+			$RightColContentLines[] = "</div>";
+			$DisplayData["right_col"] = join("\n",$RightColContentLines);
+			if ($ThumbCount == 1)
+			{
+				if ($FirstThumbID !== false)
+				{
+					$ChildOfRecord = $FirstThumbID;
+				}
+			}
+
+			break;
+
+
+		// Item; should never be used, but works the same as the record
+
+		case AIB_ITEM_TYPE_ITEM:
+			$OutBuffer[] = "<table class='browse-title-table'>";
+			$OutBuffer[] = "<tr class='browse-title-row'>";
+			$OutBuffer[] = "<td class='browse-title-cell'>";
+			$OutBuffer[] = "Items In Record \"".urldecode($ParentRecord["item_title"])."\"";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "</tr>";
+			$OutBuffer[] = "</table>";
+			$OutBuffer[] = "<br>";
+
+			// Create a table where there are two columns:  Left is for scrolling
+			// photo banner, right is for field data
+
+			$OutBuffer[] = "<table class='browse-item-table'>";
+
+			// Banner area
+
+			$OutBuffer[] = "<tr class='record-item-banner-row'>";
+			$BannerWidth = (count($ChildItemList) + 1) * AIB_SCROLLABLE_IMAGE_WIDTH;
+			$LowBannerScrollValue = $BannerWidth * -1;
+			$OutBuffer[] = "<td class='record-item-banner-cell' colspan='99'>";
+			$OutBuffer[] = "<table width='100%' class='browse-item-banner-table'>";
+			$OutBuffer[] = "<tr class='browse-item-banner-table-row'>";
+			$OutBuffer[] = "<td class='browse-item-banner-table-left-page-cell'>";
+			$OutBuffer[] = "<button type='button' class='browse-item-banner-table-left-page-button' onclick=\"move_banner(this,'left');\" id='left_page_button'><img id='left_page_button_image' src='".AIB_SCROLL_LEFT_BUTTON_IMAGE."'></button>";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "<td class='browse-item-banner-table-banner-cell'>";
+			$OutBuffer[] = "<div class='browse-item-banner-container'>";
+			$OutBuffer[] = "<div class='browse-item-banner' style='width:$BannerWidth"."px;' id='browse_item_banner'>";
+			$ParentID = $ParentRecord["item_id"];
+			$PreloadID = $ParentID;
+			$OutBuffer[] = "<img class='browse-item-thumb-image' src=\"/images/folder-pictures.png\" onclick=\"load_record_data($ParentID);\" id='record_thumb' style='height:75px; width:75px;'>";
+
+			$DisplayChildList = array();
+			foreach($ChildItemList as $ChildRecord)
+			{
+				$ChildID = $ChildRecord["item_id"];
+				$ChildTitle = urldecode($ChildRecord["item_title"]);
+
+				// Show thumbnail, if any available.  Otherwise a title indicating that the file can be opened
+
+				$FileList = aib_get_files_for_item($GLOBALS["aib_db"],$ChildID);
+				$ThumbURL = "/images/no_image.png";
+				$TempChildRecord = false;
+				foreach($FileList as $FileRecord)
+				{
+					$TempMIME = urldecode($FileRecord["file_mime_type"]);
+					if ($FileRecord["file_class"] == AIB_FILE_CLASS_THUMB && preg_match("/image/",$TempMIME) != false)
+					{
+						$TempChildRecord = $FileRecord;
+						$ThumbID = $FileRecord["record_id"];
+						$ThumbURL = "/get_thumb.php?id=$ThumbID";
+						break;
+					}
+				}
+
+				if ($TempChildRecord != false)
+				{
+					$DisplayChildList[] = $ChildRecord;
+					$RefName = "child_item_".$ChildID;
+					$OutBuffer[] = "<img class='browse-item-thumb-image' src=\"$ThumbURL\" onclick=\"load_item_data('$RefName',$ChildID);\" id='$RefName'>";
+				}
+			}
+
+			$OutBuffer[] = "</div></div>";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "<td class='browse-item-banner-table-right-page-cell'>";
+			$OutBuffer[] = "<button type='button' class='browse-item-banner-table-right-page-button' onclick=\"move_banner(this,'right');\" id='right_page_button'><img id='right_page_button_image' src='".AIB_SCROLL_RIGHT_BUTTON_IMAGE."'</button>";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "</tr></table>";
+			$OutBuffer[] = "<td>";
+
+			// End of banner row
+
+			$OutBuffer[] = "</tr>";
+
+			// Photo and field area
+
+			$OutBuffer[] = "<tr class='record-item-content-row'>";
+			$ImageCount = count($DisplayChildList) + 1;
+			$HighBannerScrollValue = (AIB_SCROLLABLE_IMAGE_WIDTH / 4) * -1;
+			if ($HighBannerScrollValue < 0)
+			{
+				$HighBannerScrollValue = 0;
+			}
+
+			if ($ImageCount > 1)
+			{
+				$BannerWidth = $ImageCount * AIB_SCROLLABLE_IMAGE_WIDTH;
+				$LowBannerScrollValue = ($BannerWidth - AIB_SCROLLABLE_IMAGE_WIDTH) * -1;
+			}
+			else
+			{
+				$BannerWidth = $ImageCount * AIB_SCROLLABLE_IMAGE_WIDTH;
+				$LowBannerScrollValue = $BannerWidth * -1;
+			}
+
+			$OutBuffer[] = "<td class='record-item-photo-cell' id='item_photo_cell'>";
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "<td class='record-item-separator-cell'> </td>";
+
+			// Field column
+
+			$OutBuffer[] = "<td class='record-item-field-cell' id='item_field_cell'>";
+
+			// End of image/field row
+
+			$OutBuffer[] = "</tr>";
+
+			// End of table
+
+			$OutBuffer[] = "</table>";
+
+			// Create right-hand navigation div and populate.  First, create template for display.
+
+			$IndicatorEntryTemplate = "<a class='aib-loc-path-link' href='/browse.php?&parent=[[ITEMID]]'>[[TITLE]]</a>";
+
+			// Set up display options
+
+			$IndicatorOptions = array("entry_template" => $IndicatorEntryTemplate, "ul_template" => "<ul class='aib-loc-indicator-list'>");
+			$IndicatorOptions["pad_cell_template"] = "<td width='5'></td>";
+			$IndicatorOptions["entry_cell_template"] = "<td colspan='99'>";
+			$IndicatorOptions["symbol_cell_template"] = "<td style='width:0.5em; padding:0;'><span style='font-size:1.5em; color:#a0a0a0;'>&#9492;</span></td>";
+			$IndicatorOptions["table_template"] = "<table width='100%' cellpadding='0' cellspacing='0'>";
+			$IndicatorOptions["archive_groups_title"] = "Organizations";
+
+			// Get ID path for current parent
+
+			$IDPathList = ftree_get_item_id_path($GLOBALS["aib_db"],$CurrentParent);
+
+			// Generate nav display on right
+
+			$RightColContentLines = array();
+			$RightColContentLines[] = "<div class='aib-loc-indicator-title-div'>";
+			$RightColContentLines[] = "<span class='aib-loc-indicator-title-span'>Your Current Location</span>";
+			$RightColContentLines[] = "</div>";
+			$RightColContentLines[] = "<div class='aib-loc-indicator-div'>";
+			$RightColContentLines[] = aib_generate_loc_indicator_table($GLOBALS["aib_db"],$IndicatorOptions,$IDPathList);
+			$RightColContentLines[] = "<div class='clearitall'></div>";
+			$RightColContentLines[] = "</div>";
+			$DisplayData["right_col"] = join("\n",$RightColContentLines);
+			break;
+
+		// Must be an item, but we'll use a default display method.
+
+		default:
+			$OutBuffer[] = "<table class='browse-title-table'>";
+			$OutBuffer[] = "<tr class='browse-title-row'>";
+			$OutBuffer[] = "<td class='browse-title-cell'>";
+			$OutBuffer[] = "Items ".urldecode($ParentRecord["item_title"]);
+			$OutBuffer[] = "</td>";
+			$OutBuffer[] = "</tr>";
+			$OutBuffer[] = "</table>";
+			$OutBuffer[] = "<br>";
+			$OutBuffer[] = "<table class='browse-item-table'>";
+			$FileList = aib_get_files_for_item($GLOBALS["aib_db"],$CurrentParent);
+			$ThumbURL = "/images/no_image.png";
+			foreach($FileList as $FileRecord)
+			{
+				if ($FileRecord["file_class"] == AIB_FILE_CLASS_THUMB)
+				{
+					continue;
+				}
+
+				$OutBuffer[] = "<tr class='browse-item-image-row'>";
+				$OutBuffer[] = "<td class='browse-item-image-cell'>";
+				$ImageID = $FileRecord["record_id"];
+				$ImageURL = "/get_image.php?id=$ImageID";
+				$OutBuffer[] = "<img class='browse-item-item-image' src=\"$ImageURL\">";
+				$OutBuffer[] = "</td></tr>";
+			}
+
+			$OutBuffer[] = "</table>";
+
+			$IndicatorEntryTemplate = "<a class='aib-loc-path-link' href='/browse.php?&parent=[[ITEMID]]'>[[TITLE]]</a>";
+
+			// Set up display options
+
+			$IndicatorOptions = array("entry_template" => $IndicatorEntryTemplate, "ul_template" => "<ul class='aib-loc-indicator-list'>");
+			$IndicatorOptions["pad_cell_template"] = "<td width='5'></td>";
+			$IndicatorOptions["entry_cell_template"] = "<td colspan='99'>";
+			$IndicatorOptions["symbol_cell_template"] = "<td style='width:0.5em; padding:0;'><span style='font-size:1.5em; color:#a0a0a0;'>&#9492;</span></td>";
+			$IndicatorOptions["table_template"] = "<table width='100%' cellpadding='0' cellspacing='0'>";
+			$IndicatorOptions["archive_groups_title"] = "Item Detail";
+
+			// Get ID path for current parent
+
+			$IDPathList = ftree_get_item_id_path($GLOBALS["aib_db"],$CurrentParent);
+
+			// Generate nav display on right
+
+			$RightColContentLines = array();
+			$RightColContentLines[] = "<div class='aib-loc-indicator-title-div'>";
+			$RightColContentLines[] = "<span class='aib-loc-indicator-title-span'>Your Current Location</span>";
+			$RightColContentLines[] = "</div>";
+			$RightColContentLines[] = "<div class='aib-loc-indicator-div'>";
+			$RightColContentLines[] = aib_generate_loc_indicator_table($GLOBALS["aib_db"],$IndicatorOptions,$IDPathList);
+			$RightColContentLines[] = "<div class='clearitall'></div>";
+			$RightColContentLines[] = "</div>";
+			$DisplayData["right_col"] = join("\n",$RightColContentLines);
+			break;
+	}
+
+	// End of browse content div
+
+	$OutBuffer[] = "</div>";
+
+	// End of center content row
+
+	$OutBuffer[] = "</td></tr>";
+
+	// Output center (record list) div
+
+	print(join("\n",$OutBuffer));
+
+	$QueryImageCode = bin2hex("itemimage");
+	$QueryFieldCode = bin2hex("itemfield");
+	$QueryRecordFieldCode = bin2hex("recordfield");
+	$EncodedUserID = bin2hex(sprintf("%d",$UserID));
+
+	// Include the footer
+
+include('template/common_footer.php');
+
+	// Modal image display code
+
+	$BottomBufferLines = array();
+	$BottomBufferLines[] = "
+	
+	<!-- modal box -->
+
+	<div id='myModal' class='modal'>
+		<span class='close' id='close_modal'><span class='close-text'>Close </span> &times;</span>
+		<span class='modal-prev' id='prev_modal'>&larr; Prev</span>
+		<span class='modal-next' id='next_modal'>Next &rarr;</span>
+		<img class='modal-content' id='img01'>
+		<div id='caption'></div>
+	</div>
+	";
+
+	print(join("\n",$BottomBufferLines));
+
+
+	// Add any footer script
+
+	$FooterScriptLines[] = "
+		var LowBannerScrollValue = $LowBannerScrollValue;
+		var HighBannerScrollValue = $HighBannerScrollValue;
+		var CurrentBannerScrollValue = $HighBannerScrollValue;
+		var LastIconClicked = '';
+		var CurrentDisplayMode = '$DisplayMode';
+		var InitialItemLoaded = 0;
+
+		// Initialize banner
+
+		\$('#browse_item_banner').css('margin-left',CurrentBannerScrollValue.toString() + 'px');
+
+		function move_banner(RefObj,Direction)
+		{
+			if (Direction == 'left')
+			{
+				// Scroll images to the left
+
+				\$('#right_page_button').prop('disabled',false);
+				\$('#right_page_button_image').css('-webkit-filter','');
+				\$('#right_page_button_image').css('filter','');
+				CurrentBannerScrollValue = CurrentBannerScrollValue + 100;
+				if (CurrentBannerScrollValue >= HighBannerScrollValue)
+				{
+					CurrentBannerScrollValue = HighBannerScrollValue;
+					\$('#left_page_button').prop('disabled',true);
+					\$('#left_page_button').prop('disabled',true);
+					\$('#left_page_button_image').css('-webkit-filter','blur(4px)');
+					\$('#left_page_button_image').css('filter','blur(4px)');
+				}
+			}
+			else
+			{
+				// Scroll images to the right
+
+				\$('#left_page_button').prop('disabled',false);
+				\$('#left_page_button_image').css('-webkit-filter','');
+				\$('#left_page_button_image').css('filter','');
+				CurrentBannerScrollValue = CurrentBannerScrollValue - 100;
+				if (CurrentBannerScrollValue < LowBannerScrollValue)
+				{
+					CurrentBannerScrollValue = LowBannerScrollValue;
+					\$('#right_page_button').prop('disabled',true);
+					\$('#right_page_button_image').css('-webkit-filter','blur(4px)');
+					\$('#right_page_button_image').css('filter','blur(4px)');
+				}
+			}
+
+			\$('#browse_item_banner').css('margin-left',CurrentBannerScrollValue.toString() + 'px');
+		}
+
+		function load_item_data(RefName,ChildID)
+		{
+			var QueryParam = {};
+			
+			QueryParam['o'] = '$QueryImageCode';
+			QueryParam['i'] = '$EncodedUserID';
+			QueryParam['pn'] = 1;
+			QueryParam['checks'] = '';
+			QueryParam['checks_title'] = '';
+			QueryParam['pic'] = 1;
+			QueryParam['lop'] = 'get';
+			QueryParam['id'] = 'aibitem';
+			QueryParam['key'] = ChildID;
+			\$('#item_photo_cell').html(\"<span class='aib-loading-image-notice'>Loading Image</span>\");
+			aib_ajax_request('/services/browseair.php',QueryParam,show_record,error_record);
+
+			QueryParam['o'] = '$QueryFieldCode';
+			aib_ajax_request('/services/browseair.php',QueryParam,show_record,error_record);
+			\$('#record_icon').css('border','');
+			if (LastIconClicked != '')
+			{
+				\$('#' + LastIconClicked).css('border','');
+			}
+
+			\$('#' + RefName).css('border','3px solid lightgreen');
+			LastIconClicked = RefName;
+		}
+
+		function load_record_data(ChildID)
+		{
+			var QueryParam = {};
+			
+			QueryParam['o'] = '$QueryRecordFieldCode';
+			QueryParam['i'] = '$EncodedUserID';
+			QueryParam['pn'] = 1;
+			QueryParam['checks'] = '';
+			QueryParam['checks_title'] = '';
+			QueryParam['pic'] = 1;
+			QueryParam['lop'] = 'get';
+			QueryParam['id'] = 'aibitem';
+			QueryParam['key'] = ChildID;
+			aib_ajax_request('/services/browseair.php',QueryParam,show_record,error_record);
+			if (LastIconClicked != '')
+			{
+				\$('#' + LastIconClicked).css('border','');
+			}
+
+			\$('#record_thumb').css('border','3px solid lightgreen');
+			LastIconClicked = 'record_thumb';
+		}
+
+	function show_record(InData)
+	{
+		var InfoType;
+
+		if (InData['status'] != 'OK')
+		{
+			alert('Error processing fetch request: ' + InData['info']['msg']);
+			return;
+		}
+
+		InfoType = InData['info']['type'];
+		if (InfoType == 'image')
+		{
+			\$('#item_photo_cell').html(InData['info']['html']);
+		}
+
+		if (InfoType == 'field')
+		{
+			\$('#item_field_cell').html(InData['info']['html']);
+		}
+
+		if (InfoType == 'recordfield')
+		{
+			\$('#item_photo_cell').html(InData['info']['html2']);
+			\$('#item_field_cell').html(InData['info']['html']);
+		}
+	}
+
+	function error_record(ReqObj,ErrorStatus,ErrorText)
+	{
+		alert('Request error: ' + ErrorStatus + '; ' + ErrorText);
+	}
+
+	// When the mode button is clicked when listing records or sub-groups, process
+
+	function change_display_mode()
+	{
+		var RecURL = \"$RecURL\";
+		var SubURL = \"$SubURL\";
+		if (CurrentDisplayMode == 'rec')
+		{
+			location.assign(SubURL);
+		}
+		else
+		{
+			location.assign(RecURL);
+		}
+	}
+
+	// Set up handler for photo area to allow zoom.  When image is clicked,
+	// the image URL is transferred to the image element in the modal, and
+	// the modal display mode is set to 'block'.
+	";
+
+	if ($ParentFolderType == AIB_ITEM_TYPE_RECORD || $ParentFolderType == AIB_ITEM_TYPE_ITEM)
+	{
+		$FooterScriptLines[] = "
+
+		function show_enlarged()
+		{
+			var ImageURL;
+			var ImageElement;
+			var TitleElement;
+			var CaptionElement;
+			var TitleText;
+			var ModalImage;
+			var ModalBox;
+
+			// Get sources
+
+			ImageElement = document.getElementById('browse_image');
+			CaptionElement = document.getElementById('caption');
+			ModalImage = document.getElementById('img01');
+			ModalBox = document.getElementById('myModal');
+			ImageURL = ImageElement.src;
+
+			// Copy image url to modal
+
+			ModalImage.src = ImageURL;
+
+			// Copy text to caption
+
+			// Show modal
+
+			ModalBox.style.display = 'block';
+
+		}
+
+//
+//	var PhotoAreaElement = document.getElementById('img01');
+//	PhotoAreaElement.onclick = function() {
+//	
+//		var ImageURL;
+//		var ImageElement;
+//		var TitleElement;
+//		var CaptionElement;
+//		var TitleText;
+//		var ModalImage;
+//		var ModalBox;
+//
+//		// Get sources
+//
+//		ImageElement = document.getElementById('browse_image');
+////		TitleElement = document.getElementById('item_title_cell');
+//		CaptionElement = document.getElementById('caption');
+//		ModalImage = document.getElementById('img01');
+//		ModalBox = document.getElementById('myModal');
+//		ImageURL = ImageElement.src;
+////		TitleText = TitleElement.innerHTML;
+//
+//		// Copy image url to modal
+//
+//		ModalImage.src = ImageURL;
+//
+//		// Copy text to caption
+//
+////		CaptionElement.innerHTML = TitleText;
+//
+//		// Show modal
+//
+//		ModalBox.style.display = 'block';
+//	}
+	
+
+	// Set up click handler for close button.  When user clicks on the span, the modal closes.
+
+	var CloseButtonSpan = document.getElementById('close_modal');
+	CloseButtonSpan.onclick = function() {
+		var ModalBox;
+
+		ModalBox = document.getElementById('myModal');
+		ModalBox.style.display = 'none';
+	}
+
+	var PrevButtonSpan = document.getElementById('prev_modal');
+	var NextButtonSpan = document.getElementById('next_modal');
+	PrevButtonSpan.onclick = function() {
+		var ImageElement;
+
+		ImageElement = document.getElementById('img01');
+	}
+
+	NextButtonSpan.onclick = function() {
+		var ImageElement;
+
+		ImageElement = document.getElementById('img01');
+	}
+
+	";
+	}
+
+	// If the PreloadID is not false, then force load of record data
+
+	if ($PreloadID !== false && $ChildOfRecord === false)
+	{
+		$FooterScriptLines[] = "
+			load_record_data($PreloadID);
+		";
+	}
+
+	// If the requested parent is an item in a record, pre-select that item and show on screen
+
+	if ($ChildOfRecord !== false)
+	{
+		$FooterScriptLines[] = "
+
+		if (InitialItemLoaded < 1)
+		{
+			load_item_data('child_item_$ChildOfRecord','$ChildOfRecord');
+			InitialItemLoaded = 1;
+		}
+
+		";
+		
+	}
+
+	print("<script>".join("\n",$FooterScriptLines)."</script>");
+?>
+
+<?php
+
+	// Output end of page
+
+include('template/common_end_of_page.php');
+
+	// Close database
+
+	aib_close_db();
+	exit(0);
+?>

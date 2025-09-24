@@ -1,0 +1,5 @@
+define('ENCRYPT_METHOD', 'AES-256-CBC');
+define('SECRET_KEY', 'uaK4jMLm8P158hof');
+define('SECRET_IV', 'sapplesystemspvtltdarchive');
+define('HASH','sha256');
+include 'message_config.php';

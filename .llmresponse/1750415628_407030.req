@@ -1,0 +1,15 @@
+[[CHAT START]]
+{'id': 'chatcmpl-8b4bc7ec-a6e1-408c-a098-1419e5d9c80f', 'object': 'chat.completion', 'created': 1750415709, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': 'You\'re looking for information about Sapient Systems in Noida!\n\nSapient Systems is a leading IT consulting and services company with a strong presence in Noida, India. Here are some key points about Sapient Systems Noida:\n\n1. **Location**: Sapient Systems has its office in Sector 62, Noida, Uttar Pradesh, India.\n2. **Services**: The company offers a range of services, including:\n\t* IT Consulting\n\t* Application Development\n\t* System Integration\n\t* Testing and Quality Assurance\n\t* Cloud Services\n\t* Digital Transformation\n3. **Industries**: Sapient Systems serves various industries, including:\n\t* Banking and Finance\n\t* Healthcare\n\t* Retail\n\t* Manufacturing\n\t* Government\n4. **Technology**: The company has expertise in various technologies, including:\n\t* Java\n\t* .NET\n\t* Python\n\t* Salesforce\n\t* Oracle\n\t* Microsoft\n\t* AWS\n\t* Azure\n5. **Awards and Recognition**: Sapient Systems has received several awards and recognitions, including:\n\t* "Best IT Consulting Company" by the Indian Institute of Packaging\n\t* "Top 10 IT Consulting Companies in India" by CIO Review\n6. **Careers**: Sapient Systems offers a range of career opportunities in Noida, including software development, testing, and consulting roles.\n\nIf you\'re looking to learn more about Sapient Systems Noida or explore job opportunities, I recommend visiting their official website or searching for reviews and testimonials from current or former employees.'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 16, 'completion_tokens': 328, 'total_tokens': 344}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=0.955642
+[[START CONTENT]]
+ces Branch of the Systems Development Department. The Incumbent pro...ides computer systems analysis, programming, document.tlon, instruction and consulting ser...ices for configuration manag~ml!nt users of the UNIVAC 1110 Central Computing Facility. Job R ele.... nt Criteria : Knowledge of configurat ion manaoement systems. especially CADMSS; knowledge of COBOL, EXEC-S COrItrol Languag~ and of Data Base Man69ement systems, especia lly SYSTEM 2000; ablilly to implement and mainta in abo...e software. Thlsposltion will revert to Code SSSat the end of one year. Mathematician. PhYllcist, G.n.ra' En,in.er. or Comput... SpKlaUst, GS   U1O-1J1Q.-101  U4  f/ 11 / 12, PO No. 1 ~S, Code 4032 - Th is position Is located In the Computer Ser...lces Branch of the Systems Development Department. The Incumbent provides computer systems analysis, progt"amming. documentation. Instruction .nd consulting ser...ices for data manag~ment users of the lJ NIVAC 1110 Central Computing Facility. Job Relev.nt Crit. r ia : Knowleclg~ of
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d73f5', 'fragment': '12'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

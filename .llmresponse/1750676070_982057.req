@@ -1,0 +1,104 @@
+[[CHAT START]]
+{'id': 'chatcmpl-edcff6dc-a22a-420c-ac74-cdf8d5f2d699', 'object': 'chat.completion', 'created': 1750676084, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': "Based on the provided context, here are some key points about Pacific Grove:\n\n1. Pacific Grove is a town located in California.\n2. It has a unique identity and a strong sense of community, which has been retained over the years despite changes in the town and its surroundings.\n3. The town was incorporated in 1889 and has a population of around 18,000, which is nearly triple the original population of 1,300.\n4. Pacific Grove has a rich history, with its early development being influenced by the Methodist Episcopal Church, which started the town as a camping ground.\n5. The town has a strong connection to the Pacific Coast, with its climate and natural beauty making it a popular destination for events like Chautauqua, the Feast of Lanterns, and encampments at Asilomar.\n6. The town has a diverse population, with many newcomers having moved to the area, which has contributed to its growth and development.\n7. The Heritage Society of Pacific Grove is a 501(c)(3) organization that was incorporated in 1976 and is dedicated to preserving the town's history and heritage.\n\nThese are the main points that can be gathered from the provided context. If you have any specific questions or would like more information, feel free to ask!"}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 1359, 'completion_tokens': 262, 'total_tokens': 1621}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=0.358698
+[[START CONTENT]]
+ip down. Best wishes on your success with the National Register--and continu- ing research on Pacific Grove. Incidentally, a friend of mine who lives in Ocean Grove, New Jersey, said that documents there indicated that a group from Ocean Grove was very deeply involved in the early development of Pacific Grove. I don't believe I had read that in any of the material I have about it. Sincerely, C   ~,/1 ~ I ,Q ~ 7y1.,G'4.~ !r, S ~ s~-~   t ~,~ e ~ ~l~LYQ'a G~ /~ Y  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000b4b8b', 'fragment': '4'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.472578
+[[START CONTENT]]
+ PACIFIC GROVE, CALIFORRIA  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000b4684', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.475055
+[[START CONTENT]]
+ociety of Pacific Grove 2  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000dcf5f', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.486332
+[[START CONTENT]]
+ Society of Pacific Grove 2  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000dddfc', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.486332
+[[START CONTENT]]
+Society of Pacific Grove 2  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d9518', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.497630
+[[START CONTENT]]
+itecture in Pacific Grove.  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000b6b20', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.507228
+[[START CONTENT]]
+CANCE 20. Briefly state historical and/or architectural importance (include dates, events, and persons associated with the site when known): This structure constitutes an important element in the commercial core of downtown Pacific Grove. With its immediate neighbor it ties the decade of the 1890's to that of the period of 1900 - 1915. Careful and simple detailing throughout this and its adjoining building unites the block as a co*plete ensemble 21. Main theme ofthehistoric resource: (Check only one): i Architecture Wl b. Arts& Leisure m c. Economic/Industrial m d. Exploration/Settlement El e. Government m f. Military m g. Religion El h. Social/Education El 22. Sources: List books, documents, surveys, personal interviews, and their dates: 23. Date form prepared: By (name): Address: City ZIP: Phone: Organization: (State Use Only)  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000dca30', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.514932
+[[START CONTENT]]
+on its own terms, so that for thousands attending Chautauqua, the Feast of Lanterns or an encampment at Asilomar, Pacific Grove was more than just a name on the map at the end of the SP line. Pacific Grove was an event before it was a place. Over the years, much has changed. Most obviously, the spaces have been filled in, both within the town and between it and its neighbors, so that boundaries have become less distinct and less meaningful. Yet Pacific Grove has retained its self- conscious identity. For many of its citizens, oldtimers and newcomers alike, the exceptional feeling of community is as notable as the natural beauty of the town. Pacific Grove   area: one square mile, population: 1300   was incorporated in 1889. Today, the area has nearly tripled, and the population has climbed to 18,000. Who has come? What brought them here? What have they brought with them? No single answer can be given, for the local population has grown considerably more diverse since the days when this was a Methodist retreat.
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000e6461', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.522691
+[[START CONTENT]]
+ciety of Pacific Grove. If youhave any questions please feel free to contact us at (831) 372- 2898. Respg#*ully, Jim H4an, Heritage Society Research Team TheHedtageSocietyofPacificGrove,a501(c)  3)organization,wasincorporated.July1976asaCaliforniaNonprofitPublicBenefitCorpomtion.  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000da691', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.523521
+[[START CONTENT]]
+ and dissipation are unknown. The government of the place is patriarchal and unique and it admirably serves lhe purpose of keeping without the borders of the town all dis   reputable. unruly and boisterous characters. Pacific Grove is to the Pacific Coast what Martha's Vineyard and Ocean Grove are to the Atlantic, except that Pacific Grove lias as perfect a climate in winter as in summer and is kept open all the year round. T -d , The history of Pacific Grove fur- s ecor nishes striking evidence of the rare value of climate and healthy moral surroundings. A few years ago it was started as a camping ground bv the Methodist Episcopal Church. It was laid out in lots, and tents made of cloth stretched over wooden frames were erected. Soon, however, it outgrew its original purpose. Tasteful cottages were built, stores sprang into existence, and the popu   lation increased beyond all expectation. The prices of choice lots advanced, and small fortunes were made. The Pacific Improvement Company made addition after ad
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000e6421', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

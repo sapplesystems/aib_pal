@@ -1,0 +1,110 @@
+[[CHAT START]]
+{'id': 'chatcmpl-bc1f4f26-8ef2-497a-a3d9-e72c379f7aa4', 'object': 'chat.completion', 'created': 1750867101, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': "Based on the provided context, I found the following information related to Kennedy's visit:\n\n1. Document(id='000d7267_27', metadata={'nodeid': '000d7267', 'fragment': '27'}, page_content='...President John F. Kennedy was probably the most exciting event that has occurred in Dick's 14 years with the office...': This document mentions that President John F. Kennedy visited the office, which is likely referring to the Naval Air Facility at China Lake.\n\n2. Document(id='00108e0b_1', metadata={'nodeid': '00108e0b', 'fragment': '1'}, page_content='@uri=1084939\\n@title=File: KennedyVisitsWithPilots.jpg; \\n@cdate=2024-08-05 00:41:48\\n@archive_group_title=China Lake Museum\\n@archive_title=People\\n@item_id=1084939\\narchive_group_title=China Lake Museum\\narchive_title=People\\nitem_id=1084939\\nitem_path=n823405x n1021057x n1084913x n1084915x n1084938x n1084939x\\n\\nFile: KennedyVisitsWithPilots.jpg; \\nOCR Text: Hi    \\\\i iv   n    m SNNMMV    \\\\l. NX   I II   !    HIM   President John F. Kennedy greets pilots at the Naval Air Facility during his 8 June 1963 visit to China Lake. Behind him are California Governor Edmund G. Brown and Capt. 7 US. Navy photo, courtesy US. Naval Museum of Annamth and Technology \\n'): This document contains a photo of President John F. Kennedy visiting the Naval Air Facility at China Lake, where he greeted pilots and was accompanied by California Governor Edmund G. Brown and Capt. 7.\n\nPlease note that these are the only two documents that mention Kennedy's visit. If you're looking for more information, I'd be happy to help you search the provided context."}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 2696, 'completion_tokens': 426, 'total_tokens': 3122}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=0.904825
+[[START CONTENT]]
+John F. Kennedy Presidential Library and Museum, Boston, Massachusetts Copyright: Public Domain Back JOHN F. KENNEDY PRESIDENTIAL LIBRARY AND MUSEUM Columbia Point, Boston MA 02125 (617) 514-1600 Type Search Text Here Advanced Search JFK VISIT EXHIBITS RESEARCH EDUCATION EVENTS & AWARDS ABOUT US  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '001063b9', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.928479
+[[START CONTENT]]
+r of the Foreign Relations Committee and also of the special committee formed to investigate racketeering in industrial relations, a group for which his young brother Robert sen'ed as counsel. Kennedy is widely traveled. After his discharge from the Navy in 1'945 he served as a correspondent for the International News Service, covering the San Francisco Con- ference, the British election of that year, and the Potsdam Conference. John F. Kennedy Senalor H e was married to Jacqueline Bouvier in Sept 1953. Their daugh- ter Caroline was born in 1957. The Kennedys live in Hyanis Port on Ca p e Co d, Mass., and when in Washington, in the Georgetown section. ,Name Henry Dubin Artist of the Month Selectcd as Artist-of-the-Month for August is Henry Dubin, 16- year-old Burroughs High School Senior. Eight of his abstracts will be displayed during the month in the Station Library. Although Henry has numerous hobbies, his art work has repeat- edly won recognition at ann u a 1 County Art Festivals. H is favorite media is o
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d6174', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.015004
+[[START CONTENT]]
+ty," said one mem- ber of that crew recently. "the suni\"ors owe their lins to him. NC\'f~r. at any time. did he los~ control of himself or get shook up." Kennedy was cited by the NaVY" for this action. Today h e is medic- sHy retired with lieutenant's rank. . Born May 29, 1917, in Brookline, Mass., a subu rb of Boston, he was the second of nine children. H e i:1 the son of Joseph P. Kennedy, U.S. Ambassador to Great Britain under President Franklin D. Roose\  elt. Before throwing his hat in t he ring for the 1960 election, Kennedy had a degree of political experi- ence that belies his youthful ap- pearance. Massachusetts sent him to the House of Repre~entativcs three tim e s and to the Senate twice. A graduate of Han'ard, he was only 28 when h e published a best- Se1Iing book, Why England Slept. A later best-seller b~' Kennedy, Profiles in Courage, a collection of essays on a c t s of political courage by senators, woo a Pul- iher Prize for biography. In the Senate, Kennedy distin- guished himself as a membe
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d6174', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.025021
+[[START CONTENT]]
+ion, asks ioint session of Congress for cooperation in passing legisla   tion supported by the late Chief Executive. Party Cancelled The Christmas party sched   uled by the Engineering Dept's. Recreation Assn. for Tuesday, Dec. 3, at the Community Center has been cancelled in concurr   ence with the 30  day period of mourning to pay tribute to the late President Kennedy, it was announced by David B. Mullins, treasurer of the association. Silently and $ome still shako ing their heads in disbelief, the congregations walked through the portals of the Chapel. Old, Young, Babes In Arms The old and the young were there, and babies in ar ms, much too young to realize what it was all about. But they would know later. They would read it in their history books, as the y would (Continued on Page 3) Capt. Blenman's Message The fond memories of the late President John F. Kennedy's visit to NOTS last June are still fresh. Thus, I know that I share a common feeling of deep personal loss of our local community over his death
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d5d78', 'fragment': '13'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.038640
+[[START CONTENT]]
+another building or monument bearing the President's name. Its planners envision it as a living and working memorial, expressing President Ken   nedy's concern for his country and the world. Tbe library will include a museum which will house many of the mementos associated with President Kennedy and his times. Those planning it hope to make the experiences of recent history as vivid as possible for visitors, especially students and young people. There will also be an archive which will contain President Kennedy's personal papers, as well as copies of public records necessary for an understanding of the actions of his administra   tion. The archive will be used primarily by scholars and research   ers. A third component of the Library will be an institute, with the central purpose of educating young people in the under   standing and practice of democratic political life. It will offer scholarships, research material, lectures, seminars and public programs to help achieve these purposes. The cost of the Kenned
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d68c4', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.041334
+[[START CONTENT]]
+gularly blessed. For this we are thankful. Accept this prayer of gratitude for the life and work of Thy servant, our deceased President, John Fitzgerald Kennedy. We commit him to Thy iudgment and keep- ing, and to the hallowed pages of our history. Comfort the hearts of his parents, brothers and sisters, his beloved wife and children. Bring a sense of calm to our troubled hearts in these hours of world tension and peril. Make us strong in faith toward Thee. Grant wisdom and health to Lyndon B. Johnson as he assumes the ponderous duties of office. Unite us as a nation. Turn the hearts of our enemies. Let peace, for which John Kennedy worked without stint, become a realized dream in our time. To this end we pray, in the name of the divine Lord. Amen. ROBERT C. FENNING Cdr., CHC, USN NOTS Joins in 30 Days of Mourning For Late President     Ask Divine Guidance For New President "God he with him and his family ... and with us." Fervent and heart-aching pray. ers as this were whispered by thousands of NOTS worshipe
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d5d78', 'fragment': '10'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.065106
+[[START CONTENT]]
+C, his visit was arranged by the Technical Presentations Coor- dinator, Dick Rusciolelli. "I had arranged for the new skipper to he served breakfast at the Commissioned Officers' Mess," Dick recalled. "Normally, they don't serve breakfast, so Jack (Mussier) and I , arrived at the COM early to see that everything was all right. There was no cook present, and the manager was also absent, so Jack turned to me and said, 'Do you want to cook, or serve?' I acted as the waitress, and Jack whipped up Richard W. Rusciolelli a good breakfast for Adm. Moran. What a way to start off with a new Commander," Dick laughed. The visit of then President John F. Kennedy was prohably the most exciting event that has occurred in Dick's 14 years with the office. He ranks meeting Allen Beam, the fourth man on the moon, as another exciting occurrence. "The function of the office is to see that there are no foul-ups during a visit by persons who come to NWC,1t Dick explained. "I'm fortooate in that I have a very good staff, and hoo-il
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d7267', 'fragment': '27'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.081759
+[[START CONTENT]]
+@uri=1084939
+@title=File: KennedyVisitsWithPilots.jpg; 
+@cdate=2024-08-05 00:41:48
+@archive_group_title=China Lake Museum
+@archive_title=People
+@item_id=1084939
+archive_group_title=China Lake Museum
+archive_title=People
+item_id=1084939
+item_path=n823405x n1021057x n1084913x n1084915x n1084938x n1084939x
+
+File: KennedyVisitsWithPilots.jpg; 
+OCR Text: Hi    \i iv   n    m SNNMMV    \l. NX   I II   !    HIM   President John F. Kennedy greets pilots at the Naval Air Facility during his 8 June 1963 visit to China Lake. Behind him are California Governor Edmund G. Brown and Capt. 7 US. Navy photo, courtesy US. Naval Museum of Annamth and Technology 
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '00108e0b', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.083844
+[[START CONTENT]]
+or one thing he's young. He is a new generation coming into power. People are hoping that new ideas and new approaches will find solutions to contemporary problems. FORWARD LOOKING PEOPLE i\Iy observations refer only to this area. Maybe the residents of NOTS comprise a bigger percentage of forward-looking people -not backward looking. Another reason for Kennedy'S popularity is that he doesn't talk down to anybody and I doubt if he talks up to anybody. He talks straight across. And his voice ca rries an unde rtone of sincerity. Franklin Roosevelt and Teddy Roosevelt both had that quality. WHAT THE POLLSTERS FIGURE The Gallop poll national popularity figures report a slip- ping from 83% two years ago to 64% last monlh. But in this area, Friday, June 7, I would estimate his popu- larity to be close to 100%. And if elections were tomorrow and success depended on the \'ote of tbis area he would have it made. Bible School Starts At Groves Monday Pro t est a nt Vacation Bible Get Tickets Now For Count Ba sie " THE S
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d6626', 'fragment': '9'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.093729
+[[START CONTENT]]
+ he will be Engineering Officer aboard an attack transport, the USS Rock   bridge (APA.228). Lt. Kennedy reported to NOTS on Feb. 15, 1962, from previous duty aboard the USS Delaware (ARS 23). He has been in the military service for 17'h years, having joined the Navy in Los Angeles in July 1946, after leav   ing his native slate of Rhode Is- land in 1945. During his tour at NOTS he has served as Sea Operations Of- ficer with d u t y at the Long Beach Facility. His wife, Sandra, and lheir two children - Mary 7 and Jos   eph 5, will accompany him to Norfolk where lhe family will eslablish residence. LT.(jg) J. A. KENNEDY GRADUATION - Upon completing the 12  week course in Fundan1entals of Supervision, Dr. Gautschi (left, front) and students assemble for group photo. Members of the class are Barbara Leisge, Ellen Cot t e r man, Deanna Bingham, Thelmi!: Calopedis, Elayne Colson, Evelyn Eckard, Isaac lind- say, Donr. Parrish, Gordon Stuart, Edward Thomas, Robert Boyls, Franklin EIIt, Ramon Oja, Rayford George, Jac
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d6a4d', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

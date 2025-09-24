@@ -1,0 +1,274 @@
+// Generate child entry list for tree nav
+// --------------------------------------
+function aib_generate_tree_nav_child($DBHandle,$AvoidSet,$UserRecord,$InitialParent,$ClickFunction,$ULClass = false,$LIClass = false,$ArchiveClass = false,$CollectionClass = false,$SubGroupClass = false,$ItemRefMap = false)
+{
+	// Create output line array
+
+	$OutLines = array();
+
+	// Get child list.  If no list, just return empty string.
+
+	$ChildList = ftree_list_child_objects($DBHandle,$InitialParent,false,false,FTREE_OBJECT_TYPE_FOLDER,false,true,false);
+	if ($ChildList == false)
+	{
+		return("");
+	}
+
+	if (count($ChildList) < 1)
+	{
+		return("");
+	}
+
+	$PathMap = $AvoidSet;
+
+	// Process each entry
+
+	$EmptyCallbackString = " onclick=\"empty_callback(event,this,$TempID);\" ";
+	foreach($ChildList as $ItemRecord)
+	{
+		$TempID = $ItemRecord["item_id"];
+		$IDName = "aib_navlist_entry_".$TempID;
+		$ChildIDName = "aib_navlist_childof_".$TempID;
+
+		// See if the child item is not visible
+
+		$LocalVisible = ftree_get_property($DBHandle,$TempID,AIB_FOLDER_PROPERTY_VISIBLE);
+		if ($LocalVisible == "N")
+		{
+			continue;
+		}
+
+		$FolderType = ftree_get_property($DBHandle,$TempID,AIB_FOLDER_PROPERTY_FOLDER_TYPE);
+
+		// Create input for line.  If the item exists in this parent, then checked.
+
+		if (isset($ItemRefMap[$TempID]) == true)
+		{
+			$IDBox = "<input type='checkbox' id='aib_item_checkbox_$TempID' onclick=\"set_tree_checkbox(event,this);\" checked>";
+		}
+		else
+		{
+			$IDBox = "<input type='checkbox' id='aib_item_checkbox_$TempID' onclick=\"set_tree_checkbox(event,this);\">";
+		}
+
+		$FolderType = ftree_get_property($DBHandle,$TempID,AIB_FOLDER_PROPERTY_FOLDER_TYPE);
+		$SubSize = ftree_list_child_objects($GLOBALS["aib_db"],$TempID,false,false,FTREE_OBJECT_TYPE_FOLDER,true);
+		if ($SubSize < 1)
+		{
+			$ImageString = " style='list-style-image: url(\"/images/button-nochild.png\");' ";
+			$SpanOn = "<span style='position:relative; left:-0.5em;'>";
+			$SpanOff = "</span>";
+		}
+		else
+		{
+			$ImageString = "";
+			$SpanOn = "<span style='position:relative; left:-0.5em;'>";
+			$SpanOff = "</span>";
+		}
+
+		switch($FolderType)
+		{
+			case AIB_ITEM_TYPE_COLLECTION:
+				$SubCount = ftree_list_child_objects_filter_by_aibtype($GLOBALS["aib_db"],$TempID,false,false,FTREE_OBJECT_TYPE_FOLDER,true,false,false,
+					array(AIB_ITEM_TYPE_SUBGROUP));
+				if ($SubCount < 1)
+				{
+					$ImageString = " style='list-style-image: url(\"/images/button-nochild.png\");' ";
+					$SpanOn = "<span style='position:relative; left:-0.5em;'>";
+					$SpanOff = "</span>";
+					$ClickFunctionString = " onclick=\"empty_callback(event,this,$TempID);\" ";
+				}
+				else
+				{
+					$ImageString = "";
+					$SpanOn = "<span style='position:relative; left:-0.5em;'>";
+					$SpanOff = "</span>";
+					$ClickFunctionString = " onclick=\"$ClickFunction(event,this,$TempID);\" ";
+				}
+
+				if (isset($AvoidSet[$TempID]) == false)
+				{
+					if ($CollectionClass != false)
+					{
+						$OutLines[] = "<li id='$IDName' $ImageString $ClickFunctionString class='$CollectionClass'>".$SpanOn.aib_urldecode($ItemRecord["item_title"]).$SpanOff."</li>";
+					}
+					else
+					{
+						$OutLines[] = "<li id='$IDName' $ImageString $ClickFunctionString>".$SpanOn.aib_urldecode($ItemRecord["item_title"]).$SpanOff."</li>";
+					}
+				}
+				else
+				{
+					if ($CollectionClass != false)
+					{
+						$OutLines[] = "<li id='$IDName' $ImageString $ClickFunctionString class='$CollectionClass'>".$SpanOn.aib_urldecode($ItemRecord["item_title"]).$SpanOff;
+					}
+					else
+					{
+						$OutLines[] = "<li id='$IDName' $ImageString $ClickFunctionString>".$SpanOn.aib_urldecode($ItemRecord["item_title"]).$SpanOff;
+					}
+
+					if ($ULClass != false)
+					{
+						$OutLines[] = "<ul id='$ChildIDName' $ImageString class='$ULClass' $EmptyCallbackString>";
+					}
+					else
+					{
+						$OutLines[] = "<ul id='$ChildIDName' $ImageString $EmptyCallbackString >";
+					}
+
+					$OutLines[] = aib_generate_tree_nav_child($DBHandle,$PathMap,$UserRecord,$TempID,$ClickFunction,$ULClass,$LIClass,$ArchiveClass,$CollectionClass,$SubGroupClass,$ItemRefMap);
+					$OutLines[] = "</ul>";
+					$OutLines[] = "</li>";
+				}
+
+				break;
+
+			case AIB_ITEM_TYPE_SUBGROUP:
+				$SubCount = ftree_list_child_objects_filter_by_aibtype($GLOBALS["aib_db"],$TempID,false,false,FTREE_OBJECT_TYPE_FOLDER,true,false,false,
+					array(AIB_ITEM_TYPE_SUBGROUP));
+				if ($SubCount < 1)
+				{
+					$ImageString = " style='list-style-image: url(\"/images/button-nochild.png\");' ";
+					$SpanOn = "<span style='position:relative; left:-0.5em;'>";
+					$SpanOff = "</span>";
+					$ClickFunctionString = " onclick=\"empty_callback(event,this,$TempID);\" ";
+				}
+				else
+				{
+					$ImageString = "";
+					$SpanOn = "<span style='position:relative; left:-0.5em;'>";
+					$SpanOff = "</span>";
+					$ClickFunctionString = " onclick=\"$ClickFunction(event,this,$TempID);\" ";
+				}
+
+				if (isset($AvoidSet[$TempID]) == false)
+				{
+					if ($SubGroupClass != false)
+					{
+						$OutLines[] = "<li id='$IDName' $ImageString $ClickFunctionString class='$SubGroupClass'>$SpanOn $IDBox ".aib_urldecode($ItemRecord["item_title"]).$SpanOff."</li>";
+					}
+					else
+					{
+						$OutLines[] = "<li id='$IDName' $ImageString $ClickFunctionString >$SpanOn $IDBox ".aib_urldecode($ItemRecord["item_title"]).$SpanOff."</li>";
+					}
+				}
+				else
+				{
+					if ($SubGroupClass != false)
+					{
+						$OutLines[] = "<li id='$IDName' $ImageString $ClickFunctionString class='$SubGroupClass'>$SpanOn $IDBox ".aib_urldecode($ItemRecord["item_title"]).$SpanOff;
+					}
+					else
+					{
+						$OutLines[] = "<li id='$IDName' $ImageString $ClickFunctionString >$SpanOn $IDBox ".aib_urldecode($ItemRecord["item_title"]).$SpanOff;
+					}
+
+					if ($ULClass != false)
+					{
+						$OutLines[] = "<ul id='$ChildIDName'  $ImageString class='$ULClass' $EmptyCallbackString>";
+					}
+					else
+					{
+						$OutLines[] = "<ul id='$ChildIDName' $ImageString $EmptyCallbackString >";
+					}
+
+					$OutLines[] = aib_generate_tree_nav_child($DBHandle,$PathMap,$UserRecord,$TempID,$ClickFunction,$ULClass,$LIClass,$ArchiveClass,$CollectionClass,$SubGroupClass,$ItemRefMap);
+					$OutLines[] = "</ul>";
+					$OutLines[] = "</li>";
+
+				}
+
+				break;
+
+			case AIB_ITEM_TYPE_ARCHIVE_GROUP:
+				if (isset($AvoidSet[$TempID]) == false)
+				{
+					if ($ArchiveClass != false)
+					{
+//						$OutLines[] = "<li id='$IDName' class='$ArchiveClass' onclick=\"$ClickFunction(event,this,$TempID);\">".aib_urldecode($ItemRecord["item_title"])."</li>";
+						$OutLines[] = "<li id='$IDName'  $ImageString class='$ArchiveClass' >".$SpanOn.aib_urldecode($ItemRecord["item_title"]).$SpanOff."</li>";
+					}
+					else
+					{
+//						$OutLines[] = "<li id='$IDName' onclick=\"$ClickFunction(this,$TempID);\">".aib_urldecode($ItemRecord["item_title"])."</li>";
+						$OutLines[] = "<li id='$IDName' $ImageString  >".$SpanOn.aib_urldecode($ItemRecord["item_title"]).$SpanOff."</li>";
+					}
+				}
+				else
+				{
+					if ($ArchiveClass != false)
+					{
+//						$OutLines[] = "<li id='$IDName' class='$ArchiveClass' onclick=\"$ClickFunction(event,this,$TempID);\">".aib_urldecode($ItemRecord["item_title"]);
+						$OutLines[] = "<li id='$IDName'  $ImageString class='$ArchiveClass'>".$SpanOn.aib_urldecode($ItemRecord["item_title"]).$SpanOff;
+					}
+					else
+					{
+//						$OutLines[] = "<li id='$IDName' onclick=\"$ClickFunction(this,$TempID);\">".aib_urldecode($ItemRecord["item_title"]);
+						$OutLines[] = "<li id='$IDName'  $ImageString >".$SpanOn.aib_urldecode($ItemRecord["item_title"]).$SpanOff;
+					}
+
+					if ($ULClass != false)
+					{
+						$OutLines[] = "<ul id='$ChildIDName' class='$ULClass' $EmptyCallbackString>";
+					}
+					else
+					{
+						$OutLines[] = "<ul id='$ChildIDName' $EmptyCallbackString>";
+					}
+
+					$OutLines[] = aib_generate_tree_nav_child($DBHandle,$PathMap,$UserRecord,$TempID,$ClickFunction,$ULClass,$LIClass,$ArchiveClass,$CollectionClass,$SubGroupClass,$ItemRefMap);
+					$OutLines[] = "</ul>";
+					$OutLines[] = "</li>";
+				}
+
+				break;
+
+			case AIB_ITEM_TYPE_ARCHIVE:
+				if (isset($AvoidSet[$TempID]) == false)
+				{
+					if ($ArchiveClass != false)
+					{
+						$OutLines[] = "<li id='$IDName'  $ImageString class='$ArchiveClass' onclick=\"$ClickFunction(event,this,$TempID);\">".$SpanOn.aib_urldecode($ItemRecord["item_title"]).$SpanOff."</li>";
+					}
+					else
+					{
+						$OutLines[] = "<li id='$IDName'  $ImageString onclick=\"$ClickFunction(this,$TempID);\">".$SpanOn.aib_urldecode($ItemRecord["item_title"]).$SpanOff."</li>";
+					}
+				}
+				else
+				{
+					if ($ArchiveClass != false)
+					{
+						$OutLines[] = "<li id='$IDName'  $ImageString class='$ArchiveClass' onclick=\"$ClickFunction(event,this,$TempID);\">".$SpanOn.aib_urldecode($ItemRecord["item_title"]).$SpanOff;
+					}
+					else
+					{
+						$OutLines[] = "<li id='$IDName'  $ImageString onclick=\"$ClickFunction(this,$TempID);\">".$SpanOn.aib_urldecode($ItemRecord["item_title"]).$SpanOff;
+					}
+
+					if ($ULClass != false)
+					{
+						$OutLines[] = "<ul id='$ChildIDName'  $ImageString class='$ULClass' $EmptyCallbackString>";
+					}
+					else
+					{
+						$OutLines[] = "<ul id='$ChildIDName' $ImageString $EmptyCallbackString >";
+					}
+
+					$OutLines[] = aib_generate_tree_nav_child($DBHandle,$PathMap,$UserRecord,$TempID,$ClickFunction,$ULClass,$LIClass,$ArchiveClass,$CollectionClass,$SubGroupClass,$ItemRefMap);
+					$OutLines[] = "</ul>";
+					$OutLines[] = "</li>";
+				}
+
+				break;
+
+			default:
+				break;
+		}
+	}
+
+	return(join("\n",$OutLines));
+}
+
+

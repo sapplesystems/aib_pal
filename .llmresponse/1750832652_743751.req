@@ -1,0 +1,103 @@
+[[CHAT START]]
+{'id': 'chatcmpl-e88ee04a-59d0-43c7-8c50-7a1d167c24bb', 'object': 'chat.completion', 'created': 1750832665, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': 'I don\'t have enough information to answer your question. The provided context appears to be a collection of text documents with metadata, but it doesn\'t seem to be related to "sapple systems". Could you please provide more context or clarify what you mean by "sapple systems"?'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 4006, 'completion_tokens': 56, 'total_tokens': 4062}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=1.248859
+[[START CONTENT]]
+ou can supply will help minimize processing time. '.,.:.,  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000937fe', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.254065
+[[START CONTENT]]
+ Type Grade St. 107160F,>71 r r' L A arr ANAA   >A Al\ L. ' rt O r ,1.4 1 I 1 piti r.'Z , < X .1 -7 Int.,1 2.64. 'Vk. 4.-to-69 IE 9 A-Ve / 45-4 /97/ 1.5 40 74  . 91 AGA A /*Cl ?71(. / 1 SPEC'At. FEATURES 1C1 Book Coaes Built -in Sed; Venetion Bunds 3hutters A /JUILT-  ,0-K'TI re&7- FF 4-5-0 COMPUTATION 0 4 2..1 Approiser 8 Date . s /-30-5, 4 10' t,-9.5  ' Rb R c . TA 94 l. .76 44 ' I 7-&. '  -9.  ,1 Unit Unit Cost Unit Unit Cost Unit Cot Wnit Unit Cost Unit Unit Areo Cost Cost Cost Cost Cost Cost Cost j Lost Cost Cost Cost r.p C 515 4.5-77 6-9 *413 5-'5 6,58-7 1/1   IL,-10   2 . , 5-0 -35 6 /'; te. t 6 17 re GE:-7 53 or 6 3-3 1 46 1 470 6 - C. p -3 9 / 9 k m 35' . FO 93 569- )97 3,4- Cost F.1 '(AfF>L A f, E- 2 51) H r,vr 1 1 46 340 *1 - CP 24 0 C. l<r u C. ra, .933 45-0 /008 340 .8.1-.5 *f- 534 .   6   7 -4 1'7   } 49 07 0 42- 67 '9 700 111-1 1 1 TOTAL 37-73 -7590 7844 is # -10 % NORMAL St GOOD .gw r t<r: A L R.C.L.N.D. 2 7 0 0 /08 0 3 7 5-3 n 2 : 24'100, AH 530-A 10-'47 Ct  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000dd128', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.287703
+[[START CONTENT]]
+..~= JUNIPERO -   - - ... ':I.:.:.= AV. ,He Ja5 ;J!_}_ I d .,, .,..., ~ ~1 8 0 ~   ta 'l: 1 ~ ~ EJE] ~ er ~-~~ t     :,        # ~ i / .~ ,   '# .   '1#7 4' -,;i,ow.) , ,; {S   r Drr11 Q ., # ; ; ( f ,    / - - - - - - - ~ . ./t ~ r_ ~ ,' , ; 22 .   .1J. , ; -~ , ; IJ:; d'wA _ = ~ :    "' 'CJ         ~... - ~ , JI" - ~ ..         -       , -;g, ' ,,., ,., , ;,.,fl~- - , / ,; . '\t:I # ,. :1 \.. r1 rr-.t ~ _fToL ~ I' ,, I # / , /' , /, IA r!J :.&i A ,.     . , . '   * \  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '0009a8b0', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.289308
+[[START CONTENT]]
+fe Attn Mon form. Cupb'd Closet mhlhip Floors Wells #  c. La 72,6. Type Grade St. 107160F,>71 r r' L A arr ANAA   >A Al\ L. ' rt O r ,1.4 1 I 1 piti r.'Z , < X .1 -7 Int.,1 2.64. 'Vk. 4.-to-69 IE 9 A-Ve / 45-4 /97/ 1.5 40 74  . 91 AGA A /*Cl ?71(. / 1 SPEC'At. FEATURES 1C1 Book Coaes Built -in Sed; Venetion Bunds 3hutters A /JUILT-  ,0-K'TI re&7- FF 4-5-0 COMPUTATION 0 4 2..1 Approiser 8 Date . s /-30-5, 4 10' t,-9.5  ' Rb R c . TA 94 l. .76 44 ' I 7-&. '  -9.  ,1 Unit Unit Cost Unit Unit Cost Unit Cot Wnit Unit Cost Unit Unit Areo Cost Cost Cost Cost Cost Cost Cost j Lost Cost Cost Cost r.p C 515 4.5-77 6-9 *413 5-'5 6,58-7 1/1   IL,-10   2 . , 5-0 -35 6 /'; te. t 6 17 re GE:-7 53 or 6 3-3 1 46 1 470 6 - C. p -3 9 / 9 k m 35' . FO 93 569- )97 3,4- Cost F.1 '(AfF>L A f, E- 2 51) H r,vr 1 1 46 340 *1 - CP 24 0 C. l<r u C. ra, .933 45-0 /008 340 .8.1-.5 *f- 534 .   6   7 -4 1'7   } 49 07 0 42- 67 '9 700 111-1 1 1 TOTAL 37-73 -7590 7844 is # -10 % NORMAL St GOOD .gw r t<r: A L R.C.L.N.D. 2 7 0 0 /08 0 3 7 5-3 n 
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '0009368a', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.299542
+[[START CONTENT]]
+t DETN  *12* '*tOW.) m i ' 1Lld 5   C'' I . . JUNIPERO -4 , 4 7 .... 1 - 4- uy--- 13 2- y. 7 -V 2-U- - 1 2. -- -- id ! EVWe ' ' 0 :1/ . 4. '. a. \ ' 0 47 .. 1 1.%1 0 8 .:f %*4e \ V e // , 146 -* 14{Ej 0 ........5/ 4 0/ . A- ...7 . , .       /'7 I I /-1 El 1 4/3 7 0,-'. \6 34/ 67 I I , v m I w .. Ir-4 I . 8 .7 916   . /    ,/$07 .. L -1-1 . %/ .,7 1 -0 4 2 -25 :: 1 . //. i b GIBSON . ' 0 / /2 . ' .4 ' ft 4>e fil . 4. F .11 % .,7 - .. L-3 ' tiA .. .. I . ... 1..iLL..1.,F/ .. '' A<Ah'*2'9 ... *4\6 9... ' 1   1 Afy" 7. -f<i> 436*' 2 0 7 4 / 4 ./ .607:4,1.., 44 Se-/ a 43 ' , 1 <4 . / e , I y, \ / .. V 42.6 h. 4 A .3/ 1 ' '' "Nt   / 41 4 * 030 ./ v : . 4-...3  , ' ; V , : . 4,4 A 7..04 463 /i q i ' 90 - ... Scab F'.2 - - . \2. 4 V I a P .: . 4 r -1 1 -J : 1 26 1. 1. .r- ..11 j j  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '00091ff7', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.300014
+[[START CONTENT]]
+v( a...:t.....,.,,wM~...J i.o...U1 Crtr .... T.,..11..ol.&i J...pn,n-   Ltl r.-..1,~,.     1 ,.__.'. :r ...., . :;-r. i.,.,c'.'!:t-. :....,, ... , ; ' ; ~ :: ~:..: .   " . ' . .     _1_  . -.,,/ ll.- , ,) - .~:,. ~- .;.. . 1.'C' ..... .''-\::: .11 ;4,. I .i:.:.. : ,. ~a:"'   " "/ ., I I (,,/.,~ / ~   ~ " ; ; ~ .'1,. '\, . -    '   "'::' (,   i I r - L., .?:ti 0 I ,,. l   'a:f" /"\__ .bt.awU, Bn,u;i..l~~ . .. '(  ac),, <...';':.-:~ (/.,_[.;,,f I , ,-- --- ... . ..... . .. (1,l-::1! J l / i.,L        ' I; u . :.1. l 1~ il f ~ . IOLD~,....... JU#~ J~ t{TT .......... ,. ---- - ,_,.. j l "' 1 3 ,_, ,,.: ~ ;- 1...,); _i:_t_i'.__:',1_'--- - . - :;.} . ' I ~ )' )' eo&..a,.,...T   lrt.t r 111    SI' J,a:L,;:_ f_r::___i;, e  .a ~ ,.-. 1' JUN~ lf<l2 7 I0(.8 ,0.- , . . . .1'     JUN U IHZ .., I v..*" J.nl K.uw ~...., \ k..1 l,.'k1 .... lv      ~ -----~- -~-  ---- -~---   -------- .,.,.~ ,..... !Iii 94 Ut: '\? ? IOLO~T   -. , 3 f JUN a-4. IHZ ao....~,.... /J- )' /IIN a-4. IWZ I ICIL9 """- , ... \' L,'. _ ,~~~:-~:7~../--,.
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d31a6', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.303895
+[[START CONTENT]]
+leaner System (.A) , X - X ,:/~ ~ .    sq. ft. @ $ ~ _        r , \Depreciated I ?... :.:.L_  \$    :f Present Value~-----, .AJ[e /(-~ Remodeled Age - ,- (B)     X --~- X ... c,urlt. - sg_,.f!,______@___1 .4( / .:.'-,, (C) 4' x { ?--. x -- I' - .; , cm,-'ft,   , r _.I sq. ft. @ $ --~ ,, ....-- ~ r (D) :..~ V' .;..-. y- ' , 7 ) ,.. x X - ~ . ( JI .-, I ,~ ,~ ~- sq. ft. @ $ . ,,   - ~    .    IRetaining Wall ., ,.,,. ~ . 0, ,..'\ ,~ ',   -'' - sq. ft. @ $ 1 . c ,.. ,   Tank cu. ft. Basem't X X sq. ft. @ $ Pool   Garage V y- cu. ft. ,~ ,~ - sq. ft. @ $ IOutbuilding Extras HEIGHT:.......................FT. Replacement Total 1$ ...., .t. .-r',....__ ITOTAL /~ __ / VALUE Condition: New good _ MVu m Obsolescence y   e11 No De_!l_reciation % Good $ _7 l' () THE MODSRN ANALYTIC METHOD OF REALTY VALUATION-JAMES G. STAFFORD Be ASSOCIATES, INC., OAKLAND AND SAN FRANCISCO, CALIF. COPYRIGHT-1928 Poor !.. (See :Reverse) BUCKLE\' ~ CURTIN  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '0009db3b', 'fragment': '5'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.306455
+[[START CONTENT]]
+1n,t Apparatus Therm~--eat Cont.rol Sprinkle . System - Autom .\Fire Alarm Vaouu Cleaner System A,.  : Remodeled Age J ""j / Mej)J_~_f?' Good (C) (,,,,i X /. ,. r:[O____c_s~@..1 ~ - - - - - , H. @     57j~k$ ;~ :~_!o_o I~:~::;;f-:~~ue II 4<''J,--o t,J.L.@,i,{,2S /.ou ~ I I - - - Obsol_  )~cenc~_ Yes No (D) X X cu. ft. sg. ft. ig) $" RetaininKWall cu. ft, K._ '' sq. ft. @ $ cu. ft. 2,. sq. rt. (JJI ;i; Tank I J Basem't " " sq. ft. @ $ eu. ft. A. A - sq. It. (fl! :ti 0 Pc0 00 0l~-------J--~-----~ Garage X X: Extras HEIGHT,... ...FT. sq. ft, @ $ Replacement Total 1 /""vb o Q_gt_buildill   TO'l'AL YALtrE $ 7' ?---1::) De]IT_!)Cia,_tion %_ Good --! --:.?- 1928 BLOCK FILES )ee lteverse) THE MODERN ANALYTIC METHOD OF REALTY VALUATION-JAMES G, STAFFORD 8:: ASSOCIATES, INC., OAKLAND AND SAN FRANCISCO, CALIF. COPYR:IGHT-1928 BUCKLJ;:Y~CURTIN  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000db351', 'fragment': '5'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.307300
+[[START CONTENT]]
+ern freeway s. The Wolfs' other }~~  - l~i~ 11 ~t~~c~~e~t~sr b:~:f:it~~w~f~~r11:~:J;~~t!~   ~1~~~~~~~ ~!~~~~u~~ V~~~;g~lat~~   s now majoring in drnma aL San in l!\~~Yh~~ar~:~ot~r:t~~~~~;~t~; ei 1 :!~~:i~sf:icb:;ii~tes;/~~f~; ~hf1 13J3~~t~h  ~!~~s0 !n'  ~~:\iy  ;i~~s:;~~~~t-l,i, People." liob expla ms th~~~~c;e~n1~eisin t~c ;;:f1 ~o~;~~e~~c;p~~~~1 ~~e~e~~lep1 ~~ /,0~1 ~ Wntmg. Their day was brigh tened not long ago when they ~t:e;n~1:i~~~fc ~~eJ; ~~s~i;\~bi1\1 /~;o~e~~da:~~if~:~1~ot~:~~ thing_likc tlus: "~vcd the clothes, but we also love you." This sort of tlnng you can't buy in any business. by Thia.~ Grov~ FROM A BLACK PERSPECTIVE from flagr IJ country .. . Now after centuries of white history, let's have a few years of black history ," says James C. Taylor, Monterey Peninsula College professor and president of the Monterey br~11ch of the NAACP.   me college's newly instituted Black Studies Deparlmcnl is offcrin:; a ~otal of ni.lle ~lack-oriented co~rses for the spring semester.   1 hcse courses mc!ude: Co
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000cee8d', 'fragment': '5'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=1.313312
+[[START CONTENT]]
+WITH COMPLm  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000bca24', 'fragment': '4'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

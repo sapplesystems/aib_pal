@@ -1,0 +1,290 @@
+array (
+)
+array (
+  13 => 
+  array (
+    'value' => '
+ I                         ],Fifth Grade         /|| [r, au,[r,       Lmrl, @ , day for Oakland Calif  to visit a WASHINGTON S DRY         
+        Heidi  a colored f m and a unit WE i                                 NBoW  ,other and sister-in-law Mr andIpEA GOAL IS CUT DOWN
+       ll-ll      jIo. tra, spo ta  on , ere c, joyed inl  Rayn,ond McCu, o  h. l
+        II 11  J/kk.l, lL i Io,  Z,           Ii [ |WT 1 tHI T U lel lel       . [ The 1%7 dry pea acreage goal
+ it II,-       4 J IJ[]-  [ U|[  [ [   | [ [[r[ ][      l lwrs.  narm  all)lel ws-lfor tile State of  Vashington is
+|     1           .  l ce t, lst ls a new pUl)nii our w--  *a,*-- a t* m ,*- m    ted Mr and   Mr  M turiee   Stilson , -                                                                                                                                                                    ,
+                                                                                                                                                                      [   i slignllv nlore t lan nail tile total
+|  [X,N kV 5   III  .LI L   Z )J, osT t ;I 2:d   rs  red a,d L e o;,zI  ) rl%,2l;s C a:;; for ,he naIion accord,l  to f  l,re 
+ [,I  .    ,[ . .         }.  . ]son Ch rles attended the  vesperlf.    J     z          gton o Ifrom the Production Marketing
+ E                -      .  , /1 pocm EmH    auurl.  . ong nm COl nposatlons in                           i] service, at Pulhnan high .school,ounoay.            ,1 .A(t n n        ,stration. The           oal for           tills
+                                I              I Sunday afternoon.             [         --   --   -          [ state is 235,000 acres compared
+        HIGH SCHOOL           ]                             [ Gene .MeCullough who was re.[        Starchy Cereals       !with a national goal of 478,000
+       Smoker At Ga ield      ]        nug  lresereens      [cently dlscarged from the navy and]Cereal grains consist principally [acres. The P IA figures show  that
+  The smoker at Garfield last FriI Firesereens should fit snugly al /home with his parents, Mr. andlof stareh, ghdefho/mS fS dntOthPr;ddee t lissa]thet1946tPlal ting was 512,000 acres
+  ay night consisted of: 3-3 minute[the top as well as sides.  /Mrs. R. A. McCullough left Thurs-[ energy an              Y.  in t s   te.
+
+rounds and 12 bouts.
+
+         Two Palouse boys, Bud Deerkop
+   and Alvin Cox, participated.  Bud
+   ]Deerkop lost to Curtis of Garfield.
+   .Cox won the main event from John
+   I-tarwood.
+       The Palouse smoker has been
+    cheduled for Novelnber 29. There
+    will be a return match    between
+   !Eo  and Harwood.
+          Band Cncert
+      The date for the Concert has
+  ]been re-set due to the Junior play
+  , which will be held this Friday. The
+  date set is on Thursday Dec. 5th.
+  Student Body Holds Meeting
+      The student body president, Tom
+  l-Iolway, called a meeting for the
+  lPnrchasing of a  zift for Keith Tar-
+  lbox, whc i-: co:lfined in St. Lukes
+  ]hospital with infantile Paralysis.
+ A radio was decided upon. Be
+ rantner and Elizabeth Billings
+   ere appointed to buy the gift.
+ Merry-Go- Round
+ The annual Merry- Go -aRound
+  ,hich has been scheduled for Nov-
+   mher 27, will have the four teams;
+ ]Palouse, Garfield, Pullman, and
+ Oakesdale participating.
+     The Pep Club has planned enter-
+ tainment for during the half of the
+ games.
+                   GRADE SCHOOL
+ First Grade
+ Richard Styer is absent with
+ lpneumonia. Several are absent with
+ chicken pox.
+     We have a new girl, Betty Bobo,
+ from Tacoma, Washington.
+                            Sixth Grade
+     yimmy Swan entered school from
+ CleElum, Washington.
+                          Eighth Grade
+     We have a new student, Bill
+ Swan from CleElum, Washington.
+                         Second Grade
+    Room helpers for the week are:
+]Boards, Roger Miller; Books, Mar-
+iene Wilhelm; Floors, Ray Martin;
+Lockers, Donna Watson; Room
+Inspector, David Kaiser.
+     Michael Grady has been absent
+ for two weeks because of an ap-
+
+lPendectomy. We hope he will soon
+]be back to school. We  sent.him
+
+flowers.
+    Jacqueline Humphreys brought a
+]huge box of chocolates to school
+and treated us on her birthday
+November 12.
+
+Farmers. Carpenters
+         Sa ,s Sharpened
+                 Re-Toothed
+
+Fully Automatic Work by Fac-
+tory Reconditioning  Methods.
+
+WE ALSO MAKE KEYS
+Leave Orders at
+MARSHALL-WELLS
+STORE
+              Palouse, Wash.
+
+O
+
+ -V Zp Nature s way to
+                                  reserve fine grapes
+
+ The beverage of
+                                                    moderation
+
+That which makes good
+food taste better
+
+W]N  Is the pure fermented juice of vine-rlpened fresh grapes, or of other sound
+fruits or berries. Wine is one of the most important of western farm crops. It is
+
+a product of agriculture, as bread and butter are.
+
+    In growing wines, the ripe grapes are first separated from the stems. Then the grapes
+are crushed and allowed to ferment. The young wine goes noxt into large storage
+casks to settle and age. And as time goes on it is drawn off into smaller and smaller
+
+casks, each time becoming clearer in color and finer in flavor.
+
+        Finally wine is bottled and stored away in bins till it fully matures. Wine is simply
+n                                                          
+ ature s way to preserve good grapes or berries. Try some tonight. Wine Advisory
+
+ 
+
+
+
+
+',
+    'def' => 
+    array (
+      'field_id' => '13',
+      'field_title' => 'OCR+Text',
+      'field_data_type' => 'B',
+      'field_format' => '',
+      'field_size' => '',
+      'field_owner_type' => 'S',
+      'field_owner_id' => '-1',
+      'field_symbolic_name' => 'ocrtxt',
+    ),
+  ),
+)
+/home/stparch/virtual_sites/aib_indexdata/000518f2/00053c9d/00/05/6b/66/00056b66.est
+array (
+  13 => 
+  array (
+    'value' => '
+ I                         ],Fifth Grade         /|| [r, au,[r,       Lmrl, @ , day for Oakland Calif  to visit a WASHINGTON S DRY         
+        Heidi  a colored f m and a unit WE i                                 NBoW  ,other and sister-in-law Mr andIpEA GOAL IS CUT DOWN
+       ll-ll      jIo. tra, spo ta  on , ere c, joyed inl  Rayn,ond McCu, o  h. l
+        II 11  J/kk.l, lL i Io,  Z,           Ii [ |WT 1 tHI T U lel lel       . [ The 1%7 dry pea acreage goal
+ it II,-       4 J IJ[]-  [ U|[  [ [   | [ [[r[ ][      l lwrs.  narm  all)lel ws-lfor tile State of  Vashington is
+|     1           .  l ce t, lst ls a new pUl)nii our w--  *a,*-- a t* m ,*- m    ted Mr and   Mr  M turiee   Stilson , -                                                                                                                                                                    ,
+                                                                                                                                                                      [   i slignllv nlore t lan nail tile total
+|  [X,N kV 5   III  .LI L   Z )J, osT t ;I 2:d   rs  red a,d L e o;,zI  ) rl%,2l;s C a:;; for ,he naIion accord,l  to f  l,re 
+ [,I  .    ,[ . .         }.  . ]son Ch rles attended the  vesperlf.    J     z          gton o Ifrom the Production Marketing
+ E                -      .  , /1 pocm EmH    auurl.  . ong nm COl nposatlons in                           i] service, at Pulhnan high .school,ounoay.            ,1 .A(t n n        ,stration. The           oal for           tills
+                                I              I Sunday afternoon.             [         --   --   -          [ state is 235,000 acres compared
+        HIGH SCHOOL           ]                             [ Gene .MeCullough who was re.[        Starchy Cereals       !with a national goal of 478,000
+       Smoker At Ga ield      ]        nug  lresereens      [cently dlscarged from the navy and]Cereal grains consist principally [acres. The P IA figures show  that
+  The smoker at Garfield last FriI Firesereens should fit snugly al /home with his parents, Mr. andlof stareh, ghdefho/mS fS dntOthPr;ddee t lissa]thet1946tPlal ting was 512,000 acres
+  ay night consisted of: 3-3 minute[the top as well as sides.  /Mrs. R. A. McCullough left Thurs-[ energy an              Y.  in t s   te.
+
+rounds and 12 bouts.
+
+         Two Palouse boys, Bud Deerkop
+   and Alvin Cox, participated.  Bud
+   ]Deerkop lost to Curtis of Garfield.
+   .Cox won the main event from John
+   I-tarwood.
+       The Palouse smoker has been
+    cheduled for Novelnber 29. There
+    will be a return match    between
+   !Eo  and Harwood.
+          Band Cncert
+      The date for the Concert has
+  ]been re-set due to the Junior play
+  , which will be held this Friday. The
+  date set is on Thursday Dec. 5th.
+  Student Body Holds Meeting
+      The student body president, Tom
+  l-Iolway, called a meeting for the
+  lPnrchasing of a  zift for Keith Tar-
+  lbox, whc i-: co:lfined in St. Lukes
+  ]hospital with infantile Paralysis.
+ A radio was decided upon. Be
+ rantner and Elizabeth Billings
+   ere appointed to buy the gift.
+ Merry-Go- Round
+ The annual Merry- Go -aRound
+  ,hich has been scheduled for Nov-
+   mher 27, will have the four teams;
+ ]Palouse, Garfield, Pullman, and
+ Oakesdale participating.
+     The Pep Club has planned enter-
+ tainment for during the half of the
+ games.
+                   GRADE SCHOOL
+ First Grade
+ Richard Styer is absent with
+ lpneumonia. Several are absent with
+ chicken pox.
+     We have a new girl, Betty Bobo,
+ from Tacoma, Washington.
+                            Sixth Grade
+     yimmy Swan entered school from
+ CleElum, Washington.
+                          Eighth Grade
+     We have a new student, Bill
+ Swan from CleElum, Washington.
+                         Second Grade
+    Room helpers for the week are:
+]Boards, Roger Miller; Books, Mar-
+iene Wilhelm; Floors, Ray Martin;
+Lockers, Donna Watson; Room
+Inspector, David Kaiser.
+     Michael Grady has been absent
+ for two weeks because of an ap-
+
+lPendectomy. We hope he will soon
+]be back to school. We  sent.him
+
+flowers.
+    Jacqueline Humphreys brought a
+]huge box of chocolates to school
+and treated us on her birthday
+November 12.
+
+Farmers. Carpenters
+         Sa ,s Sharpened
+                 Re-Toothed
+
+Fully Automatic Work by Fac-
+tory Reconditioning  Methods.
+
+WE ALSO MAKE KEYS
+Leave Orders at
+MARSHALL-WELLS
+STORE
+              Palouse, Wash.
+
+O
+
+ -V Zp Nature s way to
+                                  reserve fine grapes
+
+ The beverage of
+                                                    moderation
+
+That which makes good
+food taste better
+
+W]N  Is the pure fermented juice of vine-rlpened fresh grapes, or of other sound
+fruits or berries. Wine is one of the most important of western farm crops. It is
+
+a product of agriculture, as bread and butter are.
+
+    In growing wines, the ripe grapes are first separated from the stems. Then the grapes
+are crushed and allowed to ferment. The young wine goes noxt into large storage
+casks to settle and age. And as time goes on it is drawn off into smaller and smaller
+
+casks, each time becoming clearer in color and finer in flavor.
+
+        Finally wine is bottled and stored away in bins till it fully matures. Wine is simply
+n                                                          
+ ature s way to preserve good grapes or berries. Try some tonight. Wine Advisory
+
+ 
+
+
+
+
+',
+    'def' => 
+    array (
+      'field_id' => '13',
+      'field_title' => 'OCR+Text',
+      'field_data_type' => 'B',
+      'field_format' => '',
+      'field_size' => '',
+      'field_owner_type' => 'S',
+      'field_owner_id' => '-1',
+      'field_symbolic_name' => 'ocrtxt',
+    ),
+  ),
+)
+/home/stparch/virtual_sites/aib_indexdata/000518f2/00053c9d/00/05/6b/66/00056b66.est

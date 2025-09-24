@@ -1,0 +1,111 @@
+[[CHAT START]]
+{'id': 'chatcmpl-5b9ec627-9632-433d-b486-5ed59dca9304', 'object': 'chat.completion', 'created': 1751015831, 'model': '/mnt/data/llama_cpp_models/Meta-Llama-3-8B-Instruct-Q4_0.gguf', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': 'According to the provided documents, Pacific Grove is located on the Monterey Peninsula, which is 120 miles south of San Francisco, 60 miles south of San Jose, and 345 miles north of Los Angeles.'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 2463, 'completion_tokens': 42, 'total_tokens': 2505}}
+[[CHAT END]]
+[[START LOCAL]]
+[[START DOC]]
+SCORE=0.809761
+[[START CONTENT]]
+ in California secondary schools 192E-1963; faculty and staff Monter:y Institute of Foreign Studies 1964-1969. After retirement from Los Angeles City Schools, cams to Pacific Grove, built home in sand dunes overlooking Pacific Ocean between Asiloa~r and the Lig hthouse on Calle de los Amigos. Born March 17, 1904, in San Francisco (in sand dunes there, south of Golden Gate Park, on shores of the Pacific). I. Pacific Grove's location - on tip of rlonterey Peninsula - "the peninsula of the Peninsula" (Pacific Grove - 1375-1975, Evelyn Grantham Miller et al.) "The sea around us" - (Robert Louis StAv~nson, The Old Pacific Capital) Note comments~of R. L. S. in 1879 as printed in Chamber of Commerce brochure about Pacific Grove (Pacific Grovo - the City of Homns) -publication date not given, probably 1940. A. Street names reflecting location on shores of the Pacific:     n u o n e ~ , n Pacific - Asilomar ( coined word meaning r_tr.,2~t by the s.,a - Y.W.C.A. 1913) Ocea   ~ View - Beach - Arena (Sand) -Sunset -Sea V
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000b479f', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.891100
+[[START CONTENT]]
+@uri=868912
+@title=File: 301 - 500_s 16TH ST_044.pdf  Page     1; 
+@cdate=2024-02-04 22:42:01
+@archive_group_title=Heritage Society of Pacific Grove
+@archive_title=Historical Collections
+@item_id=868912
+archive_group_title=Heritage Society of Pacific Grove
+archive_title=Historical Collections
+item_id=868912
+item_path=n539319x n596134x n656387x n656760x n868905x n868906x n868912x
+
+File: 301 - 500_s 16TH ST_044.pdf  Page     1; 
+OCR Text: Archited, Phase II format, utilizing the Pacific Grove Guidelines for Historic Assessments; March 24, 2008. D. Historical Background Historical Context of the Study Area: The City of Pacific Grove is located on the Monterey Peninsula, which is 120 miles south of San Francisco, 60 miles south of San Jose, and 345 miles north of Los Angeles. The peninsula is bordered by Monterey Bay to the north, the Pacific Ocean to the west, and Carmel Bay to the south. Although characterized by cool, dry summers and wet winters, the regions of Monterey County exhibit considerable climatic div
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000d4230', 'fragment': '1'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.903250
+[[START CONTENT]]
+es of the Pacific, forms the southern boundry of the bay. Out upon this promontory, ro- mantically situated, overlooking the mountain environed bay, lies Pacific Grove. A glance at the map of Pacific Grove and its surroundings must at once con- vince the reader that this rural city has an ideal location. What a grand and exalt- ing panorama is seen from the heights of this promontory! What enchanting views one must have everywhere, whether standing on some stern rock on the wave wash- ed shore or sauntering through the ozone laden pine forests! What charming nooks and corners these forests and this ocean worn coast must afford! The natural beau- REMNANTS OF THE PAST  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000e6273', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.905981
+[[START CONTENT]]
+hip, to this admirable course of study. About three hundred persons on this Coast have completed the prescribed four years' course, and have received their diplomas from the central office. CONNECTION OF THE PACIFIC BRANCH C. L. S. C. WITH THE PARENT SOCIETY. The Pacific Coast Branch is in every sense auxiliary to the National organization. All names and fees are forwarded promptly by the Pacific  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000b423b', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.906047
+[[START CONTENT]]
+ Ave. www.pacificaroveheritage.org  
+
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000db442', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.908526
+[[START CONTENT]]
+rce who are here in the interest of the new Fresno-Monterey railroad. Mrs. W. W. Wright of the Presidio also entertained at an elaborate lea. DEL MONTE WEEKLY 5 Courier and Traveler A PACIFIC SANITARIUM (Correspondence of the New York Observer) Hotel del Monte, Monterey, Cal., Oct. 31, 1883. Nothing in these United States grat   ifies the seeker after health more than its wide range of climates. A few days since I was crossing one of the highest passes of the Rocky Mountains, nearly 1 1,000 feet above tide, the scenery grand beyond description, but cold and forbidding as an arctic sea; to-day I am in the midst of Italian sunshine, fragrant flowers and waving palms. Several years ago Messrs. Stanford, Crocker, Huntington and Hopkins, the four railway kings of the Pacific, saw that here by the shores of this pretty bay and along a coast unequaled for grandeur of scenery was a great oppor   tunity to build up a superb health and pleasure resort for both winter and summer; so they established the Pacific Improvem
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000ca084', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.908526
+[[START CONTENT]]
+rce who are here in the interest of the new Fresno-Monterey railroad. Mrs. W. W. Wright of the Presidio also entertained at an elaborate lea. DEL MONTE WEEKLY 5 Courier and Traveler A PACIFIC SANITARIUM (Correspondence of the New York Observer) Hotel del Monte, Monterey, Cal., Oct. 31, 1883. Nothing in these United States grat   ifies the seeker after health more than its wide range of climates. A few days since I was crossing one of the highest passes of the Rocky Mountains, nearly 1 1,000 feet above tide, the scenery grand beyond description, but cold and forbidding as an arctic sea; to-day I am in the midst of Italian sunshine, fragrant flowers and waving palms. Several years ago Messrs. Stanford, Crocker, Huntington and Hopkins, the four railway kings of the Pacific, saw that here by the shores of this pretty bay and along a coast unequaled for grandeur of scenery was a great oppor   tunity to build up a superb health and pleasure resort for both winter and summer; so they established the Pacific Improvem
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000ca18d', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.908526
+[[START CONTENT]]
+rce who are here in the interest of the new Fresno-Monterey railroad. Mrs. W. W. Wright of the Presidio also entertained at an elaborate lea. DEL MONTE WEEKLY 5 Courier and Traveler A PACIFIC SANITARIUM (Correspondence of the New York Observer) Hotel del Monte, Monterey, Cal., Oct. 31, 1883. Nothing in these United States grat   ifies the seeker after health more than its wide range of climates. A few days since I was crossing one of the highest passes of the Rocky Mountains, nearly 1 1,000 feet above tide, the scenery grand beyond description, but cold and forbidding as an arctic sea; to-day I am in the midst of Italian sunshine, fragrant flowers and waving palms. Several years ago Messrs. Stanford, Crocker, Huntington and Hopkins, the four railway kings of the Pacific, saw that here by the shores of this pretty bay and along a coast unequaled for grandeur of scenery was a great oppor   tunity to build up a superb health and pleasure resort for both winter and summer; so they established the Pacific Improvem
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000ca15f', 'fragment': '2'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.909657
+[[START CONTENT]]
+, said when at the Grove:    In my exten   sive travels in the Old World and in the New, I have found no drive of equal extent which, in varied beauty and grandeur, surpasses that of the Seventeen Mile Drive at Pacific Grove.    Prof. C. S. Nash of Pacific Theological Seminary Berkeley, Calif., says:    Pacific Grove is one of the most charming resorts on the Pacific Coast. The matchless Bay and the great Ocean just beyond are endlessly fascinating Especially in winter have 1 found the place restful and invigorating.    Rev. Edwin Sidney Williams of Saratoga, Calif, (for   merly of Minneapolis, Minn.), says:    1 have visited every resort of note on the Pacific Coast, from Vancouver to San Diego, and my deliberate and hearty conviction is that in climate, scenery and the folks who live there. Pacific Grove surpasses them all. Its winter climate sur   passes that of summer.    Rev. Geo. C. Adams, D. D., pastor of the First Congre   gational Church, San Francisco, says:    1 can speak in the highest terms of Pa
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000e6405', 'fragment': '3'}
+[[END META]]
+[[END DOC]]
+[[START DOC]]
+SCORE=0.910498
+[[START CONTENT]]
+Pacific Railroad   vvas completed. leaving thousands of Chinese laborers without.w0rk. Other villagers had been goldlseekers in the    Mother Lode    country. Pacific Grove came to depend on the Chinese for fresh&#39;fish and menial work. After several years of con    troversy. the village was destroyed by fire in 1906 probably caused by arson. The years brought changes to the    face and flavor&quot; of the seaside resort. By 1910. all tents had disappeared and rows of tiny cottages had sprung up. The El Carmelo Hotel was torn down in&#39;1918 and Holman   s Department Store now occupies the site. An energetic woman named Julia Platt was responsible for many beautification projects in the city. including the improvement ofthe parkway between up er and low  r Lighthouse Aven es in the early 1900   s. I                   ity a was built in 191 . along wit the 1 st p0 ice and fire departments. The Pacific Grove Museum of Natural History. founded in 1883 by the Chautauqua Circle. was situated in an octagonal str
+[[END CONTENT]]
+[[START META]]
+{'nodeid': '000b7d7c', 'fragment': '7'}
+[[END META]]
+[[END DOC]]
+[[END LOCAL]]
+

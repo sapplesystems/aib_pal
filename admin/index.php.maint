@@ -1,0 +1,5 @@
+<?php
+print("<head><title>ArchiveInABox Is Currently Offline For Maintenance</title></head>\n");
+print("<h1>We're doing site maintenance -- please try again later!</h1>\n");
+print("</html>");
+?>

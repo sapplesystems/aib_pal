@@ -1,0 +1,43 @@
+<document><status><status_value>OK</status_value></status>
+<resultset><search_spec><phrase>where are the maps?</phrase>
+<attribute></attribute>
+</search_spec>
+<start>1</start>
+<end>101</end>
+<hitcount>2</hitcount>
+<match_count>2</match_count>
+<auxwordcond>false</auxwordcond>
+<proctime>62</proctime>
+<hints><hintword><value>(null)</value><word>0</word><auxword>(null)</auxword></hintword></hints>
+<related_terms></related_terms>
+<index_info>
+<pagecount>2</pagecount>
+<wordcount>2</wordcount>
+</index_info>
+<doc>
+<searchid>539319</searchid>
+<uri>539319</uri>
+<title>Chat Response</title>
+<score>9999</score>
+<attr>
+</attr>
+<snippet>
+<sniptext>
+I'm happy to help! However, I'm a large language model, I don't have the capability to display physical maps. But I can provide you with text-based directions, descriptions, or even generate simple text-based maps for you!  If you're looking for a specific type of map, such as a topographic map, a road map, or a satellite image, I can try to help you find it. You can ask me questions like:  * What type of map are you looking for? * What region or area are you interested in? * Do you have a specific purpose or goal in mind for the map?  I'll do my best to assist you in finding the information you need!
+</sniptext>
+</snippet>
+</doc>
+<doc>
+<searchid>888944</searchid>
+<uri>888944</uri>
+<title></title>
+<score>549</score>
+<attr>
+</attr>
+<snippet>
+<sniptext>
+e meantime, I have enclosed a few more maps for you. They are from 1888, 1897, 1905 and 1914. Thanks for your patience. Sincerel
+</sniptext>
+</snippet>
+</doc>
+</resultset></document>

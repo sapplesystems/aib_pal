@@ -1,0 +1,188 @@
+<?php 
+if(isset($_REQUEST['search_text'])){
+	//echo $_REQUEST['search_text'];
+//	echo '==='.$_REQUEST['search_text']=str_replace('"','',$_REQUEST['search_text']);die;
+}
+	// Get includes as needed
+
+	require_once dirname(__FILE__) . '/config/config.php';
+
+	// Get folder ID. Assign to alternate variable to handle alternate var name
+	// used elsewhere.
+
+	$folderId = $_REQUEST['folder_id'];
+	$folder_id = $folderId;
+
+	// Include templates, flags, etc.
+
+	include_once 'get_template_name.php';
+	include_once 'get_unclaimed_society_flag.php';
+
+	// Clear "tree_data" from session
+
+	unset($_SESSION['tree_data']);
+
+	// If the aibServiceRequest function hasn't been defined elsewhere, then
+	// do so here.
+	//
+	// NOTE: This should be removed from this file, and placed in an include
+	// to avoid future bugs based on code differences between definitions.
+
+	if(!function_exists('aibServiceRequest'))
+	{
+		function aibServiceRequest($postData, $fileName)
+		{
+			$curlObj = curl_init();
+			$options = array(
+				CURLOPT_POST => 1,
+				CURLOPT_HEADER => 0,
+				CURLOPT_URL => AIB_SERVICE_URL.'/api/' . $fileName . ".php",
+				CURLOPT_FRESH_CONNECT => 0,
+				CURLOPT_RETURNTRANSFER => 1,
+				CURLOPT_FORBID_REUSE => 0,
+				CURLOPT_TIMEOUT => 300,
+				CURLOPT_POSTFIELDS => http_build_query($postData)
+			);
+
+			curl_setopt_array($curlObj, $options);
+			$result = curl_exec($curlObj);
+			if ($result == false)
+			{
+				$outData = array("status" => "ERROR", "info" => curl_error($curlObj));
+			}
+			else
+			{
+				$outData = json_decode($result, true);	
+			}
+
+			curl_close($curlObj);
+			return ($outData);
+		}
+	}
+
+	if (!isset($_SESSION['aib']['session_key']))
+	{
+		$postData = array(
+			"_id" => APIUSER,
+			"_key" => APIKEY
+		);
+
+		$apiResponse = aibServiceRequest($postData, 'session');
+		if ($apiResponse['status'] == 'OK' && $apiResponse['info'] != '')
+		{
+			$sessionKey = $_SESSION['aib']['session_key'] = $apiResponse['info'];
+		}
+	}
+	else
+	{
+		$sessionKey = $_SESSION['aib']['session_key'];
+	}
+
+	$parentDetails = array();
+	if ($folderId != '' && $sessionKey != '')
+	{
+		if(isset($_SESSION['tree_data'][$folderId]))
+		{
+			$parentDetails = $_SESSION['tree_data'][$folderId];
+		}
+		else
+		{
+			$sessionKey = $_SESSION['aib']['session_key'];      
+			$postData = array(
+				"_key" => APIKEY,
+				"_session" => $sessionKey,
+				"_user" => 1,
+				"_op" => "get_path",
+				"obj_id" => $folderId,
+				"opt_get_property" => 'Y'
+			);
+       
+			$apiResponse = aibServiceRequest($postData, 'browse');
+			if ($apiResponse['status'] == 'OK')
+			{
+				$_SESSION['tree_data'][$folderId] = $apiResponse['info']['records'];
+				$parentDetails = $apiResponse['info']['records'];
+			}
+		} 
+	}
+
+	$themeName = isset($parentDetails[1]['properties']['details_page_design']) ? $parentDetails[1]['properties']['details_page_design'] : '';
+	$societyTemp = isset($_REQUEST['society_template']) ? $_REQUEST['society_template'] : '';
+	//$themeName = 'custom1';
+if(isset($_REQUEST['search_text'])){
+	$_REQUEST['search_text'];
+	$_REQUEST['search_text']=str_replace('"','',$_REQUEST['search_text']);
+}
+	if($themeName == 'custom')
+	{
+        	include_once 'details.php';
+	}
+	elseif ($themeName == 'custom1')
+	{
+	        include_once 'details_custom2.php';
+	}
+	elseif ($themeName == 'large_design')
+	{
+	        include_once 'details_large_design.php';
+	}
+	else
+	{
+		include_once 'details_default.php';
+	}
+	
+	//include_once 'details_default.php';
+?>
+
+<div class="modal fade" id="claimed_message_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="">Claim This Archive</h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <p id="claimed_message_text"></p>
+                    <div class="text-center">
+<?php
+	$claimed_society_registration_url = "#";
+	if ($is_unclaimed_society && $is_unclaimed_society == '1')
+	{
+		$claimed_society_registration_url = 'register.html?q=' . encryptQueryString('folder_id=' . $folder_id . '&society_template=' . $societyTemp);
+	}
+?>
+                        <a class="btn btn-success" href="<?php echo $claimed_society_registration_url; ?>">Continue with Claim</a>
+                        <a class="btn btn-danger" href="#" data-dismiss="modal" aria-label="Close">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<script type="text/javascript">
+
+function openClaimPopup(e) {
+    e.preventDefault();
+    $('.loading-div').show();
+    $.ajax({
+        url: "services.php",
+        type: "post",
+        data: {mode: 'get_claimed_popup_message', user_id: 1, type: 'CM'},
+        success: function (data) {
+            console.log(data);
+            var result = JSON.parse(data);
+            if (result.status == 'success') {
+                $('#claimed_message_text').html(result.message);
+                $('#claimed_message_modal').modal('show');
+            } else {
+                showPopupMessage('error', 'error', 'Something went wrong, Please try again. (Error Code: 181)');
+            }
+            $('.loading-div').hide();
+        },
+        error: function () {
+            showPopupMessage('error', 'Something went wrong, Please try again. (Error Code: 182)');
+        }
+    });
+}
+</script>
