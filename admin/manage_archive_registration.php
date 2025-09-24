@@ -72,8 +72,9 @@ if(isset($_SESSION['aib']['user_data'])){
                         Your profile has been updated successfully.
                 </div>
                 </div>
-                    <div class="row-fluid marginTop20 bgNone"><h3>Historical Society Information</h3></div>
-                    <div class="row marginTop20 padd5">
+                    <div class="row-fluid marginTop20 bgNone"><h3>Organization Information</h3></div>
+					<!--/// Fix start for Bug Id 2565  24-Sep-2025 ///////-->
+                    <div class="row marginTop20 padd5" style="display: none;">
                         <div class="col-md-3" >
                             <label>Historical Society Name<span>*</span>:</label>
                         </div>
@@ -81,6 +82,15 @@ if(isset($_SESSION['aib']['user_data'])){
                             <input type="text" class="form-control" name="society_name" id="society_name1" value="" placeholder="Enter text">
                         </div> 
                     </div>
+					<div class="row marginTop20 padd5">
+                        <div class="col-md-3" >
+                            <label>Organization (Owner) Name<span>*</span>:</label>
+                        </div>
+                        <div class="col-md-3" >
+                            <input type="text" class="form-control" name="organization_owner_name" id="organization_owner_name" value="" placeholder="Enter text">
+                        </div> 
+                    </div>
+					<!--/// Fix End for Bug Id 2565  24-Sep-2025 ///////-->
                     <div class="row marginTop20 padd5">
                         <div class="col-md-3" >
                             <label>State<span>*</span>:</label>
@@ -575,6 +585,13 @@ if(isset($_SESSION['aib']['user_data'])){
                     if (record.prop_details.phoneNumber) {
                         $('#phoneNumber').val(record.prop_details.phoneNumber);
                     }
+					/// Fix start for Bug Id 2565  24-Sep-2025 ///////
+					if (record.prop_details.organization_owner_name) {
+                        $('#organization_owner_name').val(record.prop_details.organization_owner_name);
+                    }else{
+						 $('#organization_owner_name').val(record.item_title);
+					}
+					/// Fix End for Bug Id 2565  24-Sep-2025 ///////
 //                    if (record.prop_details.faxNumber) {
 //                        $('#faxNumber').val(record.prop_details.faxNumber);
 //                    }

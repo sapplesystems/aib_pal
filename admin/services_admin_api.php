@@ -4916,12 +4916,14 @@ switch ($_REQUEST['mode']) {
     case 'update_archive_registration_details':
         $responseData = array('status' => 'error', 'message' => 'Something went wrong! Please try again');
         parse_str($_POST['formData'], $postData);
+		/// Fix start for Bug Id 2565  24-Sep-2025 ///////
         $fieldsArray = array("phoneNumber", "faxNumber", "redactionsEmailAddress", "reprintEmailAddress", "contactEmailAddress",
             "websiteURL", "physicalAddressLine1", "mailingAddressLine1", "physicalAddressLine2", "mailingAddressLine2", "physicalCity", "mailingCity",
             "physicalState", "mailingState", "physicalZip", "mailingZip", "federalTaxIDNumber", "sateTaxIDNumber", "entityOrganization", "entityOrganizationOther",
             "CEO", "CEO_firstName", "CEO_lastName", "CEO_email", "executiveDirector", "executiveDirector_firstName", "executiveDirector_lastName", "executiveDirector_email",
             "precident", "precident_firstName", "precident_lastName", "precident_email", "otherExecutive", "otherExecutive_firstName", "otherExecutive_lastName",
-            "otherExecutive_email", "sameAsPhysicalAddress", "boardOfDirectors", "committees", "society_state");
+            "otherExecutive_email", "sameAsPhysicalAddress", "boardOfDirectors", "committees", "society_state","organization_owner_name");
+		/// Fix End for Bug Id 2565  24-Sep-2025 ///////
         $apiRequestData = array();
         $email_condition = $postData['user_old_email'] != $postData['register_emailId'];
         $email_change_message = '';
