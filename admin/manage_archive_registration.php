@@ -588,9 +588,7 @@ if(isset($_SESSION['aib']['user_data'])){
 					/// Fix start for Bug Id 2565  24-Sep-2025 ///////
 					if (record.prop_details.organization_owner_name) {
                         $('#organization_owner_name').val(record.prop_details.organization_owner_name);
-                    }else{
-						 $('#organization_owner_name').val(record.item_title);
-					}
+                    }
 					/// Fix End for Bug Id 2565  24-Sep-2025 ///////
 //                    if (record.prop_details.faxNumber) {
 //                        $('#faxNumber').val(record.prop_details.faxNumber);
