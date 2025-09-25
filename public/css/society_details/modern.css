@@ -1,0 +1,132 @@
+
+
+/* MODERN SERVICES */
+	.services-section{ height: auto; }
+	.services-section>.model, .services-section>.services{ width: 50%; float: left; }
+	/* Model Area */
+	.services-section .model{ overflow: hidden; }
+		@media only screen and (min-width: 1024px){
+			.services-section .model img{ min-height: 100%; min-width: 100%; width: auto; left:50%; -ms-transform: translateX(-50%); -webkit-transform: translateX(-50%); transform: translateX(-50%); }
+		}
+	/* Services Area */
+	.services-section .services{ overflow: auto; padding:40px; background-color:#fafafa; }
+	.services-section .services .inner{ margin-top:40px; max-width: 700px; }
+	/* Service Texts */
+	.services-section .services .service-subtitle{ font-size:25px; color:#9c9c9c; }
+	.services-section .services .service-title{ font-size:45px; color:#717171; }
+	.services-section .services .service-description{ font-size:14px; }
+		/* Responsive Settings for services */
+		@media only screen and (max-width: 1024px){
+			.services-section>.model, .services-section>.services{width: 100%; float: none;}
+			#services .services{height: auto !important; padding:50px 15px !important;}
+		}
+		@media only screen and (max-width: 641px){
+			.services-section .services .service-subtitle{ font-size:21px; }
+			.services-section .services .service-title{ font-size:35px; }
+		}
+
+
+
+
+/* MODERN FUN FACTS */
+	#facts{ padding:0; }
+	#facts .fact{ height: 360px; cursor: default; overflow: hidden; position: relative;}
+	#facts .fact img{min-width: 100%;min-height: 100%;width: auto;height: auto;-webkit-transition: all 0.2s;-moz-transition: all 0.2s;transition: all 0.2s;}
+	#facts .fact.active img{opacity: 0.1; -ms-transform: scale(1.1); -webkit-transform: scale(1.1); transform: scale(1.1);}
+	#facts .texts{position: absolute;width: 100%;height: 100%;left:0;top:0;text-align: center;display: table;}
+	#facts .texts>div{padding-top: 90px;padding-left: 15px;
+    padding-right: 15px;}
+	#facts .fact:hover img{opacity: .1; -ms-transform: scale(1.1); -webkit-transform: scale(1.1); transform: scale(1.1);}
+	#facts .texts i{ font-size: 60px; margin-bottom: 15px; z-index: 1; }
+	#facts .texts h1{ font-size: 80px; margin:0; padding: 0; z-index: 1;}
+	#facts .texts h2{ font-size: 30px; padding: 0; margin:10px 0 0; text-transform: uppercase; z-index: 1;}
+		/* Responsive Settings */
+		@media only screen and (max-width: 1070px){
+			#facts .fact{width: 50%;}
+		}
+		@media only screen and (max-width: 500px){
+			#facts .fact{ width: 100%; height: 300px; }
+			#facts .texts i{ font-size: 20px; }
+			#facts .texts h1{ font-size: 45px; }
+			#facts .texts h2{ font-size: 18px; }
+		}
+
+/* MODERN FEATURES */
+	.features-boxes .item{ color:#7c7c7c; cursor: default; text-align: left; margin:25px 0; }
+	.features-boxes .item .icon{ float: left; width: 70px; height: 70px; border:1px solid #f0f0f0; background-color:#fdfdfd; border-radius: 100%; line-height: 70px; text-align: center; font-size:20px; }
+	.features-boxes .item .texts{ float: left; width: 80%; width: calc(100% - 70px); padding-left:15px; }
+	.features-boxes .item .texts h3{ padding:0; margin:0; text-transform: uppercase; }
+	.features-boxes .item .texts p{ color:#949494; margin-top:10px; }
+	.features-boxes .item:hover .icon{ background-color:#0e96f5; color: white;}
+
+
+/* MODERN WORKS */
+	#works{position: relative;background-color:#fcfcfc; text-align: center;}
+	#works .cbp-l-caption-alignLeft{width: 100%;height: 100%;display: table;}
+	#works .cbp-item:hover .cbp-caption-defaultWrap{ -ms-transform: scale(1.05); -webkit-transform: scale(1.05); transform: scale(1.05); }
+	#works .cbp-l-caption-alignLeft .cbp-l-caption-body{display: table-cell;vertical-align: middle;text-align: center;color: white;}
+	#works h2.title{ font-size:22px; text-transform: uppercase; padding:0; margin:10px 0 0; position: relative; /* For Hover */ top:15px; opacity: 0; -webkit-transition: all 0.4s; -moz-transition: all 0.4s; transition: all 0.4s; }
+	#works p.desc{ font-size:12px; font-weight: 600; margin:0 ; color:#e3e3e3; text-transform: uppercase; position: relative; /* For Hover */ top:15px; opacity: 0; -webkit-transition: all 0.4s; -moz-transition: all 0.4s; transition: all 0.4s; }
+	#works .cbp-item:hover .icon{ top:0; opacity: 1; }
+	#works .cbp-item:hover h2.title{ top:0; -webkit-transition-delay: 0.1s; transition-delay: 0.1s; opacity: 1; }
+	#works .cbp-item:hover p.desc{ top:0; opacity: 1; -webkit-transition-delay: 0.2s; transition-delay: 0.2s; }
+		/* Responsive Works */
+		@media only screen and (max-width: 480px){
+			#works .cbp-caption-zoom .cbp-caption-activeWrap{ position: relative; opacity: 1; display: block; background-color:#333; }
+			#works .cbp-l-caption-alignLeft .cbp-l-caption-body{ padding:15px 0 10px; }
+			#works h2.title, #works p.desc{ opacity: 1; top:0; }
+			#works h2.title{ font-size: 20px; margin:0 0 5px; }
+		}
+
+	#filters li.cbp-filter-item{ position: relative; }
+	#filters.works-visible li.cbp-filter-item:before{
+		position: absolute; left:0; top:0; width: 100%; height: 100%; content: ''; background: #26292b; display: block;
+		/* Animate Settings */
+		-webkit-animation: filteranimate 1.5s linear; -moz-animation: filteranimate 1.5s linear; -ms-animation: filteranimate 1.5s; -webkit-animation-fill-mode: forwards;
+	}
+
+	@-webkit-keyframes filteranimate { 0% { opacity: 0.7;} 12% { opacity: 0.5;} 13% { opacity: 0.7;} 100% { opacity: 0;}}
+	@keyframes filteranimate { 0% { opacity: 0.7;} 12% { opacity: 0.5;} 13% { opacity: 0.7;} 100% { opacity: 0;}}
+
+
+/* About Boxes */
+	.about-boxes .box{padding:0 10px; display: inline-block; cursor: default; }
+	.about-boxes .box a.icon{background-color:#fcfcfc; display: block; border-radius: 100%; border:1px solid #e0e0e0; width: 130px; height: 130px; margin:0 auto; line-height: 130px; font-size:22px; color:#b8b8b8; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; transition: all 0.3s; }
+	.about-boxes .box:hover a.icon{background-color:#333; border-color:#333; color:white; }
+	.about-boxes .box h3.box-title{ font-size: 22px; margin:25px auto 0; text-transform: uppercase; color:#818181; padding:0; }
+	.about-boxes .box p{ font-size:14px; margin-top:20px; line-height: 23px; color:#818181; }
+	/* About boxes hovers */
+	.about-boxes .box:hover a.icon{
+		background-color:#0e96f5;
+		border-color:#0e96f5;
+	}
+
+
+/* MODERN PRICES */
+	#prices{text-align: center;}
+	#prices .item .title{ padding:15px 0; color:#818181; text-transform: uppercase;}
+	#prices .item .title h1{ font-size:50px; padding:0; margin:0; }/* price */
+	#prices .item .title h1 span{ font-size:18px; }/* per monthly text */
+	#prices .item .title h2{ font-size:37px; padding:0; margin:0; }/* package name */
+	#prices .item .item-image,#prices .item .item-image img{width: 100%;height: auto;margin:5px 0;}
+	#prices .item .features{padding:20px 0;color:#909090;}
+	#prices .item .features li{ font:inherit; margin-bottom:18px; font-size: 14px; font-weight: 600;}
+	#prices .item .features li:last-child{margin-bottom:0;}
+	#prices .item a.btn{background-color:#818181;margin:0;color: white;line-height: 14px;}
+
+
+/* MODERN CONTACT */
+	#contact{ padding: 100px 0; }
+	#contact_form .half input, #contact_form .half button{ width: 45%; width:calc(50% - 10px); float: left; margin-right:20px; }
+	#contact_form .half button{ margin-right:0px; }
+	#contact_form .half input:last-child{ margin-right:0; }
+	#contact_form input, #contact_form textarea, #contact_form button{ width: 100%; border:1px solid #ececec; background:#fafafa; padding:15px 14px; text-transform: uppercase; outline: none; margin:8px 0; font-size:14px; color:#8c8c8c; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; transition: all 0.3s; }
+	#contact_form textarea{ min-height: 150px; max-height: 150px; max-width: 100%; }
+	#contact_form input:hover, #contact_form textarea:hover, #contact_form input:focus, #contact_form textarea:focus{ border-color:#dbdbdb; }
+	#contact_form .error_warning, #contact_form .error_warning:hover, #contact_form .error_warning:focus{ border-color:#c23b3b; }
+	.dark-section #contact_form input,.dark-section #contact_form textarea,.dark-section #contact_form button{  border:1px solid #444;  background:#222;  color:white; }
+	.dark-section #contact_form input:hover,.dark-section #contact_form textarea:hover,.dark-section #contact_form input:focus,.dark-section #contact_form textarea:focus{ border-color:#555; }
+		/* Responsive Contact form */
+		@media only screen and (max-width: 640px){
+			#contact_form .half input, #contact_form .half button{ width: 100%; float: none; margin-right:0; }
+		}

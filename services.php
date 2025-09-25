@@ -7122,7 +7122,7 @@ function setVisibleProperty($item_id = null) {
         return true;
     }
 }
-
+/*<!----------- Issue Id 2567 Fix Start date 25-Sep-2025--------------->*/
 function getSearchHighlightData($item_id = '', $searchString = '') {
     if ($item_id != '' && $searchString != '') {
         $sessionKey = $_SESSION['aib']['session_key'];
@@ -7132,7 +7132,7 @@ function getSearchHighlightData($item_id = '', $searchString = '') {
             "_op" => "highlights",
             "_user" => 1,
             "obj_id" => $item_id,
-            "word_list" => base64_decode(base64_decode($searchString)),
+            "word_list" => base64_decode($searchString),
             "display_width" => 0,
             "display_height" => 0,
             "file_class" => "pr"
@@ -7153,7 +7153,7 @@ function getHighlightImageProp($item_id = '', $searchString = '', $height = '', 
             "_op" => "highlights",
             "_user" => 1,
             "obj_id" => $item_id,
-            "word_list" => base64_decode(base64_decode($searchString)),
+            "word_list" => base64_decode($searchString),
             "display_width" => $height,
             "display_height" => $width,
             "file_class" => "pr"
@@ -7164,7 +7164,7 @@ function getHighlightImageProp($item_id = '', $searchString = '', $height = '', 
         }
     }
 }
-
+/*<!----------- Issue Id 2567 Fix end date 25-Sep-2025--------------->*/
 /*
  * @Author: Sapple Systems
  * @method: getSubGroupFirstItemThumb()

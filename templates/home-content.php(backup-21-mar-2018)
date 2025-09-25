@@ -1,0 +1,253 @@
+<?php // echo "<pre>"; print_r($apiResponse['info']['records']); echo "</pre>"; 
+//
+function addhttp($url) {
+    if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+        $url = "http://" . $url;
+    }
+    return $url;
+}
+?>
+<style>
+    #myTableSG_filter{ display:none;}
+    .dataTables_length{ display:none;}
+    #myTableSG_info{display:none;}
+</style>
+<div>
+    <ul class="listing">
+        <li><a href="javascript:void(0);"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+        <?php foreach ($treeDataArray as $key => $treeData) { ?>
+            <?php if (end(array_keys($treeDataArray)) == $key) { ?> 
+                <li><a href="javascript:void(0);"><?php echo $treeData['item_title']; ?></a></li>
+            <?php } else { ?>
+                <li  class="getItemDataByFolderId" data-folder-id="<?php echo $treeData['item_id']; ?>"><a href="javascript:void(0);"><?php echo $treeData['item_title']; ?></a></li>
+            <?php }
+        }
+        ?>
+    </ul>
+</div>
+<div class="clearfix"></div>
+<?php if (count($apiResponse['info']['records']) > 0) { ?>
+    <?php if ($itemData['item_type'] == 'SG') { ?>
+        
+
+        <ul class="tabs">
+            <li class="tab-link current" data-tab="tab-1">Records</li>
+            <li class="tab-link" data-tab="tab-2">Sub Groups</li>
+        </ul>
+
+        <div id="tab-1" class="tab-content current">
+            <table id="myTable" class="custum_tbl custom_css" width="100%" cellpadding="0" cellspacing="0">  
+                <thead>  
+                    <tr>  
+                        <th>Forms Id</th>   
+
+                    </tr>  
+                </thead>  
+                <tbody class="society_ast_sub_list">  
+                <div class="clearfix"></div>
+
+                <div class="main">
+                    <?php foreach ($apiResponse['info']['records'] as $itemDataArray) { ?>
+
+                        <?php if ($itemDataArray['item_type'] != 'SG') { ?>
+                            <tr>
+                                <td>
+                                    <div class="view view-first">
+                                        <img src='<?php echo RECORD_THUMB_URL . '?id=' . $itemDataArray['item_id']; ?>' alt="Thumb Image"/>
+                                        <a class="custom-link" href="item-details.php?folder_id=<?php echo $itemDataArray['item_id']; ?>">
+                                            <div class="mask">
+                                                <h2>Open<!--<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span>3</span>
+                                                <span class="glyphicon glyphicon-link" aria-hidden="true"></span><span>3</span>--></h2>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <h6 class="recordHead"><?php echo urldecode($itemDataArray['item_title']); ?></h6>
+                                </td>
+                            </tr>
+                        <?php } ?>
+
+                    <?php } ?>
+                </div>
+                </tbody>  
+            </table>
+        </div>
+        <div id="tab-2" class="tab-content">
+            <table id="myTableSG" class="custum_tbl custom_css" width="100%" cellpadding="0" cellspacing="0">  
+                <thead>  
+                    <tr>  
+                        <th>Forms Id</th>   
+
+                    </tr>  
+                </thead>  
+                <tbody class="society_ast_sub_list">  
+                <div class="clearfix"></div>
+
+                <div class="main">
+                    <?php foreach ($apiResponse['info']['records'] as $itemDataArray) { ?>
+
+                        <?php if ($itemDataArray['item_type'] == 'SG') { ?>
+                            <tr>
+                                <td class="organizations sub-groups">
+                                    <a class="getItemDataByFolderId" data-folder-id="<?php echo $itemDataArray['item_id']; ?>" href="javascript:void(0);" title="<?php echo $itemDataArray['item_title']; ?>"><span><?php echo $itemDataArray['item_title'][0]; ?></span><?php echo substr($itemDataArray['item_title'], 1); ?></a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+
+                    <?php } ?>
+                </div>
+                </tbody>  
+            </table>
+        </div>
+
+    <?php } else {
+        ?>
+
+        </div>
+        </div>
+        
+        <div class="clearfix"></div>
+        <?php if ($itemData['item_id'] != 1) { ?>
+            <table id="myTable" class="custum_tbl" width="100%" cellpadding="0" cellspacing="0">  
+                <thead>  
+                    <tr>  
+                        <th>Forms Id</th>
+                    </tr>  
+                </thead>  
+                <tbody class="society_sub_list">  
+                    <?php foreach ($apiResponse['info']['records'] as $itemDataArray) { ?>
+                        <tr>
+                            <td class="organizations">
+                                <?php if(!empty($itemDataArray['co_property']['stpabrowse'])){
+                                    $url=$itemDataArray['co_property']['stpabrowse'];                                    
+                                ?>
+                                <a target="_blank" data-folder-id="<?php echo $itemDataArray['item_id']; ?>" href="<?php echo addhttp($url);?>" title="<?php echo $itemDataArray['item_title']; ?>"><span><?php echo $itemDataArray['item_title'][0]; ?></span><?php echo substr($itemDataArray['item_title'], 1); ?></a>
+                                <?php }else{ ?>
+                                    <a class="getItemDataByFolderId" data-folder-id="<?php echo $itemDataArray['item_id']; ?>" href="javascript:void(0);" title="<?php echo $itemDataArray['item_title']; ?>"><span><?php echo $itemDataArray['item_title'][0]; ?></span><?php echo substr($itemDataArray['item_title'], 1); ?></a>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>  
+            </table> 
+        <?php } else { ?>
+            <table id="myTable" class="custum_tbl" width="100%" cellpadding="0" cellspacing="0">  
+                <thead>  
+                    <tr>  
+                        <th>Forms Id</th>   
+                    </tr>  
+                </thead>  
+                <tbody class="society_list">  
+                    <?php foreach ($apiResponse['info']['records'] as $itemDataArray) { ?>
+                        <tr>
+                            <td>
+                                <section id="grid" class="grid clearfix">		   
+                                    <a class="" data-folder-id="<?php echo $itemDataArray['item_id']; ?>" href="society.php?folder-id=<?php echo $itemDataArray['item_id']; ?>" data-path-hover="m 180,70.57627 -180,0 L 0,0 180,0 z">
+                                        <figure>
+                                            <?php
+                                            $image_name = (isset($itemDataArray['property_list']['archive_group_thumb']) && $itemDataArray['property_list']['archive_group_thumb']!= '' && file_exists(ARCHIVE_IMAGE.$itemDataArray['property_list']['archive_group_thumb'])) ? ARCHIVE_IMAGE.$itemDataArray['property_list']['archive_group_thumb']:IMAGE_PATH.'no-image-available.png' ;
+                                            ?>
+                                            <img src="<?php echo $image_name; ?>" alt="Historical Image" />
+                                            <svg viewBox="0 0 180 320" preserveAspectRatio="none"><path d="M 280,260 0,218 0,0 180,0 z"/></svg>
+                                            <figcaption>
+                                                <h2><?php echo $itemDataArray['item_title']; ?></h2>
+                                                <!--<p><?php echo $itemDataArray['item_title']; ?></p>-->
+                                                <button>View</button>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                </section> 
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>  
+            </table> 
+        <?php } ?>
+        <?php
+    }
+} else {
+    echo '<div class="text-center">No items found.</div>';
+}
+?>
+<script>
+    var folderId="<?php echo $folderId;?>";
+   
+    (function () {
+        function init() {
+            var speed = 250,
+                    easing = mina.easeinout;
+            [].slice.call(document.querySelectorAll('#grid > a')).forEach(function (el) {
+                var s = Snap(el.querySelector('svg')), path = s.select('path'),
+                        pathConfig = {
+                            from: path.attr('d'),
+                            to: el.getAttribute('data-path-hover')
+                        };
+                el.addEventListener('mouseenter', function () {
+                    path.animate({'path': pathConfig.to}, speed, easing);
+                });
+                el.addEventListener('mouseleave', function () {
+                    path.animate({'path': pathConfig.from}, speed, easing);
+                });
+            });
+        }
+        init();
+    })();
+    //Check for Show/Hide back button.
+    $(document).ready(function () {
+        $('.custom-link').each(function () {
+            var link = $(this).attr('href');
+            var previous_id_obj = JSON.parse($('#previous-item-id').val());
+            var final_link = link + '&previous=' + previous_id_obj + ',' + $('#current-item-id').val();
+            $(this).attr('href', final_link);
+        });
+
+        if (JSON.parse($('#previous-item-id').val()) == '') {
+            $('#go-back-button').hide();
+        } else {
+            $('#go-back-button').show();
+        }
+    });
+    //Logic for go back button.
+    $('#go-back-button').click(function () {
+        var previous_id = JSON.parse($('#previous-item-id').val());
+        var current_previous = previous_id.pop();
+        $('#current-item-id').val(current_previous);
+        $('#previous-item-id').val(JSON.stringify(previous_id));
+        getItemDetailsById(current_previous);
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('ul.tabs li').click(function () {
+            var tab_id = $(this).attr('data-tab');
+
+            $('ul.tabs li').removeClass('current');
+            $('.tab-content').removeClass('current');
+
+            $(this).addClass('current');
+            $("#" + tab_id).addClass('current');
+        });
+        var users = $('#myTable').DataTable({
+            pageLength: 21
+        });
+        $('#customSearchBox').keyup(function () {
+            users.search($(this).val()).draw();
+        });
+
+        var myTableSG = $('#myTableSG').DataTable({
+            pageLength: 21
+        });
+    });
+    
+    
+    $(".getItemDataByFolderId").on("click",function(){
+        var folder_id=$(this).data("folder-id");
+        getAdvertisement(folder_id);
+    });
+    
+    if(folderId==1){
+        $("#filterTree").show();
+    }else{
+        $("#filterTree").hide(); 
+    }
+    
+</script>

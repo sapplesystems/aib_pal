@@ -62,3 +62,19 @@ if(isset($_REQUEST['q'])){
     }
 }
 
+function is_base64_encoded($str) {
+    if (empty($str) || strlen($str) % 4 !== 0) {
+        return false;
+    }
+    if (!preg_match('/^[A-Za-z0-9+\/]+={0,2}$/', $str)) {
+        return false;
+    }
+
+    // Decode and re-encode to verify
+    $decoded = base64_decode($str, true);
+    if ($decoded === false) {
+        return false;
+    }
+
+    return base64_encode($decoded) === $str;
+}

@@ -1,0 +1,54 @@
+/*
+Theme Name: Skeleton Child
+Theme URI: http://www.simplethemes.com/wordpress-themes/theme/skeleton
+Description: Skeleton Child Theme. Use this child theme to safely make modifications to the existing theme. Using a child theme ensures that you do not lose the modifications with theme updates.
+Version: 2.0.1
+Author: Simple Themes
+Author URI: http://www.simplethemes.com
+Template: smpl-skeleton
+License: GPL
+License URI: http://www.opensource.org/licenses/gpl-license.php
+*/
+
+
+/*
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+
+This child theme enables you to make customizations while allowing for safe updates to the parent theme.
+The parent theme's style.css is imported below. If you wish to make customizations, do one of the following:
+
+A.) Copy the contents of skeleton/style.css into this file, but leave the (above) child theme head in tact!
+B.) Add specific rules BELOW the import. This is intended for minimal customizations.
+
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+
+*/
+
+@import url("../smpl-skeleton/style.css");
+
+/* Custom Styles */
+body {background:none;}
+
+#navigation ul,
+#navigation ul li {
+background: #666;
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxJSIgc3RvcC1jb2xvcj0iIzQ3NDc0NyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQzJSIgc3RvcC1jb2xvcj0iIzJjMmMyYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxMzEzMTMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #474747 1%, #2c2c2c 43%, #000000 51%, #131313 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#474747), color-stop(43%,#2c2c2c), color-stop(51%,#000000), color-stop(100%,#131313));
+background: -webkit-linear-gradient(top,  #474747 1%,#2c2c2c 43%,#000000 51%,#131313 100%);
+background: -o-linear-gradient(top,  #474747 1%,#2c2c2c 43%,#000000 51%,#131313 100%);
+background: -ms-linear-gradient(top,  #474747 1%,#2c2c2c 43%,#000000 51%,#131313 100%);
+background: linear-gradient(to bottom,  #474747 1%,#2c2c2c 43%,#000000 51%,#131313 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#474747', endColorstr='#131313',GradientType=0 );
+
+}
+#navigation ul li a {color:white; font-family: Verdana, Geneva, sans-serif; font-size:15px; font-weight:normal; text-shadow:none;}
+#navigation ul li {background-color:#dedede;}
+#navigation ul li li a {color:black;}
+#navigation li.page_item a, 
+#navigation li.menu-item a {border:none;}
+
+h1, h2 {font-weight:normal;}
+h1, h2 {font-style: italic;}
