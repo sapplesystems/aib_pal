@@ -97,165 +97,8 @@
                 <?php } ?>
 
                 <!-- Fix start on 20-June-2025 -->
-				<?php if(count($llmChat)){ ?>
-				<div class="searchBGNone"><h3><strong><?php echo $_POST['chat_request'];?></strong></h3></div>
-				<?php foreach ($llmChat as $chat){if($chat['llmchat']=='Y'){ ?>			
-					<ul class="search-result searchResponseScroll">
-						<li class="search_li_all search_li_<?php echo $chat['searchid']; ?>">
-                            <div class="col-md-12">
-                                <div class="marginTopBottom10 item-location">
-									<p class="snippetHead"><?php echo $chat['snippet']; ?></p>
-								</div>	
-						</div>	
-						<li>	
-				</ul>
-				<?php } } if ($apiResponseResultllmSearch['status'] == 'OK' and count($apiResponseResultllmSearch['info']['records']) ) { ?>
-				<h3><strong>Here are some examples from your Knowledge Base:</strong></h3>
-				  <ul class="search-result searchListScroll llmresult">
-                    <?php
-                    $TargetModifier = "";
-                    if (isset($search_text) == true) {
-                        $SearchText = $search_text;
-                        $SearchText = preg_replace("/[\"]/", " ", $SearchText);
-                        $SearchText = strtolower($SearchText);
-                        $SearchWords = preg_split("/[ \t,\/\;]+/", ltrim(rtrim($SearchText)));
-                        $SearchTags = join(",", $SearchWords);
-                        $HighlightSpec = "&tags=" . $SearchTags;
-                    } else {
-                        $HighlightSpec = "";
-                    }
-
-                    //Fix start for Issue ID 2149 on 14-Feb-2023
-                    $FilterData = array();
-                    $LiClasses = array();
-                    $Parent = 0;
-                    $pathTitle = '';
-                    //Fix end for Issue ID 2149 on 14-Feb-2023
-
-                    foreach ($apiResponseResultllmSearch['info']['records'] as $key => $searchDataArray) {
-                        /************ Fix start for 2148 on 9feb2023 *******************************/
-                        $linkPrefoxSTP = '';
-                        /************ Fix End for 2148 on 9feb2023 *******************************/
-                        if ($searchDataArray['item_type'] == 'CO' || $searchDataArray['item_type'] == 'SG') {
-                            $linkFileName = "home.html?q=" . encryptQueryString('folder_id=' . $searchDataArray['item_id']);
-                            $thumbURL = IMAGE_PATH . 'folder.png';
-                            if ($source == 'people') {
-                                $linkFileName = "people.html?q=" . encryptQueryString('folder_id=' . $searchDataArray['item_id']);
-                            }
-                        } elseif ($searchDataArray['item_type'] == 'RE') {
-                            if (isset($searchDataArray["is_link"]) == true && $searchDataArray["is_link"] == "Y") {
-                                if (isset($searchDataArray["stp_link_type"]) == true) {
-									
-									/* fix start for 2274 10-july */
-                                    $linkFileName = "https://" . $searchDataArray["stp_url"] . $HighlightSpec;
-                                    //$thumbURL = "http://" . $searchDataArray["stp_thumb"];
-									$thumbURL =  $searchDataArray["stp_thumb"];
-									/* fix end for 2274 10-july */
-                                    $TargetModifier = " target='_blank'";
-                                    /************ Fix start for 2148 on 9feb2023 *******************************/
-                                    $linkPrefoxSTP = 'Page ';
-                                    /************ Fix End for 2148 on 9feb2023 *******************************/
-                                } else {
-                                    $linkFileName = "#";
-                                    $thumbURL = "#";
-                                }
-                            } else {
-                                $linkFileName = "item-details.html?q=" . encryptQueryString('folder_id=' . $searchDataArray['item_id'] . '&search_text=' . $search_text);
-                                $thumbURL = RECORD_THUMB_URL . '?id=' . $searchDataArray['item_id'];
-                            }
-                        } else {
-                            $linkFileName = "item-details.html?q=" . encryptQueryString('folder_id=' . $searchDataArray['item_parent'] . '&itemId=' . $searchDataArray['item_id'] . '&search_text=' . $search_text);
-                            $thumbURL = RECORD_THUMB_URL . '?id=' . $searchDataArray['item_id'];
-                            foreach ($searchDataArray['files'] as $file) {
-                                if ($file['file_type'] == 'tn') {
-                                    $thumbURL = THUMB_URL . '?id=' . $file['file_id'];
-                                }
-                            }
-                        }
-                        $style = "";
-                        if (isset($searchDataArray['link_visited']) && $searchDataArray['link_visited'] == 'yes') {
-                            $style = "style='color: #609;'";
-                        }
-                    ?>
-                        <li class="search_li_all search_li_<?php echo $searchDataArray['item_id']; ?>">
-                            <div class="col-md-12">
-                                <div class="marginTopBottom10 item-location" style="margin-top:0px;">
-                                    <?php
-
-                                    foreach ($searchDataArray['item_location'] as $dataArray) {
-                                        $LiClasses['search_li_' . $searchDataArray['item_id']][] = 'search_li_' . $dataArray['item_id'];
-                                    }
-
-                                    if (!empty($searchDataArray['item_location']) && $searchDataArray['pathTitle'] != $pathTitle) {
-                                        $breadcrumb_li_class = '';
-                                        foreach ($searchDataArray['item_location'] as $dataArray) {
-                                            $breadcrumb_li_class .= $dataArray['item_id'];
-                                        }
-                                    ?>
-                                        <ul style="margin-top:0px;" class="listing search_data_listing <?php echo $breadcrumb_li_class; ?>" data-cls="<?php echo $breadcrumb_li_class; ?>">
-                                            <?php
-                                            foreach ($searchDataArray['item_location'] as $dataArray) {
-                                                $file_name = "home.html?q=" . encryptQueryString('folder_id=' . $dataArray['item_id']);
-                                                if ($dataArray['item_type'] == 'RE') {
-                                                    $file_name = "item-details.html?q=" . encryptQueryString('folder_id=' . $dataArray['item_id']);
-                                                }
-
-                                                //$LiClasses['search_li_' . $searchDataArray['item_id']][] = 'search_li_' . $dataArray['item_id'];
-                                                if ($dataArray['item_type'] != 'RE' && $dataArray['item_type'] != 'IT') {
-                                                    //Fix start for Issue ID 2149 on 14-Feb-2023
-                                                    if (!array_search($dataArray['item_id'], array_column($FilterData, 'id'))) {
-                                                        $dataF['id'] = $dataArray['item_id'];
-                                                        $dataF['parent'] = $Parent;
-                                                        $dataF['name'] = addslashes($dataArray['item_title']);
-                                                        $dataF['item_type'] = $dataArray['item_type'];
-                                                        $FilterData[] = $dataF;
-                                                    }
-                                                    $Parent = $dataArray['item_id'];
-                                                    //Fix end for Issue ID 2149 on 14-Feb-2023
-                                            ?>
-                                                    <li><a href="<?php echo $file_name; ?>"><?php echo $dataArray['item_title']; ?></a>
-                                                    </li>
-                                            <?php
-                                                }
-                                            }
-                                            $Parent = 0;
-                                            ?>
-                                        </ul>
-                                    <?php }
-                                    $pathTitle = $searchDataArray['pathTitle'];
-                                    ?>
-                                </div>
-                            </div>
-                            <div class="col-md-1"></div>
-                            <div class="col-md-2 text-center">
-                                <a class="organizations search_result_clicked" search_item_id="<?php echo $searchDataArray['item_id']; ?>" href="<?php echo $linkFileName; ?>" <?php echo $TargetModifier; ?> target="_blank">
-                                    <img class="searchResultImg" src="<?php echo $thumbURL; ?>" alt="" />
-                                </a>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="marginTopBottom10">
-                                    <!--/************ Fix start for 2148 on 9feb2023 *******************************/	-->
-                                    <a class="organizations search_result_clicked" search_item_id="<?php echo $searchDataArray['item_id']; ?>" href="<?php echo $linkFileName; ?>" <?php echo $TargetModifier; ?> target="_blank"><span <?php echo $style; ?>><?php echo $linkPrefoxSTP . $searchDataArray['item_title'][0]; ?><?php echo substr($searchDataArray['item_title'], 1); ?></span></a>
-                                    <!--/************ Fix End for 2148 on 9feb2023 *******************************/	-->
-                                </div>
-                                <?php if (!empty($snipTextllmDataArray)) { ?>
-                                    <div class="marginTopBottom10">
-                                        <a class="organizations search_result_clicked" search_item_id="<?php echo $searchDataArray['item_id']; ?>" href="<?php echo $linkFileName; ?>" <?php echo $TargetModifier; ?> target="_blank">
-                                            <span style="font-weight: normal;color:#000000;"><?php echo $snipTextllmDataArray[$searchDataArray['item_id']];  ?></span>
-                                        </a>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        </li>
-                    <?php } ?>
-                </ul>
-				
-				
-				<?php }
-										 
-                }
-
-				if($totalResultCount && $totalStatndardResultCount > 0){
+				<?php 
+                if($totalResultCount && $totalStatndardResultCount > 0){
 				?>
                 <div class="searchBGNone"><h3><strong><?php echo $search_text;?></strong></h3></div>
                 
@@ -341,8 +184,10 @@
                                     foreach ($searchDataArray['item_location'] as $dataArray) {
                                         $LiClasses['search_li_' . $searchDataArray['item_id']][] = 'search_li_' . $dataArray['item_id'];
                                     }
-
-                                    if (!empty($searchDataArray['item_location']) && $searchDataArray['pathTitle'] != $pathTitle) {
+                                    /************ Fix start for 2568 on 26 Sep 2025 *******************************/
+                                    // if (!empty($searchDataArray['item_location']) && $searchDataArray['pathTitle'] != $pathTitle) {
+                                    if (!empty($searchDataArray['item_location'])) {
+                                    /************ Fix end for 2568 on 26 Sep 2025 *******************************/
                                         $breadcrumb_li_class = '';
                                         foreach ($searchDataArray['item_location'] as $dataArray) {
                                             $breadcrumb_li_class .= $dataArray['item_id'];
