@@ -74,14 +74,7 @@ if(isset($_SESSION['aib']['user_data'])){
                 </div>
                     <div class="row-fluid marginTop20 bgNone"><h3>Organization Information</h3></div>
 					<!--/// Fix start for Bug Id 2565  24-Sep-2025 ///////-->
-                    <div class="row marginTop20 padd5" style="display: none;">
-                        <div class="col-md-3" >
-                            <label>Historical Society Name<span>*</span>:</label>
-                        </div>
-                        <div class="col-md-3" >
-                            <input type="text" class="form-control" name="society_name" id="society_name1" value="" placeholder="Enter text">
-                        </div> 
-                    </div>
+                
 					<div class="row marginTop20 padd5">
                         <div class="col-md-3" >
                             <label>Organization (Owner) Name<span>*</span>:</label>
@@ -485,7 +478,7 @@ if(isset($_SESSION['aib']['user_data'])){
      firstName: "required",
      lastName: "required",
      title: "required",
-     society_state :{
+    /* society_state :{
                     required:true,
                     remote: {
                         url:"services_admin_api.php",
@@ -495,7 +488,7 @@ if(isset($_SESSION['aib']['user_data'])){
                                 society_name:function(){ return $("#society_name1").val();}
                         }
                     }
-        },
+        },*/
      register_username: {
          required: {
              depends:function(){
