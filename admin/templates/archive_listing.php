@@ -112,6 +112,10 @@ if(in_array($treeDataArray[1]['item_id'],AIB_DOWNLOAD_ENABLE_RECORD_LEVEL) or in
                 <?php
                 if (count($finalDataArray) > 0) {
                     foreach ($finalDataArray as $key => $dataArray) {
+                        // Skip rows with item_type = 'SG'
+                        if (isset($dataArray['item_type']) && $dataArray['item_type'] === 'SG') {
+                            continue;
+                        }
                         $unclaimed_society = 'NA';
                         if (isset($dataArray['properties']['society_for_claim'])) {
                             if ($dataArray['properties']['society_for_claim'] == '1') {
